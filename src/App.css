@@ -1,0 +1,76 @@
+
+/* App-level specific styles */
+
+.app-wrapper {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.app-wrapper.visible {
+  opacity: 1;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.section-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  flex-grow: 1;
+  opacity: 0.5;
+}
+
+.overview-text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  max-width: 800px;
+}
+
+.overview-text .highlight {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+.future-banner {
+  background: linear-gradient(45deg, rgba(112, 0, 255, 0.1), transparent);
+  border: 1px dashed var(--color-secondary);
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+}
+
+.future-banner h2 {
+  color: var(--color-secondary);
+  margin-bottom: 10px;
+}
+
+.status-tag {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg);
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-primary);
+  color: #000;
+}

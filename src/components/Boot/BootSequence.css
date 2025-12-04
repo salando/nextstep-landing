@@ -1,0 +1,60 @@
+
+.boot-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.boot-terminal {
+  width: 400px;
+  max-width: 90%;
+}
+
+.boot-log {
+  height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.boot-line {
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.prompt {
+  color: var(--color-active);
+  font-weight: bold;
+}
+
+.cursor-block {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--color-primary);
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.boot-progress-bar {
+  height: 2px;
+  background: #333;
+  width: 100%;
+  position: relative;
+}
+
+.boot-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.2s ease;
+  box-shadow: 0 0 10px var(--color-primary);
+}

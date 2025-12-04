@@ -1,0 +1,204 @@
+
+.hero-container {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #1a1a24 0%, var(--color-bg) 70%);
+}
+
+/* Animated Grid Background */
+.hero-grid-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  perspective: 1000px;
+  transform: translateZ(0);
+  animation: gridMove 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes gridMove {
+  0% { transform: translateY(0) scale(1.1); }
+  50% { transform: translateY(-20px) scale(1.15); }
+  100% { transform: translateY(0) scale(1.1); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 1s ease, transform 1s var(--cubic-fast);
+}
+
+.hero-content.enter {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  background: rgba(0, 243, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+.hero-title {
+  font-size: 4rem;
+  margin: 0 0 24px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.hero-title .highlight {
+  color: var(--color-primary);
+  text-shadow: var(--glow-primary);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-item .label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+}
+
+.stat-item .value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 2px;
+}
+
+.stat-item .text-active {
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--color-text-main);
+  color: var(--color-bg);
+  padding: 16px 32px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-decoration: none;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+}
+
+/* Decorative Ring */
+.tech-ring-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 80vw;
+  max-width: 800px;
+  max-height: 800px;
+  z-index: 1;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.tech-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+}
+
+.ring-1 {
+  width: 100%;
+  height: 100%;
+  border-color: rgba(255, 255, 255, 0.05);
+  animation: spin 40s linear infinite;
+}
+.ring-1::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-primary);
+}
+
+.ring-2 {
+  width: 70%;
+  height: 70%;
+  border: 1px dashed var(--color-border);
+  animation: spinReverse 30s linear infinite;
+}
+
+.ring-3 {
+  width: 40%;
+  height: 40%;
+  border: 2px solid rgba(0, 243, 255, 0.1);
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.5rem; }
+  .hero-stats { gap: 20px; }
+}

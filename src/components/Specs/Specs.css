@@ -1,0 +1,97 @@
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+}
+
+.spec-card {
+  position: relative;
+  background: rgba(15, 15, 22, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  padding: 32px 24px;
+  border-radius: 16px;
+  transition: all 0.4s var(--cubic-fast);
+  overflow: hidden;
+  cursor: default;
+}
+
+.spec-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 243, 255, 0.1);
+}
+
+.spec-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 243, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.spec-card:hover .spec-icon {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.spec-title {
+  font-size: 1.25rem;
+  margin: 0 0 16px;
+  color: var(--color-text-main);
+}
+
+.spec-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spec-list li {
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.spec-list li::before {
+  content: '>';
+  margin-right: 10px;
+  color: var(--color-primary);
+  font-family: monospace;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.spec-card:hover .spec-list li::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Shiny reflection effect */
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+
+.spec-card:hover .card-shine {
+  left: 150%;
+  transition: left 1s;
+}

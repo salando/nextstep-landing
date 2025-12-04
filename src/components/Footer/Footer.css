@@ -1,0 +1,32 @@
+
+.footer {
+  background: #020205;
+  border-top: 1px solid var(--color-border);
+  padding-bottom: 40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footer-block h4 {
+  color: var(--color-text-main);
+  margin: 0 0 16px;
+}
+
+.footer-block p {
+  color: var(--color-text-muted);
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 20px;
+  text-align: center;
+}
