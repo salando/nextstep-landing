@@ -20,9 +20,9 @@ export const Hero = () => {
           EXOSKELETON
         </h1>
         <p className="hero-subtitle">
-          Advanced lower-body assistive robotics designed for adaptive movement support using GIM8108-8 actuators and CAN-bus architecture.
+          Redefining human potential. Whether restoring mobility or enhancing performance, NextStep powers your movement to go further.
         </p>
-        
+
         <div className="hero-stats mono">
           <div className="stat-item">
             <span className="label">STATUS</span>
@@ -39,7 +39,7 @@ export const Hero = () => {
         </div>
 
         <a href="#overview" className="cta-button">
-          INITIALIZE SYSTEM_
+          EXPLORE THE PROJECT
         </a>
       </div>
 

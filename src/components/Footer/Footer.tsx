@@ -5,7 +5,7 @@ export const Footer = () => (
   <footer className="footer section-padding">
     <div className="container footer-content">
       <div className="footer-column brand-column">
-        <h2 className="mono" style={{ margin: 0, color: 'var(--color-primary)' }}>NEXTSTEP</h2>
+        <h2 className="mono footer-brand-title">NEXTSTEP</h2>
         <p className="text-muted">Empowering movement through robotics.</p>
       </div>
 
@@ -36,7 +36,7 @@ export const Footer = () => (
       <div className="copyright-content">
         <span>SYSTEM_STATUS: ONLINE</span>
         <span>&copy; 2025 NextStep Project</span>
-        <span style={{ opacity: 0.6, fontSize: '0.75rem' }}>Designed & Built by Charlie Shen</span>
+        <span className="footer-credit">Designed & Built by Charlie Shen</span>
       </div>
     </div>
   </footer>

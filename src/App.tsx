@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Research } from './pages/Research';
@@ -8,6 +8,7 @@ import { Development } from './pages/Development';
 import { NavBar } from './components/UI/NavBar';
 import { Footer } from './components/Footer/Footer';
 import { BootSequence } from './components/Boot/BootSequence';
+import { ScrollToTop } from './components/UI/ScrollToTop';
 import './styles/tokens.css';
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       {!booted && <BootSequence onComplete={handleBootComplete} />}
 
       <main className={`app-wrapper ${booted ? 'visible' : ''}`}>

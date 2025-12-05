@@ -1,0 +1,351 @@
+/* Home Page Styles */
+
+.home-section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.home-section-header .section-title {
+    margin-bottom: 0.75rem;
+}
+
+.home-section-header .section-line {
+    margin: 0 auto;
+    width: 80px;
+}
+
+/* Mission Section */
+.mission-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.lead-text {
+    font-size: 1.35rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+}
+
+.mission-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.mission-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 243, 255, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-number {
+    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.mission-card h4 {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin: 0 0 0.75rem 0;
+}
+
+.mission-card p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Status Section */
+.status-banner {
+    background: linear-gradient(135deg, rgba(0, 243, 255, 0.1) 0%, rgba(0, 243, 255, 0.02) 100%);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--color-success);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-success);
+}
+
+.status-dot.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.status-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    letter-spacing: 2px;
+}
+
+.status-phase {
+    font-size: 2rem;
+    margin: 0 0 0.75rem 0;
+    color: var(--color-primary);
+}
+
+.status-desc {
+    color: var(--color-text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Progress Overview */
+.progress-overview {
+    display: grid;
+    gap: 1rem;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+}
+
+.progress-item {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    align-items: flex-start;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.progress-item.completed {
+    border-color: rgba(0, 255, 157, 0.2);
+}
+
+.progress-item.active {
+    background: rgba(0, 243, 255, 0.05);
+    border-color: rgba(0, 243, 255, 0.3);
+}
+
+.progress-item.pending {
+    opacity: 0.6;
+}
+
+.progress-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1rem;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+}
+
+.progress-item.completed .progress-icon {
+    background: rgba(0, 255, 157, 0.15);
+    color: var(--color-success);
+}
+
+.progress-item.active .progress-icon {
+    background: rgba(0, 243, 255, 0.15);
+    color: var(--color-primary);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.progress-item.pending .progress-icon {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-muted);
+}
+
+.progress-content h4 {
+    font-size: 1.1rem;
+    margin: 0 0 0.25rem 0;
+    color: var(--color-text);
+}
+
+.progress-content p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+/* CTA Buttons */
+.home-cta-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.home-cta-button {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 1rem 2rem;
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.cta-button.secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+/* Specs Section */
+.specs-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.specs-intro p {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+}
+
+/* Future Section */
+.future-section {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+}
+
+.future-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.future-header h2 {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.status-tag {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 159, 67, 0.4);
+    color: #ff9f43;
+    background: rgba(255, 159, 67, 0.1);
+    border-radius: 4px;
+}
+
+.future-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.future-item {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.future-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.future-number {
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+}
+
+.future-item h4 {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin: 0 0 0.5rem 0;
+}
+
+.future-item p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mission-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .status-phase {
+        font-size: 1.5rem;
+    }
+
+    .future-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .future-items {
+        grid-template-columns: 1fr;
+    }
+
+    .home-cta-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
