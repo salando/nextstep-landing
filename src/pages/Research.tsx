@@ -11,7 +11,9 @@ const ExpandableSection = ({ title, children }: { title: string; children: React
                 <span className="toggle-icon">{isOpen ? '−' : '+'}</span>
                 <span>{title}</span>
             </button>
-            {isOpen && <div className="expandable-content">{children}</div>}
+            <div className="expandable-content-wrapper">
+                <div className="expandable-content">{children}</div>
+            </div>
         </div>
     );
 };

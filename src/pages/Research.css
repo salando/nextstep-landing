@@ -328,12 +328,30 @@
     font-size: 1.25rem;
 }
 
+.expandable-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+}
+
+.expandable-section.open .expandable-content-wrapper {
+    grid-template-rows: 1fr;
+}
+
 .expandable-content {
-    padding: 1.25rem;
+    overflow: hidden;
+    padding: 0 1.25rem;
     background: rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--color-text-muted);
     line-height: 1.7;
+    opacity: 0;
+    transition: opacity 0.3s ease-out, padding 0.3s ease;
+}
+
+.expandable-section.open .expandable-content {
+    opacity: 1;
+    padding: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Tech Terms */
