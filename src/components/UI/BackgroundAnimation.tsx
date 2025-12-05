@@ -30,7 +30,7 @@ export const BackgroundAnimation = () => {
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles();
+            // Do NOT re-init particles here to avoid jitter on mobile address bar toggle
         };
 
         const initParticles = () => {
@@ -88,6 +88,7 @@ export const BackgroundAnimation = () => {
 
         // Initialize
         resizeCanvas();
+        initParticles(); // Call once on mount
         draw();
 
         window.addEventListener('resize', resizeCanvas);
