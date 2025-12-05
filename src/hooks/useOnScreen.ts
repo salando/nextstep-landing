@@ -6,6 +6,9 @@ export function useOnScreen(options = { threshold: 0.1 }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true);
@@ -13,14 +16,12 @@ export function useOnScreen(options = { threshold: 0.1 }) {
       }
     }, options);
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(element);
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      observer.unobserve(element);
     };
-  }, [ref, options]);
+  }, [options]);
 
   return [ref, isVisible] as const;
 }

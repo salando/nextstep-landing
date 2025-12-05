@@ -98,3 +98,38 @@
     text-align: center;
   }
 }
+
+/* Light Mode Overrides - Footer stays dark, override text colors */
+[data-theme="light"] .footer {
+  background: #0a0a0f;
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .footer-column h4 {
+  color: #ffffff;
+}
+
+[data-theme="light"] .footer-column p {
+  color: #9ca3af;
+}
+
+[data-theme="light"] .footer-links a {
+  color: #9ca3af;
+}
+
+[data-theme="light"] .footer-links a:hover {
+  color: var(--color-primary);
+}
+
+[data-theme="light"] .footer-brand-title {
+  color: #00f3ff;
+}
+
+[data-theme="light"] .copyright {
+  color: #6b7280;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .text-muted {
+  color: #9ca3af !important;
+}

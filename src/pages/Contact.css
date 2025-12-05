@@ -1,8 +1,3 @@
-/* Contact Page Styles */
-.contact-page {
-    padding-top: 80px;
-}
-
 .contact-intro {
     max-width: 800px;
     margin: 0 auto 2rem;
@@ -13,6 +8,68 @@
     color: var(--color-text-muted);
     line-height: 1.7;
     text-align: center;
+}
+
+/* FAQ Redirect */
+.faq-redirect-card {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    backdrop-filter: blur(5px);
+}
+
+.faq-redirect-content {
+    text-align: left;
+}
+
+.faq-redirect-content h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+}
+
+.faq-redirect-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.faq-button {
+    white-space: nowrap;
+    padding: 0.75rem 1.25rem;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.faq-button:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+@media (max-width: 600px) {
+    .faq-redirect-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .faq-redirect-content {
+        text-align: center;
+    }
 }
 
 /* Transmission Console */
@@ -199,4 +256,53 @@
     .contact-methods {
         grid-template-columns: 1fr;
     }
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .faq-redirect-card {
+    background: rgba(8, 145, 178, 0.06);
+    border-color: rgba(8, 145, 178, 0.2);
+}
+
+[data-theme="light"] .faq-button {
+    background: rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .faq-button:hover {
+    box-shadow: 0 0 15px rgba(8, 145, 178, 0.3);
+}
+
+[data-theme="light"] .transmission-console {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .transmission-console:hover {
+    border-color: rgba(8, 145, 178, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .console-header {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .transmission-button {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+    border-color: rgba(8, 145, 178, 0.4);
+}
+
+[data-theme="light"] .transmission-button:hover {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.25) 0%, rgba(99, 102, 241, 0.25) 100%);
+}
+
+[data-theme="light"] .response-info {
+    background: rgba(8, 145, 178, 0.08);
+}
+
+[data-theme="light"] .contact-method {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .contact-method:hover {
+    border-color: rgba(8, 145, 178, 0.3);
 }

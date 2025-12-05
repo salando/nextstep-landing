@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Hero.css';
 
 export const Hero = () => {
@@ -30,7 +30,7 @@ export const Hero = () => {
           </div>
           <div className="stat-item">
             <span className="label">VOLTAGE</span>
-            <span className="value">29.6V (8S)</span>
+            <span className="value">14.8V (4S)</span>
           </div>
           <div className="stat-item">
             <span className="label">LOGIC</span>

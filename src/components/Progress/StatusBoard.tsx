@@ -1,5 +1,3 @@
-
-import React from 'react';
 import './StatusBoard.css';
 
 type Task = {
@@ -44,7 +42,7 @@ export const StatusBoard = () => {
         <div key={task.id} className={`task-card priority-${task.priority}`}>
           <div className="task-header">
             <span className={`priority-dot ${task.priority}`}></span>
-            <span className="mono text-muted" style={{ fontSize: '0.8em' }}>{task.priority.toUpperCase()}</span>
+            <span className="mono text-muted text-sm-priority">{task.priority.toUpperCase()}</span>
           </div>
           <h3 className="task-title">{task.title}</h3>
           <p className="task-detail">{task.detail}</p>

@@ -30,7 +30,7 @@ export const Home = () => {
                         <div className="mission-card">
                             <div className="card-number">02</div>
                             <h4>Real Performance</h4>
-                            <p>7.5 Nm of torque per motor, designed to reduce walking effort by at least 20%.</p>
+                            <p>22 Peak Nm (~0.44 HP) of torque per motor, designed to reduce walking effort by at least 20%.</p>
                         </div>
                         <div className="mission-card">
                             <div className="card-number">03</div>

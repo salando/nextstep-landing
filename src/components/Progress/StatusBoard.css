@@ -91,3 +91,13 @@
   border-radius: 4px;
   letter-spacing: 1px;
 }
+
+/* Light Mode Overrides */
+[data-theme="light"] .task-card {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .task-card:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+}

@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { Research } from './pages/Research';
 import { Contact } from './pages/Contact';
 import { Development } from './pages/Development';
+import { FAQ } from './pages/FAQ';
 import { NavBar } from './components/UI/NavBar';
 import { Footer } from './components/Footer/Footer';
 import { BootSequence } from './components/Boot/BootSequence';
@@ -34,6 +35,7 @@ function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/development" element={<Development />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
 
         <Footer />

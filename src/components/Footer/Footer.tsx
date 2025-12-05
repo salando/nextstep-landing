@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ThemeToggle } from '../UI/ThemeToggle';
 import './Footer.css';
 
 export const Footer = () => (
@@ -7,6 +8,7 @@ export const Footer = () => (
       <div className="footer-column brand-column">
         <h2 className="mono footer-brand-title">NEXTSTEP</h2>
         <p className="text-muted">Empowering movement through robotics.</p>
+        <ThemeToggle />
       </div>
 
       <div className="footer-column">
@@ -16,6 +18,7 @@ export const Footer = () => (
           <li><Link to="/research">Research</Link></li>
           <li><Link to="/development">Development</Link></li>
           <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/faq">FAQ</Link></li>
         </ul>
       </div>
 

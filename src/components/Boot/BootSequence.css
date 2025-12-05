@@ -32,9 +32,9 @@
 
 
 .boot-container {
-  width: 900px;
-  max-width: 95%;
-  height: 600px;
+  width: 700px;
+  max-width: 90%;
+  height: 450px;
   background: rgba(10, 12, 10, 0.9);
   border: 1px solid var(--color-primary);
   box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
@@ -95,11 +95,11 @@
 }
 
 .status-item .value.warning {
-  color: #ffd700;
+  color: var(--color-warning);
 }
 
 .status-item .value.error {
-  color: #ff3333;
+  color: var(--color-danger);
 }
 
 /* Log Lines */
@@ -121,15 +121,15 @@
 }
 
 .type-info {
-  color: var(--color-text);
+  color: var(--color-text-main);
 }
 
 .type-success {
-  color: var(--color-primary);
+  color: var(--color-success);
 }
 
 .type-warning {
-  color: #ffd700;
+  color: var(--color-warning);
 }
 
 /* Footer */
@@ -195,5 +195,84 @@
 }
 
 .boot-log::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+}
+
+/* Light Mode - Light themed boot screen */
+[data-theme="light"] .boot-overlay {
+  background: #f5f7fa;
+}
+
+[data-theme="light"] .boot-overlay::before {
+  background-image:
+    linear-gradient(rgba(0, 150, 180, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 150, 180, 0.08) 1px, transparent 1px);
+}
+
+[data-theme="light"] .boot-container {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+[data-theme="light"] .boot-header {
+  border-bottom-color: #000000;
+  background: rgba(0, 0, 0, 0.05);
+  color: #000000;
+}
+
+[data-theme="light"] .boot-sidebar {
+  border-left-color: #000000;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .status-item .label {
+  color: #666;
+}
+
+[data-theme="light"] .status-item .value {
+  color: #000000;
+}
+
+/* .type-info handled by var(--color-text-main) */
+
+/* .type-success handled by var(--color-success) */
+
+[data-theme="light"] .boot-footer {
+  border-top-color: #000000;
+  background: rgba(0, 150, 180, 0.03);
+}
+
+[data-theme="light"] .boot-progress-bar {
+  background: #e5e7eb;
+}
+
+[data-theme="light"] .boot-progress-fill {
+  background: var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 150, 180, 0.5);
+}
+
+[data-theme="light"] .boot-status-text {
+  color: #000000;
+}
+
+[data-theme="light"] .cursor-block {
+  background: #000000;
+}
+
+[data-theme="light"] .prompt {
+  color: #000000;
+}
+
+[data-theme="light"] .timestamp {
+  color: #333333;
+}
+
+[data-theme="light"] .boot-log::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+[data-theme="light"] .boot-log::-webkit-scrollbar-thumb {
   background: var(--color-primary);
 }

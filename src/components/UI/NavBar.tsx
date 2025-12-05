@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ThemeToggle } from './ThemeToggle';
 import './NavBar.css';
 
+const NAV_LINKS = [
+    { to: '/', label: '[HOME]' },
+    { to: '/research', label: '[RESEARCH]' },
+    { to: '/development', label: '[DEV LOG]' },
+    { to: '/contact', label: '[CONTACT]' },
+];
+
 export const NavBar = () => {
-    const location = useLocation();
+    const { pathname } = useLocation();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -13,41 +21,26 @@ export const NavBar = () => {
         <nav className="system-nav">
             <div className="nav-brand mono">NEXTSTEP_OS</div>
 
-            <button className={`mobile-menu-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
-                <span className="hamburger-line"></span>
-                <span className="hamburger-line"></span>
-                <span className="hamburger-line"></span>
-            </button>
-
             <div className={`nav-links ${isOpen ? 'open' : ''}`}>
-                <Link
-                    to="/"
-                    className={`nav-link mono ${location.pathname === '/' ? 'active' : ''}`}
-                    onClick={closeMenu}
-                >
-                    [HOME]
-                </Link>
-                <Link
-                    to="/research"
-                    className={`nav-link mono ${location.pathname === '/research' ? 'active' : ''}`}
-                    onClick={closeMenu}
-                >
-                    [RESEARCH]
-                </Link>
-                <Link
-                    to="/development"
-                    className={`nav-link mono ${location.pathname === '/development' ? 'active' : ''}`}
-                    onClick={closeMenu}
-                >
-                    [DEV LOG]
-                </Link>
-                <Link
-                    to="/contact"
-                    className={`nav-link mono ${location.pathname === '/contact' ? 'active' : ''}`}
-                    onClick={closeMenu}
-                >
-                    [CONTACT]
-                </Link>
+                {NAV_LINKS.map(({ to, label }) => (
+                    <Link
+                        key={to}
+                        to={to}
+                        className={`nav-link mono ${pathname === to ? 'active' : ''}`}
+                        onClick={closeMenu}
+                    >
+                        {label}
+                    </Link>
+                ))}
+            </div>
+
+            <div className="nav-actions">
+                <ThemeToggle />
+                <button className={`mobile-menu-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
+                    <span className="hamburger-line"></span>
+                    <span className="hamburger-line"></span>
+                    <span className="hamburger-line"></span>
+                </button>
             </div>
         </nav>
     );

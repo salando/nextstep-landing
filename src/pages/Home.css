@@ -349,3 +349,70 @@
         align-items: center;
     }
 }
+
+/* Light Mode Overrides */
+[data-theme="light"] .mission-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .mission-card:hover {
+    border-color: rgba(8, 145, 178, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .status-banner {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(8, 145, 178, 0.02) 100%);
+    border-color: rgba(8, 145, 178, 0.2);
+}
+
+[data-theme="light"] .progress-item {
+    background: rgba(0, 0, 0, 0.015);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .progress-item.completed {
+    border-color: rgba(5, 150, 105, 0.25);
+}
+
+[data-theme="light"] .progress-item.active {
+    background: rgba(8, 145, 178, 0.06);
+    border-color: rgba(8, 145, 178, 0.3);
+}
+
+[data-theme="light"] .progress-item.completed .progress-icon {
+    background: rgba(5, 150, 105, 0.12);
+}
+
+[data-theme="light"] .progress-item.active .progress-icon {
+    background: rgba(8, 145, 178, 0.12);
+}
+
+[data-theme="light"] .progress-item.pending .progress-icon {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .cta-button.secondary {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .cta-button.secondary:hover {
+    background: rgba(8, 145, 178, 0.06);
+}
+
+[data-theme="light"] .future-section {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.01) 100%);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .future-item {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .future-item:hover {
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}

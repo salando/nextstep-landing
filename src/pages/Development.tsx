@@ -1,4 +1,3 @@
-import React from 'react';
 import { Section } from '../components/UI/Section';
 import { StatusBoard } from '../components/Progress/StatusBoard';
 import { ProgressFeed } from '../components/Progress/ProgressFeed';
@@ -18,13 +17,13 @@ export const Development = () => {
                     </p>
                 </div>
 
-                <div style={{ marginTop: '3rem' }}>
+                <div className="mt-3">
                     <StatusBoard />
                 </div>
 
-                <div style={{ marginTop: '5rem' }}>
+                <div className="mt-5">
                     <div className="section-header">
-                        <h3 className="section-title" style={{ fontSize: '1.5rem' }}>Progress Log</h3>
+                        <h3 className="section-title text-md">Progress Log</h3>
                         <div className="section-line"></div>
                     </div>
                     <ProgressFeed />

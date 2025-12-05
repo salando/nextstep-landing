@@ -1,4 +1,3 @@
-
 .specs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -94,4 +93,26 @@
 .spec-card:hover .card-shine {
   left: 150%;
   transition: left 1s;
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .spec-card {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .spec-card:hover {
+  box-shadow: 0 15px 40px rgba(8, 145, 178, 0.12);
+}
+
+[data-theme="light"] .spec-icon {
+  background: rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .spec-list li {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .card-shine {
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.02), transparent);
 }

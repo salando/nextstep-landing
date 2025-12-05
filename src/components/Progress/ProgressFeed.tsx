@@ -1,4 +1,3 @@
-import React from 'react';
 import { PROGRESS_DATA } from '../../data/progressData';
 import './ProgressFeed.css';
 

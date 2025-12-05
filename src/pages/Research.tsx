@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Section } from '../components/UI/Section';
+import { HardwareGrid } from '../components/Research/HardwareGrid';
 import './Research.css';
 
 // Expandable section component for technical details
-const ExpandableSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
+const ExpandableSection = ({ title, children }: { title: string; children: ReactNode }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className={`expandable-section ${isOpen ? 'open' : ''}`}>
@@ -18,13 +19,28 @@ const ExpandableSection = ({ title, children }: { title: string; children: React
     );
 };
 
-// Info tooltip for technical terms
-const TechTerm = ({ term, explanation }: { term: string; explanation: string }) => (
-    <span className="tech-term" title={explanation}>
-        {term}
-        <span className="term-indicator">?</span>
-    </span>
-);
+// Info tooltip for technical terms (hover to show)
+const TechTerm = ({ term, explanation }: { term: string; explanation: string }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <span
+            className="tech-term-wrapper"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+        >
+            <span className={`tech-term ${isOpen ? 'active' : ''}`}>
+                {term}
+                <span className="term-indicator">?</span>
+            </span>
+            {isOpen && (
+                <span className="tech-tooltip">
+                    {explanation}
+                </span>
+            )}
+        </span>
+    );
+};
 
 export const Research = () => {
     return (
@@ -45,7 +61,7 @@ export const Research = () => {
 
                     {/* Introduction Section */}
                     <Section id="introduction">
-                        <h2 className="section-header">Introduction</h2>
+                        <div className="section-header">Introduction</div>
                         <div className="text-block">
                             <p>
                                 NextStep is an exoskeleton designed to assist lower-body movement, specifically helping with <TechTerm term="hip flexion" explanation="The movement of lifting your thigh toward your chest, like when walking or running" />: the motion of lifting your leg when you walk or run.
@@ -82,11 +98,11 @@ export const Research = () => {
 
                     {/* Biomechanics Section */}
                     <Section id="biomechanics">
-                        <h2 className="section-header">Understanding Human Movement</h2>
+                        <div className="section-header">Understanding Human Movement</div>
                         <div className="text-block">
                             <p>
                                 Before designing any hardware, we needed to understand exactly <em>how</em> humans walk and run.
-                                The hip joint acts like a pivot point—when you lift your leg, your thigh bone (femur) rotates around this joint.
+                                The hip joint acts like a pivot point - when you lift your leg, your thigh bone (femur) rotates around this joint.
                             </p>
                         </div>
 
@@ -117,10 +133,10 @@ export const Research = () => {
 
                     {/* Power Analysis Section */}
                     <Section id="power-analysis">
-                        <h2 className="section-header">Power Analysis: Reverse-Engineering the Competition</h2>
+                        <div className="section-header">Power Analysis: Reverse-Engineering the Competition</div>
                         <div className="text-block">
                             <p>
-                                To understand what motors we needed, we analyzed a commercial exoskeleton—the Hypershell X Ultra—by working backwards from their published specifications.
+                                To understand what motors we needed, we analyzed a commercial exoskeleton - the Hypershell X Ultra - by working backwards from their published specifications.
                                 This would give us a realistic target for our own design.
                             </p>
                         </div>
@@ -128,9 +144,9 @@ export const Research = () => {
                         <div className="warning-callout">
                             <h4>Marketing vs Reality</h4>
                             <p>
-                                Hypershell claims "1000W peak power"—but our calculations showed this is misleading.
+                                Hypershell claims "1000W peak power" - but our calculations showed this is misleading.
                                 With a 72Wh battery lasting 7.5 hours in eco mode, the <em>actual</em> average power is only about <strong>10 watts</strong>.
-                                The 1000W figure is likely the "stall" power—what happens if the motor is completely blocked—not normal operation.
+                                The 1000W figure is likely the "stall" power - what happens if the motor is completely blocked - not normal operation.
                             </p>
                         </div>
 
@@ -161,7 +177,7 @@ export const Research = () => {
 
                     {/* Methodology Section */}
                     <Section id="methodology">
-                        <h2 className="section-header">Design Approach</h2>
+                        <div className="section-header">Design Approach</div>
                         <p className="text-block">
                             We evaluated three fundamentally different ways to apply force to the leg.
                             Each has trade-offs between complexity, reliability, and performance.
@@ -245,7 +261,7 @@ export const Research = () => {
 
                     {/* Motor Types Section */}
                     <Section id="motor-types">
-                        <h2 className="section-header">Understanding Motors</h2>
+                        <div className="section-header">Understanding Motors</div>
                         <div className="text-block">
                             <p>
                                 Not all motors are created equal. For our exoskeleton, we needed to understand the different types and pick the right one for the job.
@@ -285,7 +301,7 @@ export const Research = () => {
                                 <h4>Form Factor: "Pancake" Motors</h4>
                                 <p>
                                     We needed a motor that sits flat against the hip, not one that sticks out like a cylinder.
-                                    These flat, wide motors are nicknamed "pancake" motors—perfect for wearable applications.
+                                    These flat, wide motors are nicknamed "pancake" motors - perfect for wearable applications.
                                 </p>
                             </div>
                         </div>
@@ -293,11 +309,11 @@ export const Research = () => {
 
                     {/* Gearing Section */}
                     <Section id="gearing">
-                        <h2 className="section-header">The Gearing Challenge</h2>
+                        <div className="section-header">The Gearing Challenge</div>
                         <div className="text-block">
                             <p>
                                 Here's our problem: motors that spin fast are small and cheap. Motors with high torque are big and expensive.
-                                We need high torque at low speed. The solution? <strong>Gears</strong>—trading speed for force, like the gears on a bicycle.
+                                We need high torque at low speed. The solution? <strong>Gears</strong> - trading speed for force, like the gears on a bicycle.
                             </p>
                         </div>
 
@@ -339,14 +355,14 @@ export const Research = () => {
                             <p>
                                 <TechTerm term="Backdriveability" explanation="The ability for force applied to the output (your leg) to move the motor backwards" /> is crucial for safety.
                                 If you stumble or need to override the motor, the mechanism must allow your leg to move freely.
-                                Worm gears are "self-locking"—force from your leg can't spin the motor backwards, which could cause injury.
+                                Worm gears are "self-locking" - force from your leg can't spin the motor backwards, which could cause injury.
                             </p>
                         </ExpandableSection>
                     </Section>
 
                     {/* Motor Research Section */}
                     <Section id="motor-research">
-                        <h2 className="section-header">Motor Research & Selection</h2>
+                        <div className="section-header">Motor Research & Selection</div>
 
                         <div className="research-block">
                             <h3>The Search Process</h3>
@@ -368,7 +384,7 @@ export const Research = () => {
                         <div className="research-block">
                             <h3>Motor Types Considered</h3>
                             <p>
-                                Our breakthrough came when we searched for "robotic actuator"—motors designed for robot joints.
+                                Our breakthrough came when we searched for "robotic actuator" - motors designed for robot joints.
                                 These motors are built for exactly our use case: high torque, low speed, compact size.
                             </p>
                             <div className="image-grid">
@@ -386,7 +402,7 @@ export const Research = () => {
                         <div className="research-block">
                             <h3>The Winning Solution</h3>
                             <p>
-                                We found motors with built-in planetary gearboxes—combining the motor and gearing into one compact unit.
+                                We found motors with built-in planetary gearboxes - combining the motor and gearing into one compact unit.
                                 The <strong>GIM8108-8</strong> from Steadywin emerged as the best option.
                             </p>
                             <div className="highlight-box">
@@ -395,7 +411,7 @@ export const Research = () => {
                                     <div className="specs-content">
                                         <h4>Selected Motor: GIM8108-8</h4>
                                         <ul>
-                                            <li><strong>Torque:</strong> 7.5 Nm (50% more than the GIM6010-8)</li>
+                                            <li><strong>Torque:</strong> 22 Nm Peak / 7.5 Nm Rated</li>
                                             <li><strong>Gear Ratio:</strong> 1:8 (built-in planetary gearbox)</li>
                                             <li><strong>Weight:</strong> ~396g including driver</li>
                                             <li><strong>Cost:</strong> ~$200 CAD per unit</li>
@@ -423,7 +439,7 @@ export const Research = () => {
 
                     {/* Budget Section */}
                     <Section id="budget">
-                        <h2 className="section-header">Budget Breakdown</h2>
+                        <div className="section-header">Budget Breakdown</div>
                         <p className="text-block">
                             The budget for this project is set at under $500, though flexible. This constraint forced us to be creative with component selection.
                         </p>
@@ -492,7 +508,7 @@ export const Research = () => {
 
                     {/* Belt Research Section */}
                     <Section id="belt-research">
-                        <h2 className="section-header">Belt & Attachment Research</h2>
+                        <div className="section-header">Belt & Attachment Research</div>
                         <p className="text-block">
                             The exoskeleton needs to attach securely to your body without slipping during movement.
                             We analyzed the human waist geometry (which is actually an ellipse, not a circle) to design the attachment system.
@@ -550,6 +566,16 @@ export const Research = () => {
                                 <strong>Conclusion:</strong> We selected a ratchet-style adjustable belt system reinforced with a rigid frame to secure the components.
                             </p>
                         </div>
+                    </Section>
+
+                    {/* Hardware Showcase Section */}
+                    <Section id="hardware-showcase">
+                        <div className="section-header">Physical Implementation</div>
+                        <p className="text-block">
+                            From CAD models to reality. Here are the physical components that power NextStep.
+                            Hover over each card to see technical specifications.
+                        </p>
+                        <HardwareGrid />
                     </Section>
 
                 </div>

@@ -1,0 +1,63 @@
+.theme-toggle {
+    position: relative;
+    top: auto;
+    right: auto;
+    z-index: 10;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    padding: 0.4rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.toggle-track {
+    width: 44px;
+    height: 24px;
+    background: var(--color-surface);
+    border-radius: 12px;
+    position: relative;
+    border: 1px solid var(--color-border);
+    transition: background 0.3s ease;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+    transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease;
+}
+
+.toggle-thumb.light {
+    left: 21px;
+    background: var(--color-warning);
+}
+
+/* Light Mode Styles */
+[data-theme="light"] .theme-toggle {
+    background: transparent;
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--color-primary);
+}
+
+[data-theme="light"] .toggle-track {
+    background: #e5e7eb;
+    border-color: transparent;
+}

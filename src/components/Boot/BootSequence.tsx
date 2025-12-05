@@ -1,21 +1,18 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './BootSequence.css';
 
-export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
-  const [lines, setLines] = useState<{ text: string; type: 'info' | 'success' | 'warning' }[]>([]);
-  const initialized = React.useRef(false);
+type SequenceItem = { text: string; type: 'info' | 'success' | 'warning' };
 
-  const sequence = [
-    { text: "Initializing NEXTSTEP_OS kernel v2.4.0...", type: 'info' },
-    { text: "Mounting file system: /dev/nvme0n1...", type: 'info' },
+export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
+  const [lines, setLines] = useState<SequenceItem[]>([]);
+  const initialized = useRef(false);
+
+  const sequence: SequenceItem[] = [
+    { text: "Initializing NEXTSTEP_OS kernel...", type: 'info' },
     { text: "Loading GIM8108 driver modules... [OK]", type: 'success' },
     { text: "Verifying 4S LiPo voltage... 16.8V [STABLE]", type: 'success' },
-    { text: "Connecting to neural interface bridge...", type: 'info' },
-    { text: "Allocating memory for gait analysis... 4096MB", type: 'info' },
     { text: "Calibrating IMU sensors (BNO055)...", type: 'warning' },
-    { text: "IMU calibration complete. Drift < 0.01°", type: 'success' },
-    { text: "Establishing secure link to exoskeleton...", type: 'info' },
     { text: "System diagnostics: GREEN", type: 'success' },
     { text: "Boot sequence complete. Launching UI...", type: 'info' }
   ];
@@ -26,16 +23,15 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
 
     let delay = 0;
     sequence.forEach((item, index) => {
-      delay += Math.random() * 150 + 50;
+      delay += Math.random() * 100 + 50; // Slightly faster delay
       setTimeout(() => {
-        // @ts-ignore
         setLines(prev => [...prev, item]);
 
         const el = document.getElementById('boot-log');
         if (el) el.scrollTop = el.scrollHeight;
 
         if (index === sequence.length - 1) {
-          setTimeout(onComplete, 1000);
+          setTimeout(onComplete, 500);
         }
       }, delay);
     });
@@ -48,7 +44,6 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
       <div className="boot-container">
         <div className="boot-header">
           <div className="header-left">NEXTSTEP_OS // BOOT_LOADER</div>
-          <div className="header-right">MEM: 64GB // CPU: 12%</div>
         </div>
 
         <div className="boot-content">
