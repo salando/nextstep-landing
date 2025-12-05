@@ -4,34 +4,40 @@ import './BootSequence.css';
 
 export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
   const [lines, setLines] = useState<string[]>([]);
-  
+  const initialized = React.useRef(false);
+
   const sequence = [
     "Initializing kernel...",
     "Loading GIM8108 drivers...",
-    "Checking battery clusters (8S)...",
-    "Mounting file system...",
+    "Checking battery clusters (4S)...",
+    "Accessing development logs...",
+    "Calculating total uptime... [120+ HOURS LOGGED]",
     "Calibrating IMU sensors...",
-    "Establishing CAN bus link...",
     "System GREEN.",
     "Welcome, User."
   ];
 
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
     let delay = 0;
     sequence.forEach((line, index) => {
-      delay += Math.random() * 300 + 100;
+      delay += Math.random() * 90 + 110;
       setTimeout(() => {
         setLines(prev => [...prev, line]);
         // Scroll to bottom
         const el = document.getElementById('boot-log');
-        if(el) el.scrollTop = el.scrollHeight;
-        
+        if (el) el.scrollTop = el.scrollHeight;
+
         if (index === sequence.length - 1) {
           setTimeout(onComplete, 800);
         }
       }, delay);
     });
   }, []);
+
+  const progress = Math.min((lines.length / sequence.length) * 100, 100);
 
   return (
     <div className="boot-overlay">
@@ -45,7 +51,7 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
           <div className="cursor-block"></div>
         </div>
         <div className="boot-progress-bar">
-          <div className="boot-progress-fill" style={{ width: `${(lines.length / sequence.length) * 100}%` }}></div>
+          <div className="boot-progress-fill" style={{ width: `${progress}%` }}></div>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
-
 .boot-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: #000;
   z-index: 9999;
   display: flex;
@@ -11,15 +13,34 @@
 }
 
 .boot-terminal {
-  width: 400px;
-  max-width: 90%;
+  width: 800px;
+  max-width: 95%;
+  background: rgba(10, 10, 15, 0.95);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.boot-terminal::before {
+  content: "NEXTSTEP_OS // KERNEL_LOADER_V1.0";
+  position: absolute;
+  top: -25px;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  letter-spacing: 2px;
 }
 
 .boot-log {
-  height: 200px;
+  height: 400px;
   overflow-y: auto;
   margin-bottom: 20px;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  padding-right: 10px;
 }
 
 .boot-line {
@@ -41,8 +62,15 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .boot-progress-bar {
