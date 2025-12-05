@@ -6,11 +6,12 @@ export const HardwareGrid = () => {
         {
             id: 1,
             title: "GIM8108-8 Motor",
-            category: "Actuation",
-            image: "/research_images/image43.png", // Using existing image from Research page
+            category: "Actuator",
+            image: "/research_images/image43.png",
             description: "High-torque brushless motor with integrated planetary gearbox. The heart of the exoskeleton's movement system.",
+            className: "grid-span-2", // Bento Feature: Wide card
             specs: [
-                { label: "Torque", value: "22 Nm Peak" },
+                { label: "Torque", value: "22 Nm" },
                 { label: "Gear Ratio", value: "8:1" },
                 { label: "Weight", value: "396g" },
                 { label: "Voltage", value: "24V" }
@@ -19,37 +20,39 @@ export const HardwareGrid = () => {
         {
             id: 2,
             title: "ODrive S1",
-            category: "Motor Controller",
-            image: "/research_images/image39.png", // Placeholder, using another existing image for now
-            description: "High-performance motor controller capable of precise field-oriented control (FOC) for smooth motion.",
+            category: "Controller",
+            image: "/research_images/image39.png",
+            description: "FOC motor controller with CAN bus interface for precise torque control.",
+            className: "grid-span-2",
             specs: [
                 { label: "Peak Current", value: "40A" },
-                { label: "Input Voltage", value: "12-48V" },
-                { label: "Interface", value: "CAN Bus" }
+                { label: "Protocol", value: "CAN" }
             ]
         },
         {
             id: 3,
-            title: "Custom Battery Pack",
+            title: "Custom Battery",
             category: "Power",
-            image: "/research_images/image52.png", // Using existing image
-            description: "6S2P Lithium-Ion battery pack designed for high discharge rates to handle peak motor loads.",
+            image: "/research_images/image52.png",
+            description: "6S2P Li-Ion pack with high C-rating for burst power delivery.",
+            className: "grid-span-2",
             specs: [
-                { label: "Capacity", value: "5000mAh" },
-                { label: "Voltage", value: "22.2V" },
-                { label: "Max Discharge", value: "60A" }
+                { label: "Capacity", value: "5Ah" },
+                { label: "Voltage", value: "22.2V" }
             ]
         },
         {
             id: 4,
-            title: "Carbon Fiber Frame",
+            title: "CF-Nylon Frame",
             category: "Structure",
-            image: "/research_images/image45.png", // Placeholder
-            description: "Lightweight and rigid structural components to transfer force to the user's leg without flexing.",
+            image: "/research_images/image45.png",
+            description: "Topology-optimized structure printed in Carbon Fiber Nylon.",
+            className: "grid-span-2", // Bento Feature: Wide card at bottom
             specs: [
-                { label: "Material", value: "CF-Nylon" },
+                { label: "Material", value: "PA12-CF" },
                 { label: "Weight", value: "450g" },
-                { label: "Process", value: "3D Print" }
+                { label: "Process", value: "SLS" },
+                { label: "Load", value: "120kg" }
             ]
         }
     ];
@@ -64,6 +67,7 @@ export const HardwareGrid = () => {
                     image={item.image}
                     description={item.description}
                     specs={item.specs}
+                    className={item.className}
                 />
             ))}
         </div>

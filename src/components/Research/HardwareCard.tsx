@@ -12,6 +12,7 @@ interface HardwareCardProps {
     image: string;
     description: string;
     specs?: HardwareSpec[];
+    className?: string; // Allow passing grid span classes
 }
 
 export const HardwareCard: React.FC<HardwareCardProps> = ({
@@ -19,32 +20,40 @@ export const HardwareCard: React.FC<HardwareCardProps> = ({
     category,
     image,
     description,
-    specs
+    specs,
+    className = ''
 }) => {
     return (
-        <div className="hardware-card">
+        <div className={`hardware-card ${className}`}>
+            {/* Decoration: Technical Corners */}
+            <div className="card-tech-corners">
+                <div className="corner-tl"></div>
+                <div className="corner-tr"></div>
+                <div className="corner-bl"></div>
+                <div className="corner-br"></div>
+            </div>
+
             <div className="card-image-container">
                 <img src={image} alt={title} className="card-image" />
             </div>
 
             <div className="card-content">
-                <span className="card-category">{category}</span>
-                <h3 className="card-title">{title}</h3>
-            </div>
+                <div className="card-header">
+                    <span className="category-tag">{category}</span>
+                    <h3 className="card-title">{title}</h3>
+                </div>
 
-            <div className="card-overlay">
-                <h3 className="card-title" style={{ marginBottom: '1rem' }}>{title}</h3>
-                <p className="overlay-description">{description}</p>
+                <p className="card-description">{description}</p>
 
                 {specs && specs.length > 0 && (
-                    <ul className="specs-list-mini">
+                    <div className="specs-container">
                         {specs.map((spec, index) => (
-                            <li key={index}>
+                            <div className="spec-item" key={index}>
                                 <span className="spec-label">{spec.label}</span>
                                 <span className="spec-value">{spec.value}</span>
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 )}
             </div>
         </div>

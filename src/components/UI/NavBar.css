@@ -13,10 +13,13 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Navigation Styles */
 .nav-brand {
   color: var(--color-primary);
-  font-weight: bold;
-  letter-spacing: 2px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 1.2rem;
 }
 
 .nav-links {
@@ -36,8 +39,13 @@
 .nav-link {
   color: var(--color-text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  /* Slightly larger for Outfit */
+  font-family: var(--font-display);
+  font-weight: 500;
   transition: color 0.3s ease;
+  text-transform: uppercase;
+  /* Maintain the "technical" feel */
 }
 
 .nav-link:hover,

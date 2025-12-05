@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextStep Boot Animation Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #00f3ff;
+            --color-bg: #050508;
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: #fff;
+            font-family: var(--font-display);
+            overflow-x: hidden;
+            min-height: 200vh;
+            /* Allow scrolling to test fixed header */
+        }
+
+        /* --- Header Styles (Target State) --- */
+        .system-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-brand {
+            color: var(--color-primary);
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            font-size: 1.2rem;
+            /* Important: Ensure the element has a layout we can capture */
+            display: inline-block;
+            transform-origin: top left;
+            /* Anchor for FLIP scale/translate */
+            will-change: transform, opacity;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* --- Overlay Styles (Initial State) --- */
+        .boot-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #050505;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+            pointer-events: none;
+            /* Allows click through after fade */
+        }
+
+        /* Grid Effect on Overlay */
+        .boot-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .boot-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- Animation Classes --- */
+
+        /* The class applied during the transition */
+        .animating-logo {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Dummy content to show behind */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header containing the FINAL destination of the logo -->
+    <nav class="system-nav">
+        <!-- This IS the logo element. We will move it around. -->
+        <div id="header-logo" class="nav-brand">NEXTSTEP</div>
+
+        <div class="nav-links">
+            <span>[RESEARCH]</span>
+            <span>[DEV LOG]</span>
+            <span>[CONTACT]</span>
+        </div>
+    </nav>
+
+    <!-- The Splash Screen Overlay -->
+    <!-- Note: inner content is removed as requested, we only care about the background fading out -->
+    <div id="boot-overlay" class="boot-overlay"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="hero">
+            <h1>WELCOME</h1>
+            <p>System Online.</p>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logo = document.getElementById('header-logo');
+            const overlay = document.getElementById('boot-overlay');
+
+            // 1. Calculate Final State (First)
+            // The browser naturally positions the logo in the header CSS.
+            const finalRect = logo.getBoundingClientRect();
+
+            // 2. Calculate Initial State (Last)
+            // We want it centered in the viewport.
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            // Current logo dimensions
+            const width = finalRect.width;
+            const height = finalRect.height;
+
+            // Target center position
+            const initialX = (windowWidth - width) / 2;
+            const initialY = (windowHeight - height) / 2;
+
+            // Calculate the delta (difference)
+            const deltaX = initialX - finalRect.left;
+            const deltaY = initialY - finalRect.top;
+
+            // 3. Invert
+            // Apply a transform to put the logo physically in the visual center
+            // Scale could be added here if we wanted it larger in the center (e.g., scale(2))
+            const initialScale = 2.5;
+            logo.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${initialScale})`;
+
+            // Ensure no transition happens instantly
+            logo.style.transition = 'none';
+
+            // Make sure the logo is above the overlay (z-index hack or ensure header is high z-index)
+            // The header has z-index 1000, overlay 9999.
+            // We need the logo to be visible ON TOP of the overlay during animation.
+            // Since the logo is inside the header (z-index 1000), it's behind the overlay (9999).
+            // We can temporarily boost the z-index of the logo or the header, 
+            // OR move the overlay behind. But moving overlay behind hides it.
+            // Best approach: Clone or portal? 
+            // Constraint: "Logo should be the same DOM element".
+            // Solution: Boost Header z-index temporarily OR Logo z-index relative to a shared context? 
+            // Actually, `position: fixed` contexts are tricky. 
+            // Let's set the logo to `position: relative` and high z-index? 
+            // It won't escape the stacking context of the `nav` (z-index 1000) if the nav is lower than overlay (9999).
+            // FIX: We must set the header z-index > overlay z-index during animation, then restore?
+            // OR set overlay z-index < header. 
+            // Let's set Nav Z-Index to 10000 during animation.
+            const nav = document.querySelector('.system-nav');
+            nav.style.zIndex = '10000';
+
+            // 4. Play (Wait for load + slight delay for "boot" effect)
+            window.onload = () => {
+                // Wait a moment so user sees the logo in center
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        // Add transition class
+                        logo.classList.add('animating-logo');
+
+                        // Remove transform -> floats back to natural header position
+                        logo.style.transform = 'translate(0, 0) scale(1)';
+
+                        // Handle opacity of the overlay
+                        // We want the overlay to stay black UNTIL the logo starts moving or nearly finishes?
+                        // "Once the logo finishes moving, fade out the splash overlay"
+                        // So wait for transition to end? Or start fade near end?
+                        // "Once the logo finishes moving" implies sequential.
+
+                        logo.addEventListener('transitionend', () => {
+                            // Logo has landed
+                            overlay.classList.add('fade-out');
+
+                            // Restore z-indices after fade
+                            setTimeout(() => {
+                                nav.style.zIndex = ''; // Reset to CSS default
+                                overlay.remove(); // Remove from DOM as requested
+                            }, 800); // 0.8s matches css transition
+                        }, { once: true });
+
+                    });
+                }, 800); // Initial hold time (simulated boot)
+            };
+        });
+    </script>
+</body>
+
+</html>

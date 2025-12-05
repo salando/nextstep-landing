@@ -1,144 +1,383 @@
-/* Hardware Showcase Styles */
+/* Hardware Showcase - Technical Schematic / Bento Grid Style */
 
 .hardware-section {
-    padding: 4rem 0;
+    padding: 6rem 0;
     background-color: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background "Blueprint" Grid Effect */
+.hardware-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hardware-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    /* 4 columns layout for desktop */
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(280px, auto);
+    gap: 1.5rem;
     margin-top: 3rem;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
 }
 
+/* Feature adjustments for Bento Grid */
+.grid-span-2 {
+    grid-column: span 2;
+}
+
+.grid-row-2 {
+    grid-row: span 2;
+}
+
+/* Hardware Card - Container */
 .hardware-card {
-    background: var(--color-surface);
-    border-radius: 16px;
+    background: rgba(20, 20, 25, 0.6);
+    /* Glassmorphic dark base */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    cursor: pointer;
-    height: 400px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: flex;
     flex-direction: column;
+    /* Concept for referencing */
 }
 
+/* Hover Effect: Glow and Lift */
 .hardware-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px) scale(1.01);
     border-color: var(--color-primary);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(var(--color-primary-rgb), 0.3),
+        0 0 20px rgba(var(--color-primary-rgb), 0.1);
 }
 
-.card-image-container {
-    height: 60%;
+/* Technical Corner Accents */
+.card-tech-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    overflow: hidden;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.hardware-card:hover .card-tech-corners {
+    opacity: 1;
+}
+
+.corner-tl,
+.corner-tr,
+.corner-bl,
+.corner-br {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: var(--color-primary);
+    transition: all 0.3s ease;
+}
+
+.corner-tl {
+    top: 8px;
+    left: 8px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+}
+
+.corner-tr {
+    top: 8px;
+    right: 8px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+}
+
+.corner-bl {
+    bottom: 8px;
+    left: 8px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+}
+
+.corner-br {
+    bottom: 8px;
+    right: 8px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+
+
+/* Image Area */
+.card-image-container {
+    height: 100%;
+    width: 100%;
     position: relative;
+    overflow: hidden;
+    /* Subtle gradient overlay to make text readable */
+}
+
+/* Gradient Fade for text readability */
+.card-image-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 10%, transparent);
+    z-index: 1;
 }
 
 .card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s ease;
+    filter: brightness(0.85) contrast(1.1);
 }
 
 .hardware-card:hover .card-image {
-    transform: scale(1.1);
+    transform: scale(1.08);
+    filter: brightness(1) contrast(1.1);
 }
 
+/* Content Area */
 .card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: 1.5rem;
-    flex: 1;
+    z-index: 5;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom, var(--color-surface), var(--color-bg));
-    z-index: 2;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.9) 0%, rgba(10, 10, 15, 0.6) 40%, transparent 100%);
+    transition: all 0.4s ease;
+    transform: translateY(0);
+    /* Start at normal position */
+}
+
+/* On hover, increase background contrast for readability */
+.hardware-card:hover .card-content {
+    background: linear-gradient(to top, rgba(5, 5, 10, 0.98) 0%, rgba(5, 5, 10, 0.9) 60%, transparent 100%);
+}
+
+.card-header {
+    margin-bottom: 0;
+    /* Tighten up default view */
+    transition: margin-bottom 0.4s ease;
+}
+
+.hardware-card:hover .card-header {
+    margin-bottom: 0.75rem;
+    /* Make room for content on hover */
+}
+
+.category-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 4px;
 }
 
 .card-title {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--color-text-main);
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    letter-spacing: -0.02em;
 }
 
-.card-category {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-primary);
+/* Hide description and specs by default to show full photo */
+.card-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    /* a bit brighter */
+    line-height: 1.5;
+    margin-bottom: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.specs-container {
+    margin-top: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Reveal on hover */
+.hardware-card:hover .card-description {
+    max-height: 100px;
+    /* enough for 3-4 lines */
+    opacity: 1;
     margin-bottom: 1rem;
-    font-weight: 600;
 }
 
-/* Flashcard Reveal Effect */
-.card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(8px);
-    padding: 2rem;
+.hardware-card:hover .specs-container {
+    padding-top: 0.75rem;
+    max-height: 200px;
+    opacity: 1;
+}
+
+/* Large card adjustments */
+.grid-span-2 .card-title {
+    font-size: 1.8rem;
+}
+
+.grid-span-2 .specs-container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hardware-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-span-2 {
+        grid-column: span 2;
+    }
+
+    .grid-span-2 .specs-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Spec Items */
+.spec-item {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.hardware-card:hover .card-overlay {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.overlay-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
-}
-
-.specs-list-mini {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.specs-list-mini li {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.85rem;
-}
-
-.specs-list-mini li:last-child {
-    border-bottom: none;
+    gap: 0.15rem;
 }
 
 .spec-label {
-    color: var(--color-text-muted);
-}
-
-.spec-value {
-    color: var(--color-primary);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 600;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+.spec-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: var(--font-mono);
+}
+
+@media (max-width: 600px) {
     .hardware-grid {
         grid-template-columns: 1fr;
     }
 
+    .grid-span-2 {
+        grid-column: span 1;
+    }
+
     .hardware-card {
-        height: auto;
         min-height: 350px;
     }
+
+    .card-description {
+        max-height: 100px;
+        opacity: 1;
+        margin-top: 0.5rem;
+    }
+
+    .specs-container {
+        max-height: 150px;
+        opacity: 1;
+        padding-top: 0.5rem;
+    }
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .hardware-card {
+    background: rgba(240, 240, 245, 0.9);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .hardware-card:hover {
+    border-color: var(--color-primary);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(var(--color-primary-rgb), 0.3),
+        0 0 20px rgba(var(--color-primary-rgb), 0.08);
+}
+
+[data-theme="light"] .card-image-container::after {
+    background: linear-gradient(to top, rgba(250, 250, 252, 0.98) 10%, transparent);
+}
+
+[data-theme="light"] .card-content {
+    background: linear-gradient(to top, rgba(250, 250, 252, 0.95) 0%, rgba(250, 250, 252, 0.7) 40%, transparent 100%);
+}
+
+[data-theme="light"] .hardware-card:hover .card-content {
+    background: linear-gradient(to top, rgba(250, 250, 252, 0.99) 0%, rgba(250, 250, 252, 0.95) 60%, transparent 100%);
+}
+
+[data-theme="light"] .card-title {
+    color: var(--color-text-main);
+    text-shadow: none;
+}
+
+[data-theme="light"] .card-description {
+    color: var(--color-text-muted);
+}
+
+[data-theme="light"] .specs-container {
+    border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .spec-label {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .spec-value {
+    color: var(--color-text-main);
+}
+
+[data-theme="light"] .hardware-section::before {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }

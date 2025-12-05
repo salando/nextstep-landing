@@ -1,0 +1,6 @@
+.global-logo {
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    /* Other static styles */
+}

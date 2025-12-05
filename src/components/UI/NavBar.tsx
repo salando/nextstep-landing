@@ -7,6 +7,7 @@ const NAV_LINKS = [
     { to: '/', label: '[HOME]' },
     { to: '/research', label: '[RESEARCH]' },
     { to: '/development', label: '[DEV LOG]' },
+    { to: '/physical', label: '[PHYSICAL]' },
     { to: '/contact', label: '[CONTACT]' },
 ];
 
@@ -19,14 +20,14 @@ export const NavBar = () => {
 
     return (
         <nav className="system-nav">
-            <div className="nav-brand mono">NEXTSTEP_OS</div>
+            <div className="nav-brand" id="nav-logo-anchor" style={{ opacity: 0 }}>NEXTSTEP</div>
 
             <div className={`nav-links ${isOpen ? 'open' : ''}`}>
                 {NAV_LINKS.map(({ to, label }) => (
                     <Link
                         key={to}
                         to={to}
-                        className={`nav-link mono ${pathname === to ? 'active' : ''}`}
+                        className={`nav-link ${pathname === to ? 'active' : ''}`}
                         onClick={closeMenu}
                     >
                         {label}

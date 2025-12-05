@@ -569,11 +569,11 @@ export const Research = () => {
                     </Section>
 
                     {/* Hardware Showcase Section */}
-                    <Section id="hardware-showcase">
+                    <Section id="hardware-showcase" className="hardware-section">
                         <div className="section-header">Physical Implementation</div>
-                        <p className="text-block">
-                            From CAD models to reality. Here are the physical components that power NextStep.
-                            Hover over each card to see technical specifications.
+                        <p className="text-block" style={{ maxWidth: '800px', marginBottom: '4rem' }}>
+                            Precision engineering meets student budget. We utilized topology optimization and FOC motor control
+                            to achieve high-torque performance in a compact form factor.
                         </p>
                         <HardwareGrid />
                     </Section>

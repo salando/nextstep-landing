@@ -1,15 +1,14 @@
-
 import { useEffect, useState, useRef } from 'react';
 import './BootSequence.css';
 
 type SequenceItem = { text: string; type: 'info' | 'success' | 'warning' };
 
-export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
+export const BootSequence = ({ onComplete, shouldFadeOut }: { onComplete: () => void, shouldFadeOut: boolean }) => {
   const [lines, setLines] = useState<SequenceItem[]>([]);
   const initialized = useRef(false);
 
   const sequence: SequenceItem[] = [
-    { text: "Initializing NEXTSTEP_OS kernel...", type: 'info' },
+    { text: "Initializing NEXTSTEP kernel...", type: 'info' },
     { text: "Loading GIM8108 driver modules... [OK]", type: 'success' },
     { text: "Verifying 4S LiPo voltage... 16.8V [STABLE]", type: 'success' },
     { text: "Calibrating IMU sensors (BNO055)...", type: 'warning' },
@@ -23,7 +22,7 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
 
     let delay = 0;
     sequence.forEach((item, index) => {
-      delay += Math.random() * 100 + 50; // Slightly faster delay
+      delay += Math.random() * 100 + 50;
       setTimeout(() => {
         setLines(prev => [...prev, item]);
 
@@ -31,7 +30,9 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
         if (el) el.scrollTop = el.scrollHeight;
 
         if (index === sequence.length - 1) {
-          setTimeout(onComplete, 500);
+          setTimeout(() => {
+            onComplete();
+          }, 800);
         }
       }, delay);
     });
@@ -40,10 +41,14 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
   const progress = Math.min((lines.length / sequence.length) * 100, 100);
 
   return (
-    <div className="boot-overlay">
-      <div className="boot-container">
+    <div className={`boot-overlay ${shouldFadeOut ? 'exiting' : ''}`}>
+      <div className={`boot-container ${shouldFadeOut ? 'fade-out' : ''}`}>
         <div className="boot-header">
-          <div className="header-left">NEXTSTEP_OS // BOOT_LOADER</div>
+          <div className="header-left">
+            {/* Anchor for GlobalLogo - Text matches logo for sizing */}
+            <span id="boot-logo-anchor" style={{ opacity: 0, fontWeight: 'bold' }}>NEXTSTEP</span>
+            <span className="header-suffix"> // BOOT_LOADER</span>
+          </div>
         </div>
 
         <div className="boot-content">
@@ -76,6 +81,7 @@ export const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
 
         <div className="boot-footer">
           <div className="boot-progress-bar">
+            {/* Fix: removed extra space in width string */}
             <div className="boot-progress-fill" style={{ width: `${progress}%` }}></div>
           </div>
           <div className="boot-status-text">LOADING RESOURCES... {Math.round(progress)}%</div>

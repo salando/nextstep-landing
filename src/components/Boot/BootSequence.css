@@ -12,6 +12,64 @@
   color: var(--color-primary);
   font-family: 'JetBrains Mono', 'Courier New', monospace;
   overflow: hidden;
+  transition: opacity 0.85s ease-out 0.2s;
+}
+
+.boot-overlay.exiting {
+  opacity: 0;
+}
+
+/* Flying Text Animation */
+.flying-nextstep-text {
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  /* Fallback if var not set, usage matches main font */
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  pointer-events: none;
+  transition: all 0.85s cubic-bezier(0.5, 0, 0.1, 1);
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="light"] .flying-nextstep-text {
+  color: #000000;
+  text-shadow: none;
+}
+
+/* Original Header Text Placeholder */
+.header-nextstep-placeholder {
+  font-weight: bold;
+  color: var(--color-primary);
+  transition: opacity 0.1s;
+}
+
+[data-theme="light"] .header-nextstep-placeholder {
+  color: #000000;
+}
+
+.header-suffix {
+  transition: opacity 0.3s ease-out;
+}
+
+.boot-container.fade-out .header-suffix {
+  opacity: 0;
+}
+
+/* Mobile adjustments for flying name */
+@media (max-width: 768px) {
+  .header-nextstep.fly-to-corner {
+    top: 15px;
+    left: 15px;
+    font-size: 1.1rem;
+  }
+}
+
+.boot-container.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.5s ease-out;
 }
 
 /* Grid background effect */
@@ -201,6 +259,14 @@
 /* Light Mode - Light themed boot screen */
 [data-theme="light"] .boot-overlay {
   background: #f5f7fa;
+}
+
+[data-theme="light"] .header-nextstep {
+  color: #000000;
+}
+
+[data-theme="light"] .header-nextstep.fly-to-corner {
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="light"] .boot-overlay::before {
