@@ -12,10 +12,14 @@ import './styles/tokens.css';
 import './App.css';
 
 function App() {
-  const [booted, setBooted] = useState(false);
+  const [booted, setBooted] = useState(() => {
+    // Skip boot animation if already booted in this session (internal navigation)
+    return sessionStorage.getItem('nextstep-session-booted') === 'true';
+  });
 
   const handleBootComplete = () => {
     setBooted(true);
+    sessionStorage.setItem('nextstep-session-booted', 'true');
   };
 
   return (
