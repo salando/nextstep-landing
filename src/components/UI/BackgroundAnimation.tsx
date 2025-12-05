@@ -27,10 +27,18 @@ export const BackgroundAnimation = () => {
         const connectionDistance = 150;
         const moveSpeed = 0.5;
 
+        let lastWidth = window.innerWidth;
+
         const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            // Do NOT re-init particles here to avoid jitter on mobile address bar toggle
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // Only resize if width changes (orientation change) to avoid jitter on mobile scroll
+            if (width !== lastWidth) {
+                canvas.width = width;
+                canvas.height = height;
+                lastWidth = width;
+            }
         };
 
         const initParticles = () => {
@@ -87,7 +95,8 @@ export const BackgroundAnimation = () => {
         };
 
         // Initialize
-        resizeCanvas();
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         initParticles(); // Call once on mount
         draw();
 
