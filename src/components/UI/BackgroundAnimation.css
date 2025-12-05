@@ -10,3 +10,10 @@
     background: var(--color-bg);
     /* Fallback */
 }
+
+/* Disable animation on mobile for performance */
+@media (max-width: 768px) {
+    .background-canvas {
+        display: none;
+    }
+}
