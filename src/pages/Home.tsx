@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero/Hero';
 import { Section } from '../components/UI/Section';
 import { StatusBoard } from '../components/Progress/StatusBoard';
@@ -36,9 +36,9 @@ export const Home = () => {
                         View the detailed engineering log and task breakdown on the Development page.
                     </p>
                     <div style={{ marginTop: '2rem' }}>
-                        <a href="/development" className="cta-button" style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.8rem 2rem' }}>
+                        <Link to="/development" className="cta-button" style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.8rem 2rem' }}>
                             VIEW FULL LOG
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </Section>
