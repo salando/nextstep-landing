@@ -276,3 +276,61 @@
 [data-theme="light"] .boot-log::-webkit-scrollbar-thumb {
   background: var(--color-primary);
 }
+
+/* Enhanced Light Mode Contrast */
+[data-theme="light"] .type-success {
+  color: #00703c;
+  font-weight: 600;
+}
+
+[data-theme="light"] .type-warning {
+  color: #b35900;
+  font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .boot-container {
+    width: 95%;
+    height: 85vh;
+    max-height: 600px;
+  }
+
+  .boot-content {
+    flex-direction: column;
+  }
+
+  .boot-sidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--color-primary);
+    padding: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  [data-theme="light"] .boot-sidebar {
+    border-top-color: #000;
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .status-item {
+    text-align: center;
+    flex: 1;
+  }
+
+  .status-item .label {
+    font-size: 0.6rem;
+  }
+
+  .status-item .value {
+    font-size: 1rem;
+  }
+
+  .boot-header {
+    font-size: 0.7rem;
+    padding: 8px 15px;
+  }
+}
