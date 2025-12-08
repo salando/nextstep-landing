@@ -53,6 +53,26 @@ export const Research = () => {
                         Building an exoskeleton isn't just about putting parts together. It's about solving a complex problem with real constraints.
                         I had to work within a student budget of <span className="highlight">$600 CAD</span>, keep the weight under <span className="highlight">2.5kg</span>, and still get enough power to actually assist movement.
                     </p>
+                    <div className="research-link-container" style={{ marginTop: '1.5rem' }}>
+                        <a
+                            href="https://docs.google.com/document/d/1QaOiNfTLvfGHUYodscHln3R66K1hQNszgLVrH0TSYv8/edit?usp=sharing"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="research-doc-link"
+                            style={{
+                                color: 'var(--color-primary)',
+                                textDecoration: 'none',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                fontSize: '1.1rem',
+                                fontWeight: 500
+                            }}
+                        >
+                            <span>Read the Full Research Document</span>
+                            <span style={{ fontSize: '1.2em' }}>→</span>
+                        </a>
+                    </div>
                 </div>
             </Section>
 
