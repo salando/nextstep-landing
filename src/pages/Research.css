@@ -51,12 +51,16 @@
 @media (max-width: 1024px) {
     .research-layout {
         flex-direction: column;
-        padding: 0 1rem;
-        gap: 2rem;
+        padding: 0;
+        /* Removing padding here so sidebar can be full width */
+        gap: 1.5rem;
     }
 
+    /* Add padding back to content only */
     .research-content {
         margin: 0 auto;
+        padding: 0 1rem 2rem 1rem;
+        width: 100%;
     }
 }
 
