@@ -1,32 +1,56 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { PROGRESS_DATA } from '../../data/progressData';
 import './ProgressFeed.css';
 
-export const ProgressFeed = () => {
+interface ProgressFeedProps {
+    activeFilter?: string;
+}
+
+export const ProgressFeed = ({ activeFilter = 'All' }: ProgressFeedProps) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
     const [selectedEntry, setSelectedEntry] = useState<typeof PROGRESS_DATA[0] | null>(null);
     const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
     const [isAnimating, setIsAnimating] = useState(false);
     const [previousImageIndex, setPreviousImageIndex] = useState<number>(0);
+
     const animationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const isOpeningRef = useRef(false);
 
-    // Sort by date descending (newest first)
-    const sortedData = [...PROGRESS_DATA].sort((a, b) =>
-        new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    // Filter and Sort Data
+    const sortedData = useMemo(() => {
+        let data = [...PROGRESS_DATA];
 
-    const handleImageClick = (imageIndex: number, entry: typeof PROGRESS_DATA[0]) => {
+        if (activeFilter !== 'All') {
+            data = data.filter(entry => entry.tags.includes(activeFilter));
+        }
+
+        return data.sort((a, b) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+    }, [activeFilter]);
+
+    const handleImageClick = (imageIndex: number, entry: typeof PROGRESS_DATA[0], e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (isOpeningRef.current || selectedEntry) return;
+
+        isOpeningRef.current = true;
         setSelectedImageIndex(imageIndex);
-        setPreviousImageIndex(imageIndex); // Initialize previous to current
+        setPreviousImageIndex(imageIndex);
         setSelectedEntry(entry);
         setIsAnimating(false);
+
         if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current);
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        document.body.style.overflow = 'hidden';
+
+        // Reset the opening guard after a short delay
+        setTimeout(() => {
+            isOpeningRef.current = false;
+        }, 500);
     };
 
     const navigateImage = useCallback((direction: 'prev' | 'next') => {
-        if (!selectedEntry?.images) return; // Removed isAnimating check
+        if (!selectedEntry?.images) return;
 
         if (animationTimeoutRef.current) {
             clearTimeout(animationTimeoutRef.current);
@@ -67,6 +91,7 @@ export const ProgressFeed = () => {
         if (e.key === 'Escape') closeLightbox();
     }, [selectedEntry, navigateImage, closeLightbox]);
 
+
     useEffect(() => {
         if (selectedEntry) {
             window.addEventListener('keydown', handleKeyDown);
@@ -75,6 +100,16 @@ export const ProgressFeed = () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [selectedEntry, handleKeyDown]);
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            document.body.style.overflow = 'auto';
+            if (animationTimeoutRef.current) {
+                clearTimeout(animationTimeoutRef.current);
+            }
+        };
+    }, []);
 
     const lightboxContent = selectedEntry && selectedEntry.images && selectedEntry.images.length > 0 && (
         <div className="lightbox-overlay" onClick={closeLightbox}>
@@ -163,7 +198,7 @@ export const ProgressFeed = () => {
                                             <div
                                                 key={index}
                                                 className="image-container"
-                                                onClick={() => handleImageClick(index, entry)}
+                                                onClick={(e) => handleImageClick(index, entry, e)}
                                             >
                                                 <img
                                                     src={img}

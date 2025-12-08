@@ -315,4 +315,33 @@
     .hardware-card:active .card-inner {
         transform: rotateY(180deg);
     }
+
+    /* Mobile Text Optimization: Show more image */
+    .card-back-content {
+        padding: 16px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.9) 60%, transparent 100%);
+    }
+
+    .card-title-back {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-description-back {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+    }
+
+    .specs-container-back {
+        gap: 0.75rem;
+    }
+
+    .spec-label {
+        font-size: 0.6rem;
+    }
+
+    .spec-value {
+        font-size: 0.8rem;
+    }
 }

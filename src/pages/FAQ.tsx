@@ -25,6 +25,11 @@ const faqData: FAQCategory[] = [
                 id: "gen-2",
                 question: "Who is the target pilot demographic?",
                 answer: "The current prototype is designed for individuals with partial mobility impairments, rehabilitation patients requiring gait assistance, and potentially for industrial fatigue reduction."
+            },
+            {
+                id: "gen-3",
+                question: "What is the current project status?",
+                answer: "We are currently in the Phase 2 integration stage. Initial motor testing and PCB fabrication are complete. We are now integrating the control software with the physical hardware and beginning closed-loop gait trials."
             }
         ]
     },
@@ -45,6 +50,11 @@ const faqData: FAQCategory[] = [
                 id: "tech-3",
                 question: "What control architecture is used?",
                 answer: "The exoskeleton runs on a distributed control system. An ESP32 microcontroller handles high-level gait logic and sensor fusion, communicating with ODrive motor controllers via CAN bus for precise field-oriented control (FOC)."
+            },
+            {
+                id: "tech-4",
+                question: "What sensors are integrated?",
+                answer: "The system employs a sensor fusion array including IMUs (Inertial Measurement Units) for limb orientation, load cells for ground reaction force detection, and motor encoders for precise joint angle position."
             }
         ]
     },
@@ -62,11 +72,27 @@ const faqData: FAQCategory[] = [
                 answer: "Yes. The actuators are back-drivable, meaning the user can mechanically overpower the motors in case of a system freeze, ensuring they are never 'locked' in a position."
             }
         ]
+    },
+    {
+        title: "FUTURE_ROADMAP",
+        items: [
+            {
+                id: "fut-1",
+                question: "Is this open source?",
+                answer: "Yes. Upon project completion, we plan to release all CAD files, PCB schematics, and source code under an open-source license to encourage further innovation in the assistive robotics community."
+            },
+            {
+                id: "fut-2",
+                question: "What are the next planned features?",
+                answer: "Future iterations will focus on implementing machine learning-based gait prediction, reducing the overall frame weight with carbon fiber components, and extending battery life through regenerative braking."
+            }
+        ]
     }
 ];
 
 export const FAQ = () => {
     const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+    const [searchQuery, setSearchQuery] = useState("");
 
     const toggleItem = (id: string) => {
         const newOpenItems = new Set(openItems);
@@ -77,6 +103,14 @@ export const FAQ = () => {
         }
         setOpenItems(newOpenItems);
     };
+
+    const filteredFAQData = faqData.map(category => ({
+        ...category,
+        items: category.items.filter(item =>
+            item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.answer.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    })).filter(category => category.items.length > 0);
 
     return (
         <div className="page-content">
@@ -90,35 +124,51 @@ export const FAQ = () => {
                     <p className="mono">COMMON INQUIRIES & SPECS</p>
                 </div>
 
+                <div className="faq-search-container">
+                    <input
+                        type="text"
+                        placeholder="Search for keywords..."
+                        className="faq-search-input"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+
                 <div className="faq-grid">
-                    {faqData.map((category, catIndex) => (
-                        <div key={category.title} className="faq-category" style={{ animationDelay: `${catIndex * 0.1}s` }}>
-                            <h3 className="category-title mono">
-                                <span className="category-marker">/</span>
-                                {category.title}
-                            </h3>
-                            <div className="category-items">
-                                {category.items.map((item) => (
-                                    <div
-                                        key={item.id}
-                                        className={`faq-item ${openItems.has(item.id) ? 'open' : ''}`}
-                                        onClick={() => toggleItem(item.id)}
-                                    >
-                                        <div className="faq-question">
-                                            <span className="status-indicator"></span>
-                                            <h4>{item.question}</h4>
-                                            <span className="expand-icon">{openItems.has(item.id) ? '−' : '+'}</span>
-                                        </div>
-                                        <div className="faq-answer">
-                                            <div className="answer-content">
-                                                <p>{item.answer}</p>
+                    {filteredFAQData.length > 0 ? (
+                        filteredFAQData.map((category, catIndex) => (
+                            <div key={category.title} className="faq-category" style={{ animationDelay: `${catIndex * 0.1}s` }}>
+                                <h3 className="category-title mono">
+                                    <span className="category-marker">/</span>
+                                    {category.title}
+                                </h3>
+                                <div className="category-items">
+                                    {category.items.map((item) => (
+                                        <div
+                                            key={item.id}
+                                            className={`faq-item ${openItems.has(item.id) ? 'open' : ''}`}
+                                            onClick={() => toggleItem(item.id)}
+                                        >
+                                            <div className="faq-question">
+                                                <span className="status-indicator"></span>
+                                                <h4>{item.question}</h4>
+                                                <span className="expand-icon">{openItems.has(item.id) ? '−' : '+'}</span>
+                                            </div>
+                                            <div className="faq-answer">
+                                                <div className="answer-content">
+                                                    <p>{item.answer}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
+                        ))
+                    ) : (
+                        <div className="no-results" style={{ textAlign: "center", padding: "2rem", opacity: 0.7 }}>
+                            <p>No results found for "{searchQuery}"</p>
                         </div>
-                    ))}
+                    )}
                 </div>
             </div>
         </div>

@@ -40,18 +40,24 @@
   color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.95rem;
-  /* Slightly larger for Outfit */
   font-family: var(--font-display);
   font-weight: 500;
-  transition: color 0.3s ease;
   text-transform: uppercase;
-  /* Maintain the "technical" feel */
+  border: none;
+  outline: none;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.nav-link:focus,
+.nav-link:focus-visible,
+.nav-link:active {
+  outline: none;
+  box-shadow: none;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: var(--color-secondary);
-  text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
 }
 
 /* Mobile Menu Toggle */
@@ -110,7 +116,7 @@
     gap: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transform: translateY(-100%);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     z-index: -1;
     align-items: center;
     opacity: 0;
@@ -129,7 +135,6 @@
     width: 100%;
     text-align: center;
     letter-spacing: 2px;
-    border: 1px solid transparent;
     transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(10px);
@@ -142,27 +147,25 @@
 
   /* Staggered Animation Delays */
   .nav-links.open .nav-link:nth-child(1) {
-    transition-delay: 0.1s;
+    transition-delay: 0.05s;
   }
 
   .nav-links.open .nav-link:nth-child(2) {
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
   }
 
   .nav-links.open .nav-link:nth-child(3) {
-    transition-delay: 0.3s;
+    transition-delay: 0.15s;
   }
 
   .nav-links.open .nav-link:nth-child(4) {
-    transition-delay: 0.4s;
+    transition-delay: 0.2s;
   }
 
   .nav-link:hover,
   .nav-link:active {
     color: var(--color-primary);
-    border-color: rgba(0, 243, 255, 0.3);
     background: rgba(0, 243, 255, 0.05);
-    text-shadow: 0 0 15px rgba(0, 243, 255, 0.8);
     letter-spacing: 6px;
   }
 }
@@ -195,7 +198,6 @@
 
   [data-theme="light"] .nav-link:hover,
   [data-theme="light"] .nav-link:active {
-    border-color: rgba(8, 145, 178, 0.3);
     background: rgba(8, 145, 178, 0.08);
     text-shadow: none;
   }

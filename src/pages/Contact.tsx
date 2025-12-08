@@ -52,12 +52,7 @@ export const Contact = () => (
             </div>
 
             {/* Response Info */}
-            <div className="response-info">
-                <p>
-                    <strong>Response Time:</strong> Expect a reply within 24-48 hours.
-                    For urgent matters, include <span className="priority-tag">[PRIORITY]</span> in your subject line.
-                </p>
-            </div>
+
         </Section>
     </div>
 );

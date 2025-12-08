@@ -15,11 +15,12 @@ export const Section: FC<SectionProps> = ({ children, className = '', id }) => {
   return (
     <section
       id={id}
-      ref={ref}
-      className={`section-padding reveal-section ${isVisible ? 'is-visible' : ''} ${className}`}
+      className={`section-padding ${className}`}
     >
-      <div className="container">
-        {children}
+      <div ref={ref} className={`reveal-section ${isVisible ? 'is-visible' : ''}`}>
+        <div className="container">
+          {children}
+        </div>
       </div>
     </section>
   );

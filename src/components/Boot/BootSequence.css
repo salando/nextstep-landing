@@ -17,6 +17,7 @@
 
 .boot-overlay.exiting {
   opacity: 0;
+  pointer-events: none;
 }
 
 /* Flying Text Animation */

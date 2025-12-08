@@ -10,9 +10,9 @@
 .progress-feed::before {
     content: '';
     position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
+    left: 19px;
+    top: 50px;
+    bottom: 50px;
     width: 2px;
     background: linear-gradient(to bottom, var(--color-primary), transparent);
     opacity: 0.3;
@@ -144,6 +144,7 @@
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
+    touch-action: manipulation;
 }
 
 .image-overlay {
@@ -224,6 +225,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    touch-action: manipulation;
     z-index: 10;
     transition: background 0.2s ease;
 }
@@ -248,6 +250,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    touch-action: manipulation;
     z-index: 20;
     transition: all 0.2s ease;
 }

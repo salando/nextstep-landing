@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 /* App-level specific styles */
 
 .app-wrapper {

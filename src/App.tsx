@@ -1,12 +1,6 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Research } from './pages/Research';
-import { Contact } from './pages/Contact';
-import { Development } from './pages/Development';
-import { Physical } from './pages/Physical';
-import { FAQ } from './pages/FAQ';
 import { NavBar } from './components/UI/NavBar';
 import { Footer } from './components/Footer/Footer';
 import { BootSequence } from './components/Boot/BootSequence';
@@ -14,6 +8,16 @@ import { GlobalLogo } from './components/UI/GlobalLogo';
 import { ScrollToTop } from './components/UI/ScrollToTop';
 import './styles/tokens.css';
 import './App.css';
+
+// Lazy load pages
+// We need to use inline imports for Vite/Rollup to correctly bundle the chunks
+const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const Research = lazy(() => import('./pages/Research').then(module => ({ default: module.Research })));
+const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.Contact })));
+const Development = lazy(() => import('./pages/Development').then(module => ({ default: module.Development })));
+const Physical = lazy(() => import('./pages/Physical').then(module => ({ default: module.Physical })));
+const FAQ = lazy(() => import('./pages/FAQ').then(module => ({ default: module.FAQ })));
+const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
 function App() {
   // Boot State Machine: 'loading' -> 'flying' -> 'cleanup' -> 'complete'
@@ -56,14 +60,17 @@ function App() {
       <main className={`app-wrapper ${bootState !== 'loading' ? 'visible' : ''}`}>
         <NavBar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/research" element={<Research />} />
-          <Route path="/development" element={<Development />} />
-          <Route path="/physical" element={<Physical />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<FAQ />} />
-        </Routes>
+        <Suspense fallback={<div className="loading-fallback">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/research" element={<Research />} />
+            <Route path="/development" element={<Development />} />
+            <Route path="/physical" element={<Physical />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
 
         <Footer />
       </main>

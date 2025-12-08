@@ -18,10 +18,18 @@ export const ThemeToggle = () => {
     }, []);
 
     const toggleTheme = () => {
+        // Add transition class to html element
+        document.documentElement.classList.add('theme-transition');
+
         const newTheme = theme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+
+        // Remove class after transition completes
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transition');
+        }, 300);
     };
 
     return (

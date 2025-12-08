@@ -37,7 +37,7 @@ export const NavBar = () => {
 
             <div className="nav-actions">
                 <ThemeToggle />
-                <button className={`mobile-menu-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
+                <button className={`mobile-menu-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Toggle menu" id="mobile-menu-toggle">
                     <span className="hamburger-line"></span>
                     <span className="hamburger-line"></span>
                     <span className="hamburger-line"></span>
