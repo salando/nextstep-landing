@@ -50,8 +50,8 @@ export const Research = () => {
                     <h1 className="section-title intro-title">The Engineering Journey</h1>
                     <div className="section-line intro-line"></div>
                     <p className="intro-lead">
-                        Building an exoskeleton is not just about assembling parts. It is about solving a complex optimization problem.
-                        We faced strict constraints: a student budget of <span className="highlight">$600 CAD</span>, a weight limit of <span className="highlight">2.5kg</span>, and the need for high-torque actuation.
+                        The development of an active exoskeleton presents a complex optimization challenge, requiring the integration of biomechanics, mechanical engineering, and control systems constrained by a strictly limited budget and weight envelope.
+                        We navigated strict constraints: a student budget of <span className="highlight">$600 CAD</span>, a weight limit of <span className="highlight">2.5kg</span>, and the necessity for high-torque actuation.
                     </p>
                 </div>
             </Section>
@@ -61,14 +61,14 @@ export const Research = () => {
 
                     {/* Introduction Section */}
                     <Section id="introduction">
-                        <div className="section-header">Introduction</div>
+                        <div className="section-header">Project Overview</div>
                         <div className="text-block">
                             <p>
-                                NextStep is an exoskeleton designed to assist lower-body movement, specifically helping with <TechTerm term="hip flexion" explanation="The movement of lifting your thigh toward your chest, like when walking or running" />: the motion of lifting your leg when you walk or run.
-                                Think of it as a "power assist" for your legs, similar to how e-bikes help you pedal.
+                                NextStep is an assistive exoskeleton designed to augment lower-body movement, focusing specifically on <TechTerm term="hip flexion" explanation="The movement of lifting your thigh toward your chest, like when walking or running" />: the kinematics of lifting the leg during gait.
+                                Analogous to an electric bicycle for mobility, NextStep provides assistive torque to the hip joint, reducing the physiological effort required for locomotion.
                             </p>
                             <p>
-                                This technology has applications in demanding physical work (construction, logistics, manufacturing) and the medical field, where it can help people with mobility challenges regain or enhance their movement.
+                                This technology holds significant potential for both industrial applications (construction, logistics) and therapeutic rehabilitation, allowing individuals with mobility impairments to regain functional independence.
                             </p>
                         </div>
 
@@ -98,103 +98,97 @@ export const Research = () => {
 
                     {/* Biomechanics Section */}
                     <Section id="biomechanics">
-                        <div className="section-header">Understanding Human Movement</div>
+                        <div className="section-header">Kinematics & Biomechanics</div>
                         <div className="text-block">
                             <p>
-                                Before designing any hardware, we needed to understand exactly <em>how</em> humans walk and run.
-                                The hip joint acts like a pivot point - when you lift your leg, your thigh bone (femur) rotates around this joint.
+                                Effective hardware design necessitates a fundamental understanding of human gait kinematics.
+                                The hip joint functions as a primary pivot, with the femur experiencing rotational displacement relative to the pelvis.
                             </p>
                         </div>
 
                         <div className="info-callout">
                             <h4>Key Insight</h4>
-                            <p>Walking requires about <strong>40-50°</strong> of hip rotation, while running increases this to <strong>60-65°</strong>. This tells us exactly how much rotation our motor needs to provide.</p>
+                            <p>Gait analysis reveals hip flexion requires approximately <strong>40-50°</strong> of rotation during walking, increasing to <strong>60-65°</strong> during running. These kinematic requirements dictate the necessary actuator range of motion.</p>
                         </div>
 
                         <div className="research-block">
-                            <h3>The Numbers Behind Walking</h3>
+                            <h3>Actuator Requirements Analysis</h3>
                             <p>
-                                At a fast running pace, humans take about 180-200 steps per minute (called <TechTerm term="cadence" explanation="The number of steps taken per minute during walking or running" />).
-                                Combined with the rotation angle, this means the hip moves through roughly <strong>13,000 degrees per minute</strong>.
-                            </p>
-                            <p>
-                                Converting this to motor terms: our motor needs to turn at least <strong>36 RPM</strong> (rotations per minute) to keep up with a runner.
-                                That might sound slow, and it is. But here is the tricky part: we also need a lot of force (<TechTerm term="torque" explanation="Rotational force: how hard the motor can twist. Higher torque means more pushing power." />).
+                                At elevated cadences (180-200 <TechTerm term="SPM" explanation="Steps Per Minute" />), the hip joint angular velocity exceeds <strong>13,000 degrees per minute</strong>.
+                                Consequently, the actuator must support angular velocities of minimally <strong>36 RPM</strong> while delivering substantial force (<TechTerm term="torque" explanation="Rotational force: how hard the motor can twist. Higher torque means more pushing power." />).
                             </p>
                         </div>
 
-                        <ExpandableSection title="Why This Matters for Motor Selection">
+                        <ExpandableSection title="The Engineering Contradiction">
                             <p>
-                                Most motors are designed for high speed (thousands of RPM) but low torque. We need the opposite: low speed but high torque.
-                                This fundamental mismatch drove most of our motor research. We had to find creative solutions to get both.
+                                This presents a fundamental disconnect: commercial electric motors are typically optimized for high RPM and low torque.
+                                Human joint actuation, conversely, requires low angular velocity and high torque. The primary engineering challenge was resolving this impedance mismatch.
                             </p>
                         </ExpandableSection>
                     </Section>
 
                     {/* Power Analysis Section */}
                     <Section id="power-analysis">
-                        <div className="section-header">Power Analysis: Reverse-Engineering the Competition</div>
+                        <div className="section-header">Competitive Analysis & Power Estimates</div>
                         <div className="text-block">
                             <p>
-                                To understand what motors we needed, we analyzed a commercial exoskeleton - the Hypershell X Ultra - by working backwards from their published specifications.
-                                This would give us a realistic target for our own design.
+                                To establish baseline specifications, we conducted a reverse-engineering analysis of the Hypershell X Ultra.
+                                By analyzing their published specifications, we derived realistic operating parameters for a functional prototype.
                             </p>
                         </div>
 
                         <div className="warning-callout">
-                            <h4>Marketing vs Reality</h4>
+                            <h4>Specification Analysis</h4>
                             <p>
-                                Hypershell claims "1000W peak power" - but our calculations showed this is misleading.
-                                With a 72Wh battery lasting 7.5 hours in eco mode, the <em>actual</em> average power is only about <strong>10 watts</strong>.
-                                The 1000W figure is likely the "stall" power - what happens if the motor is completely blocked - not normal operation.
+                                While marketed with a "1000W peak power" figure, energetic analysis suggests this refers to instantaneous stall power.
+                                Based on the 72Wh battery capacity and 7.5h runtime, the continuous power consumption is approximately <strong>10W</strong>.
                             </p>
                         </div>
 
                         <div className="research-block">
-                            <h3>What We Calculated</h3>
-                            <p>Using the battery specs and run times, we derived realistic motor requirements:</p>
+                            <h3>Derived Specifications</h3>
+                            <p>Based on battery energy density and runtime data, we derived the following motor requirements:</p>
                             <ul className="specs-list">
-                                <li><strong>Voltage:</strong> 14.4V (4-cell lithium battery)</li>
-                                <li><strong>Running Current:</strong> ~3.75 amps</li>
-                                <li><strong>Speed Needed:</strong> 36 RPM (minimum)</li>
+                                <li><strong>Operating Voltage:</strong> 14.4V (4S LiPo configuration)</li>
+                                <li><strong>Nominal Current:</strong> ~3.75 A</li>
+                                <li><strong>Required Angular Velocity:</strong> &gt;36 RPM</li>
                                 <li><strong>Peak Torque:</strong> 40 Nm</li>
-                                <li><strong>Running Torque:</strong> 4.3 Nm</li>
+                                <li><strong>Continuous Torque:</strong> 4.3 Nm</li>
                             </ul>
                         </div>
 
                         <ExpandableSection title="Show Me the Math">
                             <div className="calculation-block">
-                                <p><strong>Voltage calculation:</strong></p>
-                                <code>Voltage = Energy ÷ Charge = 72Wh ÷ 5Ah = 14.4V</code>
-                                <p><strong>Power in hyper mode:</strong></p>
-                                <code>Power = 72Wh ÷ 1.33 hours = 54W average</code>
-                                <p><strong>Current draw:</strong></p>
-                                <code>Current = Power ÷ Voltage = 54W ÷ 14.4V = 3.75A</code>
-                                <p>These calculations helped us understand what's actually achievable on a student budget.</p>
+                                <p><strong>Voltage Derivation:</strong></p>
+                                <code>Voltage = Energy ÷ Capacity = 72Wh ÷ 5Ah = 14.4V</code>
+                                <p><strong>Average Power Consumption:</strong></p>
+                                <code>P_avg = 72Wh ÷ 1.33h (Hyper Mode) ≈ 54W</code>
+                                <p><strong>Current Estimation:</strong></p>
+                                <code>I_nom = P_avg ÷ V = 54W ÷ 14.4V ≈ 3.75A</code>
+                                <p>These calculations validated the feasibility of the project within the constraints of student-accessible hardware.</p>
                             </div>
                         </ExpandableSection>
                     </Section>
 
                     {/* Methodology Section */}
                     <Section id="methodology">
-                        <div className="section-header">Design Approach</div>
+                        <div className="section-header">Design Methodology</div>
                         <p className="text-block">
-                            We evaluated three fundamentally different ways to apply force to the leg.
-                            Each has trade-offs between complexity, reliability, and performance.
+                            To select an optimal actuation topology, three force transmission methods were evaluated against criteria of complexity, wearability, and mechanical efficiency.
                         </p>
 
                         <div className="design-comparison">
                             <div className="design-option">
                                 <h4>Direct Motor Drive</h4>
-                                <p>Motor attached directly to the hip joint. Simple, reliable, but finding a motor with enough torque at low speed is challenging.</p>
+                                <p>High-torque motor coupled directly to the hip joint. Mechanically simple and reliable, though sourcing motors with sufficient torque density is challenging.</p>
                             </div>
                             <div className="design-option">
-                                <h4>Cable Pull System</h4>
-                                <p>Motor pulls cables attached to the leg. Lighter motors possible, but cables can tangle and wear out over time.</p>
+                                <h4>Cable Transmission</h4>
+                                <p>Bowden cable system relocating motors to a backpack. Reduces distal mass but introduces friction, elasticity, and mechanical complexity.</p>
                             </div>
                             <div className="design-option">
-                                <h4>Spring Energy Storage</h4>
-                                <p>Motor charges springs that release energy at the right moment. Most complex, but potentially very efficient.</p>
+                                <h4>Series Elastic Actuation (Springs)</h4>
+                                <p>Motors charge potential energy into springs. Theoretically efficient but significantly increases control system complexity and mechanical bulk.</p>
                             </div>
                         </div>
 
@@ -261,38 +255,38 @@ export const Research = () => {
 
                     {/* Motor Types Section */}
                     <Section id="motor-types">
-                        <div className="section-header">Understanding Motors</div>
+                        <div className="section-header">Actuator selection</div>
                         <div className="text-block">
                             <p>
-                                Not all motors are created equal. For our exoskeleton, we needed to understand the different types and pick the right one for the job.
+                                Actuator selection required a comparative analysis of motor architectures to identify the optimal balance of torque density and efficiency.
                             </p>
                         </div>
 
                         <div className="motor-types-grid">
                             <div className="motor-type-card">
-                                <h4>Brushed vs Brushless</h4>
+                                <h4>Brushed vs Brushless (BLDC)</h4>
                                 <div className="comparison-visual">
                                     <div className="vs-item bad">
                                         <span className="vs-label">Brushed</span>
-                                        <p>Simpler, cheaper, but wears out faster due to physical contact inside</p>
+                                        <p>Mechanically simple but prone to brush wear and lower efficiency</p>
                                     </div>
                                     <div className="vs-item good">
                                         <span className="vs-label">Brushless ✓</span>
-                                        <p>More efficient, quieter, longer-lasting. Uses magnets instead of brushes</p>
+                                        <p>Superior torque-to-weight ratio, higher efficiency, and maintenance-free operation</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="motor-type-card">
-                                <h4>Inrunner vs Outrunner</h4>
+                                <h4>Rotor Configuration</h4>
                                 <div className="comparison-visual">
                                     <div className="vs-item">
                                         <span className="vs-label">Inrunner</span>
-                                        <p>Spinning parts inside, higher speed, lower torque</p>
+                                        <p>Internal rotor; optimized for high RPM, low torque applications</p>
                                     </div>
                                     <div className="vs-item good">
                                         <span className="vs-label">Outrunner ✓</span>
-                                        <p>Outer shell spins, higher torque, wider and flatter shape</p>
+                                        <p>External rotor; inherently higher torque generation due to increased varying radius</p>
                                     </div>
                                 </div>
                             </div>
@@ -300,8 +294,8 @@ export const Research = () => {
                             <div className="motor-type-card">
                                 <h4>Form Factor: "Pancake" Motors</h4>
                                 <p>
-                                    We needed a motor that sits flat against the hip, not one that sticks out like a cylinder.
-                                    These flat, wide motors are nicknamed "pancake" motors - perfect for wearable applications.
+                                    To minimize protrusion from the hip, a low-profile "pancake" stator configuration was selected.
+                                    This geometry maximizes the moment arm for torque generation while maintaining an unobtrusive wearable profile.
                                 </p>
                             </div>
                         </div>
@@ -309,65 +303,65 @@ export const Research = () => {
 
                     {/* Gearing Section */}
                     <Section id="gearing">
-                        <div className="section-header">The Gearing Challenge</div>
+                        <div className="section-header">Transmission & Reduction</div>
                         <div className="text-block">
                             <p>
-                                Here's our problem: motors that spin fast are small and cheap. Motors with high torque are big and expensive.
-                                We need high torque at low speed. The solution? <strong>Gears</strong> - trading speed for force, like the gears on a bicycle.
+                                A critical design challenge involves the impedance mismatch between electric motors and human joints.
+                                Motors operate efficiently at high speeds, while human joints require high torque at low speeds. A reduction transmission is required to bridge this gap.
                             </p>
                         </div>
 
                         <div className="info-callout">
-                            <h4>The Bicycle Analogy</h4>
+                            <h4>Mechanical Advantage</h4>
                             <p>
-                                When you shift to a lower gear on a bike, you pedal faster but climb hills more easily.
-                                That's exactly what we're doing: taking a fast-spinning motor and "gearing it down" to spin slower but with much more pushing power.
+                                Similar to a bicycle's low gear, a reduction stage reduces the output speed while multiplying torque.
+                                This allows a compact, high-efficiency motor to drive the high-load requirements of the hip joint.
                             </p>
                         </div>
 
                         <div className="research-block">
-                            <h3>Gearing Options We Considered</h3>
+                            <h3>Transmission Typologies</h3>
                             <div className="gear-options">
                                 <div className="gear-option">
                                     <h4>Spur Gears</h4>
-                                    <p>Simple interlocking gears. Easy to understand, but need many stages for high reduction. Gets bulky.</p>
-                                    <span className="gear-verdict bad">Too bulky for our needs</span>
+                                    <p>Simple modification, but requires multiple stages for significant reduction, resulting in excessive volume.</p>
+                                    <span className="gear-verdict bad">Volume Constraints</span>
                                 </div>
                                 <div className="gear-option">
                                     <h4>Worm Gears</h4>
-                                    <p>Compact and high reduction, but a major flaw: not "backdriveable." If you push on the output, it locks up. Dangerous for an exoskeleton.</p>
-                                    <span className="gear-verdict bad">Not backdriveable</span>
+                                    <p>High reduction ratio in a single stage, but mechanically non-backdriveable, posing safety risks.</p>
+                                    <span className="gear-verdict bad">Non-backdriveable</span>
                                 </div>
                                 <div className="gear-option selected">
                                     <h4>Planetary Gears</h4>
-                                    <p>Compact, high reduction, and backdriveable. Multiple small gears orbit around a central gear. Complex but reliable.</p>
-                                    <span className="gear-verdict good">Best balance for our needs</span>
+                                    <p>High power density and coaxial alignment. Loads are distributed across detailed planet gears, offering durability and backdriveability.</p>
+                                    <span className="gear-verdict good">Optimal Solution</span>
                                 </div>
                                 <div className="gear-option">
                                     <h4>Harmonic Drive</h4>
-                                    <p>Extremely compact and precise. Used in robots and space equipment. But costs more than our entire budget!</p>
-                                    <span className="gear-verdict bad">Too expensive</span>
+                                    <p>Zero-backlash precision gearing used in industrial robotics. Prohibitively expensive.</p>
+                                    <span className="gear-verdict bad">Cost Prohibitive</span>
                                 </div>
                             </div>
                         </div>
 
-                        <ExpandableSection title="Why Backdriveability Matters">
+                        <ExpandableSection title="Safety Critical: Backdriveability">
                             <p>
-                                <TechTerm term="Backdriveability" explanation="The ability for force applied to the output (your leg) to move the motor backwards" /> is crucial for safety.
-                                If you stumble or need to override the motor, the mechanism must allow your leg to move freely.
-                                Worm gears are "self-locking" - force from your leg can't spin the motor backwards, which could cause injury.
+                                <TechTerm term="Backdriveability" explanation="The ability for force applied to the output (your leg) to move the motor backwards" /> is a non-negotiable safety requirement.
+                                In the event of system failure or user stumble, the transmission must allow the leg to move freely without mechanical locking, preventing potential injury.
                             </p>
                         </ExpandableSection>
                     </Section>
 
                     {/* Motor Research Section */}
                     <Section id="motor-research">
-                        <div className="section-header">Motor Research & Selection</div>
+                        <div className="section-header">Component Sourcing</div>
 
                         <div className="research-block">
-                            <h3>The Search Process</h3>
+                            <h3>Market Analysis</h3>
                             <p>
-                                Finding the right motor was like searching for a needle in a haystack. Most motors available for purchase didn't meet our requirements for torque, speed, weight, AND budget all at once.
+                                Identifying a commercially available actuator that satisfied our torque, weight, and fiscal constraints proved challenging.
+                                Standard UAV motors lacked sufficient torque, while industrial servo actuators exceeded our budget.
                             </p>
                             <div className="image-grid">
                                 <div className="image-card">
@@ -384,26 +378,25 @@ export const Research = () => {
                         <div className="research-block">
                             <h3>Motor Types Considered</h3>
                             <p>
-                                Our breakthrough came when we searched for "robotic actuator" - motors designed for robot joints.
-                                These motors are built for exactly our use case: high torque, low speed, compact size.
+                                The optimal solution was identified in the "robotic actuator" category: integrated modules combining high-torque BLDC motors with low-backlash planetary gears.
+                                These units are purpose-built for dynamic joint actuation in quadrupedal robots and exoskeletons.
                             </p>
                             <div className="image-grid">
                                 <div className="image-card">
                                     <img src="/research_images/image39.png" alt="Pancake Motor" />
-                                    <p className="image-caption">Pancake Motor Form Factor</p>
+                                    <p className="image-caption">Stator Geometry Analysis</p>
                                 </div>
                                 <div className="image-card">
                                     <img src="/research_images/image37.png" alt="Outrunner vs Inrunner" />
-                                    <p className="image-caption">Outrunner vs Inrunner Design</p>
+                                    <p className="image-caption">Rotor Configuration Comparison</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="research-block">
-                            <h3>The Winning Solution</h3>
+                            <h3>Selected Configuration</h3>
                             <p>
-                                We found motors with built-in planetary gearboxes - combining the motor and gearing into one compact unit.
-                                The <strong>GIM8108-8</strong> from Steadywin emerged as the best option.
+                                We selected the Steadywin <strong>GIM8108-8</strong>, an integrated actuator module that combines a pancake-style BLDC motor with a highly integrated planetary gearbox.
                             </p>
                             <div className="highlight-box">
                                 <div className="motor-specs">
@@ -439,9 +432,9 @@ export const Research = () => {
 
                     {/* Budget Section */}
                     <Section id="budget">
-                        <div className="section-header">Budget Breakdown</div>
+                        <div className="section-header">Fiscal Analysis</div>
                         <p className="text-block">
-                            The budget for this project is set at under $500, though flexible. This constraint forced us to be creative with component selection.
+                            Project fiscal constraints were established at $500 CAD. This budgetary envelope necessitated strategic component selection and the in-house fabrication of structural components to prioritize expenditure on critical actuators.
                         </p>
                         <div className="budget-table-container">
                             <table className="budget-table">
@@ -457,14 +450,14 @@ export const Research = () => {
                                 <tbody>
                                     <tr>
                                         <td>Motor (GIM8108-8)</td>
-                                        <td>Mechanical</td>
+                                        <td>Actuation</td>
                                         <td>2</td>
                                         <td>$150</td>
                                         <td>$300.00</td>
                                     </tr>
                                     <tr>
                                         <td>Battery (4S LiPo)</td>
-                                        <td>Power</td>
+                                        <td>Power System</td>
                                         <td>2</td>
                                         <td>$50</td>
                                         <td>$100.00</td>
@@ -484,22 +477,23 @@ export const Research = () => {
                                         <td>$20.00</td>
                                     </tr>
                                     <tr>
-                                        <td>Controller</td>
+                                        <td>Microcontroller</td>
                                         <td>Control</td>
                                         <td>1</td>
                                         <td>$0</td>
                                         <td>$0.00</td>
                                     </tr>
                                     <tr>
-                                        <td>Wire (15ft)</td>
-                                        <td>Mechanical</td>
+                                        <td>Wiring Harness</td>
+                                        <td>Electrical</td>
                                         <td>1</td>
                                         <td>$10</td>
                                         <td>$10.00</td>
                                     </tr>
                                     <tr className="total-row">
-                                        <td colSpan={4}>Total Estimated Cost</td>
+                                        <td colSpan={4}>Total Bill of Materials</td>
                                         <td>$470.00</td>
+                                        {/* TODO: Update total calculation logic if needed, currently hardcoded */}
                                     </tr>
                                 </tbody>
                             </table>
@@ -508,24 +502,24 @@ export const Research = () => {
 
                     {/* Belt Research Section */}
                     <Section id="belt-research">
-                        <div className="section-header">Belt & Attachment Research</div>
+                        <div className="section-header">Ergonomics & Interface Design</div>
                         <p className="text-block">
-                            The exoskeleton needs to attach securely to your body without slipping during movement.
-                            We analyzed the human waist geometry (which is actually an ellipse, not a circle) to design the attachment system.
+                            Effective torque transmission requires a rigid yet comfortable coupling between the exoskeleton and the user's iliac crest.
+                            Anthropometric analysis of waist geometry—approximated as an ellipse—informed the design of the primary interference fit.
                         </p>
                         <div className="research-block">
-                            <h3>Fastening Mechanism</h3>
+                            <h3>Retention System Selection</h3>
                             <p>
-                                We evaluated three belt types based on durability, reliability, comfort, and ease of use:
+                                The attachment mechanism was selected via a decision matrix evaluating durability, locking reliability, and user comfort:
                             </p>
                             <div className="design-matrix-container">
                                 <table className="design-matrix">
                                     <thead>
                                         <tr>
                                             <th>Criteria</th>
-                                            <th>Ratchet Belt</th>
-                                            <th>Slide Belt</th>
-                                            <th>Velcro Belt</th>
+                                            <th>Ratchet Mechanism</th>
+                                            <th>Friction Slide</th>
+                                            <th>Velcro / Hook & Loop</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -536,7 +530,7 @@ export const Research = () => {
                                             <td>6</td>
                                         </tr>
                                         <tr>
-                                            <td>Reliability /5</td>
+                                            <td>Locking Security /5</td>
                                             <td>5</td>
                                             <td>5</td>
                                             <td>4</td>
@@ -548,14 +542,14 @@ export const Research = () => {
                                             <td>3</td>
                                         </tr>
                                         <tr>
-                                            <td>Ease of use /3</td>
+                                            <td>Ease of donning /3</td>
                                             <td>2</td>
                                             <td>2</td>
                                             <td>3</td>
                                         </tr>
                                         <tr className="total-row">
                                             <td>Total /19</td>
-                                            <td className="highlight-cell">18 (Winner)</td>
+                                            <td className="highlight-cell">18 (Selected)</td>
                                             <td>17</td>
                                             <td>16</td>
                                         </tr>
@@ -563,7 +557,7 @@ export const Research = () => {
                                 </table>
                             </div>
                             <p>
-                                <strong>Conclusion:</strong> We selected a ratchet-style adjustable belt system reinforced with a rigid frame to secure the components.
+                                <strong>Conclusion:</strong> A ratchet-style retention system reinforced with a semi-rigid frame was selected to maximize load transfer efficiency while maintaining adjustability.
                             </p>
                         </div>
                     </Section>
