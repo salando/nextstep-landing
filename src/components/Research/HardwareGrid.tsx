@@ -9,7 +9,7 @@ export const HardwareGrid = () => {
             category: "Actuator",
             image: "/research_images/image43.png",
             description: "High-torque brushless motor with integrated planetary gearbox. The heart of the exoskeleton's movement system.",
-            className: "grid-span-2", // Bento Feature: Wide card
+            className: "grid-span-2",
             specs: [
                 { label: "Torque", value: "22 Nm" },
                 { label: "Gear Ratio", value: "8:1" },
@@ -19,14 +19,16 @@ export const HardwareGrid = () => {
         },
         {
             id: 2,
-            title: "ODrive S1",
-            category: "Controller",
-            image: "/research_images/image39.png",
-            description: "FOC motor controller with CAN bus interface for precise torque control.",
+            title: "Waveshare CAN HAT",
+            category: "Interface",
+            image: "/research_images/image54.png",
+            description: "RS485/CAN HAT for Raspberry Pi 5. Enables communication with the CyberGear motors.",
             className: "grid-span-2",
             specs: [
-                { label: "Peak Current", value: "40A" },
-                { label: "Protocol", value: "CAN" }
+                { label: "Controller", value: "MCP2515" },
+                { label: "Interface", value: "SPI" },
+                { label: "Oscillator", value: "12MHz" },
+                { label: "Transceiver", value: "SN65HVD230" }
             ]
         },
         {
@@ -38,7 +40,9 @@ export const HardwareGrid = () => {
             className: "grid-span-2",
             specs: [
                 { label: "Capacity", value: "5Ah" },
-                { label: "Voltage", value: "22.2V" }
+                { label: "Voltage", value: "22.2V" },
+                { label: "Config", value: "6S2P" },
+                { label: "Peak", value: "1200W" }
             ]
         },
         {
@@ -47,7 +51,7 @@ export const HardwareGrid = () => {
             category: "Structure",
             image: "/research_images/image45.png",
             description: "Topology-optimized structure printed in Carbon Fiber Nylon.",
-            className: "grid-span-2", // Bento Feature: Wide card at bottom
+            className: "grid-span-2",
             specs: [
                 { label: "Material", value: "PA12-CF" },
                 { label: "Weight", value: "450g" },

@@ -21,6 +21,7 @@ const SECTIONS = [
     id: 'power',
     title: 'Power Systems',
     icon: IconPower,
+    image: '/research_images/battery_closeup.jpg', // Correct Battery Image
     items: [
       '2x 4S 5000mAh Li-ion (Split Config)',
       'JBD 7S-14S Li-ion 30A BMS',
@@ -32,6 +33,7 @@ const SECTIONS = [
     id: 'control',
     title: 'Control Logic',
     icon: IconChip,
+    image: '/research_images/pi_setup.jpg', // Correct Pi/HAT Image
     items: [
       'Raspberry Pi 4 (Central Brain)',
       'RS485 CAN HAT Extension',
@@ -43,6 +45,7 @@ const SECTIONS = [
     id: 'mech',
     title: 'Mechanical',
     icon: IconMech,
+    image: '/research_images/motor_setup_2.jpg',
     items: [
       'GIM8108-8 Brushless Motors',
       'Carbon Fiber / Alu Frame',
@@ -54,6 +57,7 @@ const SECTIONS = [
     id: 'coms',
     title: 'Communication',
     icon: IconWifi,
+    image: '/research_images/motor_setup_5.jpg', // Power System Image as requested
     items: [
       'CAN Bus @ 1Mbps',
       '120Ω Termination Resistors',
@@ -74,17 +78,41 @@ export const Specs = () => {
           className={`spec-card ${activeId === s.id ? 'active' : ''}`}
           onMouseEnter={() => setActiveId(s.id)}
           onMouseLeave={() => setActiveId(null)}
+        // For mobile tap: toggle active state if needed, but hover covers most
+        // onClick={() => setActiveId(activeId === s.id ? null : s.id)} 
         >
-          <div className="spec-icon">
-            <s.icon />
+          <div className="card-inner">
+            {/* Front Face */}
+            <div className="card-face card-front">
+              <div className="spec-icon">
+                <s.icon />
+              </div>
+              <h3 className="spec-title">{s.title}</h3>
+              <ul className="spec-list">
+                {s.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+              <div className="card-shine"></div>
+            </div>
+
+            {/* Back Face */}
+            <div className="card-face card-back">
+              <div className="card-back-bg" style={{ backgroundImage: `url(${s.image})` }}></div>
+              <div className="card-back-content">
+                <h3 className="spec-title-back">{s.title}</h3>
+                <div className="spec-info-back">
+                  <p>System Details</p>
+                  <ul className="spec-list-back">
+                    {/* Show a simplified or same list on back, user said "some info at bottom" */}
+                    {/* Let's show the first 2 items to keep it clean */}
+                    <li>{s.items[0]}</li>
+                    <li>{s.items[1]}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <h3 className="spec-title">{s.title}</h3>
-          <ul className="spec-list">
-            {s.items.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-          <div className="card-shine"></div>
         </div>
       ))}
     </div>

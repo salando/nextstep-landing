@@ -11,11 +11,12 @@ type Task = {
 const TASKS: Task[] = [
   { id: '1', title: 'Motor Research', status: 'completed', priority: 'critical', detail: 'Completed: Specs analysis & selection.' },
   { id: '2', title: 'Component Selection', status: 'completed', priority: 'high', detail: 'Full BOM created (Power, Control, Safety).' },
-  { id: '3', title: 'Parts Sourcing', status: 'active', priority: 'high', detail: 'Ordering vendors & logistics.' },
-  { id: '4', title: 'Battery Calculations', status: 'pending', priority: 'critical', detail: 'Runtime & discharge analysis.' },
-  { id: '5', title: 'Battery Wiring', status: 'backlog', priority: 'medium', detail: 'BMS implementation & safety circuits.' },
-  { id: '6', title: 'Motor Coding', status: 'backlog', priority: 'medium', detail: 'CAN bus protocol implementation.' },
-  { id: '7', title: 'AI Implementation', status: 'backlog', priority: 'optional', detail: 'Adaptive gait learning (Future).' },
+  { id: '3', title: 'Parts Sourcing', status: 'completed', priority: 'high', detail: 'Received: Motors, RPi5, CAN HAT.' },
+  { id: '4', title: 'Hardware Integration', status: 'active', priority: 'critical', detail: 'Wiring & Controller setup complete. Debugging.' },
+  { id: '5', title: 'Motor Coding', status: 'active', priority: 'critical', detail: 'v1 Deployed. CAN comms failing.' },
+  { id: '6', title: 'Battery Calculations', status: 'pending', priority: 'high', detail: 'Runtime & discharge analysis.' },
+  { id: '7', title: 'Battery Wiring', status: 'backlog', priority: 'medium', detail: 'BMS implementation & safety circuits.' },
+  { id: '8', title: 'AI Implementation', status: 'backlog', priority: 'optional', detail: 'Adaptive gait learning (Future).' },
 ];
 
 const StatusBadge = ({ status }: { status: Task['status'] }) => {

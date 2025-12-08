@@ -1,27 +1,125 @@
+/* Specs Container */
 .specs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  /* Force 4 columns on desktop */
+  gap: 24px;
+  perspective: 1000px;
 }
 
+/* Card Container */
 .spec-card {
   position: relative;
+  height: 360px;
+  /* Reduced from 420px to reduce empty space */
+  cursor: pointer;
+  background: transparent;
+  /* Remove background from container, moved to faces */
+  border: none;
+  padding: 0;
+  overflow: visible;
+  /* Need visible for 3D effect usually, but strict overflow:hidden on faces works too */
+}
+
+/* Inner 3D Wrapper */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Flip */
+.spec-card:hover .card-inner,
+.spec-card.active .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Card Faces Shared Styles */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Front Face Specifics */
+.card-front {
   background: rgba(15, 15, 22, 0.6);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-border);
   padding: 32px 24px;
-  border-radius: 16px;
+  z-index: 2;
   transition: all 0.4s var(--cubic-fast);
-  overflow: hidden;
-  cursor: default;
 }
 
-.spec-card:hover {
+/* Back Face Specifics */
+.card-back {
+  background: #000;
+  transform: rotateY(180deg);
+  z-index: 1;
+  position: relative;
+  justify-content: flex-end;
+  /* Align content to bottom */
+}
+
+/* Back Content Overlay */
+.card-back-content {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  /* Gradient only at the bottom to reveal image */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 40%, transparent 100%);
+  width: 100%;
+}
+
+.card-back-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  /* Full visibility */
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+  .specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hover effects for the inner visuals */
+.spec-card:hover .card-front {
   border-color: var(--color-primary);
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 243, 255, 0.1);
+  /* shadow handled by new container styles or removed */
 }
 
+.spec-card:hover .card-back-bg {
+  opacity: 0.8;
+}
+
+/* Spec Icon Styles (Front) */
 .spec-icon {
   width: 48px;
   height: 48px;
@@ -41,16 +139,29 @@
   transform: scale(1.1) rotate(-5deg);
 }
 
+/* Title Styles */
 .spec-title {
   font-size: 1.25rem;
   margin: 0 0 16px;
   color: var(--color-text-main);
+  font-weight: 600;
 }
 
+.spec-title-back {
+  font-size: 1.4rem;
+  margin: 0 0 12px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Clean List Styles (Front) */
 .spec-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
+  /* Push content */
 }
 
 .spec-list li {
@@ -77,7 +188,37 @@
   transform: translateX(0);
 }
 
-/* Shiny reflection effect */
+/* Back Info Styles */
+.spec-info-back p {
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.spec-list-back {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spec-list-back li {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.spec-list-back li::before {
+  content: '•';
+  color: var(--color-primary);
+  margin-right: 8px;
+}
+
+/* Shine Effect (Front only) */
 .card-shine {
   position: absolute;
   top: 0;
@@ -88,6 +229,7 @@
   transform: skewX(-20deg);
   transition: left 0.5s;
   pointer-events: none;
+  z-index: 5;
 }
 
 .spec-card:hover .card-shine {
@@ -96,12 +238,12 @@
 }
 
 /* Light Mode Overrides */
-[data-theme="light"] .spec-card {
+[data-theme="light"] .card-front {
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-[data-theme="light"] .spec-card:hover {
+[data-theme="light"] .spec-card:hover .card-front {
   box-shadow: 0 15px 40px rgba(8, 145, 178, 0.12);
 }
 

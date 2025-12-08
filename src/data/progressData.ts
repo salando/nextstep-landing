@@ -9,6 +9,22 @@ export type ProgressEntry = {
 
 export const PROGRESS_DATA: ProgressEntry[] = [
     {
+        id: '4',
+        date: '2025-12-07',
+        title: 'Motor Integration & Debugging',
+        content: 'Integrated Raspberry Pi 5 with Waveshare CAN HAT and CyberGear motors. Successfully deployed the Python driver and v1 test script. Currently debugging a critical CAN communication issue where the motor is unresponsive to commands. Physical wiring verified, moving to signal analysis.',
+        tags: ['Hardware', 'Integration', 'Debugging', 'Python'],
+        images: [
+            '/research_images/image56.png',
+            '/research_images/image54.png',
+            '/research_images/motor_setup_1.jpg',
+            '/research_images/motor_setup_2.jpg',
+            '/research_images/motor_setup_5.jpg',
+            '/research_images/can_setup_1.png',
+            '/research_images/can_setup_2.png'
+        ]
+    },
+    {
         id: '1',
         date: '2025-10-15',
         title: 'Initial Motor Testing',
