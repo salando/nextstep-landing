@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Hero } from '../components/Hero/Hero';
-import { Section } from '../components/UI/Section';
-import { Specs } from '../components/Specs/Specs';
-import { BackgroundAnimation } from '../components/UI/BackgroundAnimation';
-import './Home.css';
+import { Hero } from '@/components/Hero/Hero';
+import { Section } from '@/components/UI/Section';
+import { Specs } from '@/components/Specs/Specs';
+import { BackgroundAnimation } from '@/components/UI/BackgroundAnimation';
+import { MISSION_CARDS, PROGRESS_ITEMS, FUTURE_ITEMS } from '@/data/homeData';
+import '@/pages/Home.css';
 
 export const Home = () => {
     return (
@@ -22,21 +23,13 @@ export const Home = () => {
                     </p>
 
                     <div className="mission-cards">
-                        <div className="mission-card">
-                            <div className="card-number">01</div>
-                            <h4>Accessible Technology</h4>
-                            <p>Built on a student budget of $600 CAD, proving that advanced robotics does not require massive funding.</p>
-                        </div>
-                        <div className="mission-card">
-                            <div className="card-number">02</div>
-                            <h4>Real Performance</h4>
-                            <p>22 Peak Nm (~0.44 HP) of torque per motor, designed to reduce walking effort by at least 20%.</p>
-                        </div>
-                        <div className="mission-card">
-                            <div className="card-number">03</div>
-                            <h4>Dual Purpose</h4>
-                            <p>From restoring mobility to enhancing performance. One platform, multiple applications.</p>
-                        </div>
+                        {MISSION_CARDS.map((card) => (
+                            <div className="mission-card" key={card.number}>
+                                <div className="card-number">{card.number}</div>
+                                <h4>{card.title}</h4>
+                                <p>{card.description}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </Section>
@@ -59,34 +52,15 @@ export const Home = () => {
                 </div>
 
                 <div className="progress-overview">
-                    <div className="progress-item completed">
-                        <span className="progress-icon">✓</span>
-                        <div className="progress-content">
-                            <h4>Motor Research</h4>
-                            <p>Analyzed commercial exoskeletons, calculated power requirements</p>
+                    {PROGRESS_ITEMS.map((item, index) => (
+                        <div className={`progress-item ${item.status}`} key={index}>
+                            <span className="progress-icon">{item.icon}</span>
+                            <div className="progress-content">
+                                <h4>{item.title}</h4>
+                                <p>{item.description}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="progress-item completed">
-                        <span className="progress-icon">✓</span>
-                        <div className="progress-content">
-                            <h4>Component Selection</h4>
-                            <p>Selected GIM8108-8 motors with integrated planetary gearbox</p>
-                        </div>
-                    </div>
-                    <div className="progress-item active">
-                        <span className="progress-icon">→</span>
-                        <div className="progress-content">
-                            <h4>Parts Sourcing</h4>
-                            <p>Ordering motors, batteries, and control systems</p>
-                        </div>
-                    </div>
-                    <div className="progress-item pending">
-                        <span className="progress-icon">○</span>
-                        <div className="progress-content">
-                            <h4>Assembly & Testing</h4>
-                            <p>Frame construction, motor coding, safety validation</p>
-                        </div>
-                    </div>
+                    ))}
                 </div>
 
                 <div className="home-cta-container">
@@ -117,21 +91,13 @@ export const Home = () => {
                         <span className="status-tag">PLANNED</span>
                     </div>
                     <div className="future-items">
-                        <div className="future-item">
-                            <div className="future-number">01</div>
-                            <h4>Adaptive AI Gait Learning</h4>
-                            <p>Machine learning algorithms that adapt to your walking style over time</p>
-                        </div>
-                        <div className="future-item">
-                            <div className="future-number">02</div>
-                            <h4>Mobile Companion App</h4>
-                            <p>Monitor battery, adjust assistance levels, track activity</p>
-                        </div>
-                        <div className="future-item">
-                            <div className="future-number">03</div>
-                            <h4>Extended Battery System</h4>
-                            <p>Hot-swappable battery packs for all-day operation</p>
-                        </div>
+                        {FUTURE_ITEMS.map((item) => (
+                            <div className="future-item" key={item.number}>
+                                <div className="future-number">{item.number}</div>
+                                <h4>{item.title}</h4>
+                                <p>{item.description}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </Section>
