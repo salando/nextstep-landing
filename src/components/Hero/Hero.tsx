@@ -6,7 +6,8 @@ export const Hero = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 50);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

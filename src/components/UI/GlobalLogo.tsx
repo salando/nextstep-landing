@@ -32,7 +32,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
             fontFamily: computed.fontFamily,
             color: computed.color,
             lineHeight: computed.lineHeight,
-            textTransform: computed.textTransform as any,
+            textTransform: computed.textTransform as React.CSSProperties['textTransform'],
             textShadow: computed.textShadow,
             whiteSpace: 'nowrap', // Ensure single line
             boxSizing: 'border-box' as React.CSSProperties['boxSizing']
@@ -67,7 +67,10 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
         // Animation State: Triggered when booted becomes true
         else if (booted && !isAnimating) {
             cancelAnimationFrame(requestRef.current!);
-            setIsAnimating(true);
+
+            // Defer state update to avoid sync render warning
+            setTimeout(() => setIsAnimating(true), 0);
+
 
             // 1. Get current position (should be at boot anchor)
             const startStyle = snapToAnchor('boot-logo-anchor');
@@ -97,25 +100,30 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                     line-height ${fontDuration} ${bezier} ${fontDelay}
                 `.replace(/\n\s+/g, ' ').trim();
 
-                // Set initial state
-                setStyle({
-                    ...startStyle,
-                    position: 'fixed',
-                    zIndex: 10005,
-                    opacity: 1,
-                    transition: transition
-                });
+                // Defer start to avoid sync setState in effect
+                setTimeout(() => {
+                    setIsAnimating(true);
 
-                // Start animation to end style
-                requestAnimationFrame(() => {
+                    // Set initial state with transition
                     setStyle({
-                        ...endStyle,
+                        ...startStyle,
                         position: 'fixed',
                         zIndex: 10005,
                         opacity: 1,
                         transition: transition
                     });
-                });
+
+                    // Start animation to end style in next frame
+                    requestAnimationFrame(() => {
+                        setStyle({
+                            ...endStyle,
+                            position: 'fixed',
+                            zIndex: 10005,
+                            opacity: 1,
+                            transition: transition
+                        });
+                    });
+                }, 0);
 
                 // Cleanup
                 setTimeout(() => {

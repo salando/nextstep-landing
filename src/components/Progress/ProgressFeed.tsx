@@ -41,7 +41,7 @@ export const ProgressFeed = ({ activeFilter = 'All' }: ProgressFeedProps) => {
         setIsAnimating(false);
 
         if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current);
-        document.body.style.overflow = 'hidden';
+        // document.body.style.overflow = 'hidden'; // Handled by useEffect
 
         // Reset the opening guard after a short delay
         setTimeout(() => {
@@ -81,7 +81,7 @@ export const ProgressFeed = ({ activeFilter = 'All' }: ProgressFeedProps) => {
         setIsAnimating(false);
         setSelectedImageIndex(0);
         setSelectedEntry(null);
-        document.body.style.overflow = 'auto';
+        // document.body.style.overflow = 'auto'; // Handled by useEffect
     }, []);
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -101,10 +101,21 @@ export const ProgressFeed = ({ activeFilter = 'All' }: ProgressFeedProps) => {
         };
     }, [selectedEntry, handleKeyDown]);
 
-    // Cleanup on unmount
+    // Manage body overflow
     useEffect(() => {
+        if (selectedEntry) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
         return () => {
             document.body.style.overflow = 'auto';
+        };
+    }, [selectedEntry]);
+
+    // Cleanup animations on unmount
+    useEffect(() => {
+        return () => {
             if (animationTimeoutRef.current) {
                 clearTimeout(animationTimeoutRef.current);
             }

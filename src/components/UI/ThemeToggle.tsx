@@ -2,20 +2,14 @@ import { useEffect, useState } from 'react';
 import './ThemeToggle.css';
 
 export const ThemeToggle = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+        return savedTheme || 'dark';
+    });
 
     useEffect(() => {
-        // Check local storage or system preference on mount
-        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-        if (savedTheme) {
-            setTheme(savedTheme);
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        } else {
-            // Default to dark
-            setTheme('dark');
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-    }, []);
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
 
     const toggleTheme = () => {
         // Add transition class to html element

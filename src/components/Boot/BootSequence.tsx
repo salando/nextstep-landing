@@ -3,42 +3,45 @@ import './BootSequence.css';
 
 type SequenceItem = { text: string; type: 'info' | 'success' | 'warning' };
 
-export const BootSequence = ({ onComplete, shouldFadeOut }: { onComplete: () => void, shouldFadeOut: boolean }) => {
-  const [lines, setLines] = useState<SequenceItem[]>([]);
-  const initialized = useRef(false);
+const SEQUENCE_DATA: SequenceItem[] = [
+  { text: "Initializing NEXTSTEP kernel...", type: 'info' },
+  { text: "Loading GIM8108 driver modules... [OK]", type: 'success' },
+  { text: "Verifying 4S LiPo voltage... 16.8V [STABLE]", type: 'success' },
+  { text: "Calibrating IMU sensors (BNO055)...", type: 'warning' },
+  { text: "System diagnostics: GREEN", type: 'success' },
+  { text: "Boot sequence complete. Launching UI...", type: 'info' }
+];
 
-  const sequence: SequenceItem[] = [
-    { text: "Initializing NEXTSTEP kernel...", type: 'info' },
-    { text: "Loading GIM8108 driver modules... [OK]", type: 'success' },
-    { text: "Verifying 4S LiPo voltage... 16.8V [STABLE]", type: 'success' },
-    { text: "Calibrating IMU sensors (BNO055)...", type: 'warning' },
-    { text: "System diagnostics: GREEN", type: 'success' },
-    { text: "Boot sequence complete. Launching UI...", type: 'info' }
-  ];
+export const BootSequence = ({ onComplete, shouldFadeOut }: { onComplete: () => void, shouldFadeOut: boolean }) => {
+  // Store lines with their calculated timestamp to ensure purity during render
+  const [lines, setLines] = useState<(SequenceItem & { timestamp: number })[]>([]);
+  const initialized = useRef(false);
 
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
 
     let delay = 0;
-    sequence.forEach((item, index) => {
+    SEQUENCE_DATA.forEach((item, index) => {
       delay += Math.random() * 100 + 50;
       setTimeout(() => {
-        setLines(prev => [...prev, item]);
+        // Calculate timestamp here (side effect), not in render
+        const timestamp = Math.floor(Date.now() / 1000) - 10000 + index * 12;
+        setLines(prev => [...prev, { ...item, timestamp }]);
 
         const el = document.getElementById('boot-log');
         if (el) el.scrollTop = el.scrollHeight;
 
-        if (index === sequence.length - 1) {
+        if (index === SEQUENCE_DATA.length - 1) {
           setTimeout(() => {
             onComplete();
           }, 800);
         }
       }, delay);
     });
-  }, []);
+  }, [onComplete]);
 
-  const progress = Math.min((lines.length / sequence.length) * 100, 100);
+  const progress = Math.min((lines.length / SEQUENCE_DATA.length) * 100, 100);
 
   return (
     <div className={`boot-overlay ${shouldFadeOut ? 'exiting' : ''}`}>
@@ -55,7 +58,7 @@ export const BootSequence = ({ onComplete, shouldFadeOut }: { onComplete: () => 
           <div id="boot-log" className="boot-log">
             {lines.map((line, i) => (
               <div key={i} className={`boot-line type-${line.type}`}>
-                <span className="timestamp">[{Math.floor(Date.now() / 1000) - 10000 + i * 12}]</span>
+                <span className="timestamp">[{line.timestamp}]</span>
                 <span className="prompt">&gt;</span>
                 {line.text}
               </div>
