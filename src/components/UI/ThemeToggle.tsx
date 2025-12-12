@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ThemeToggle.css';
 
@@ -11,6 +12,17 @@ export const ThemeToggle = () => {
     });
 
     const transitionRef = useRef<any>(null);
+    const location = useLocation();
+    const navCooldownRef = useRef(false);
+
+    // Set cooldown after navigation to prevent view transition glitches
+    useEffect(() => {
+        navCooldownRef.current = true;
+        const timeout = setTimeout(() => {
+            navCooldownRef.current = false;
+        }, 300); // Brief cooldown after navigation
+        return () => clearTimeout(timeout);
+    }, [location.pathname]);
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
@@ -20,9 +32,9 @@ export const ThemeToggle = () => {
     const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
-        // Check for View Transition API support
+        // Use simple transition if View Transitions not supported OR during nav cooldown
         // @ts-ignore - Document.startViewTransition is experimental
-        if (!document.startViewTransition) {
+        if (!document.startViewTransition || navCooldownRef.current) {
             document.documentElement.classList.add('theme-transition');
             setTheme(nextTheme);
             setTimeout(() => document.documentElement.classList.remove('theme-transition'), 300);
@@ -92,21 +104,9 @@ export const ThemeToggle = () => {
             className="theme-toggle"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            style={{
-                justifyContent: theme === 'dark' ? 'flex-end' : 'flex-start',
-                padding: '4px'
-            }}
+            data-active-theme={theme}
         >
-            <motion.div
-                className="toggle-thumb"
-                layout="position"
-                layoutId="theme-toggle-thumb"
-                transition={{
-                    type: "spring",
-                    stiffness: 700,
-                    damping: 30
-                }}
-            >
+            <div className="toggle-thumb">
                 <AnimatePresence mode="popLayout" initial={false}>
                     <motion.div
                         key={theme}
@@ -154,7 +154,7 @@ export const ThemeToggle = () => {
                         )}
                     </motion.div>
                 </AnimatePresence>
-            </motion.div>
+            </div>
         </button>
     );
 };

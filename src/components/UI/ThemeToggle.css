@@ -3,7 +3,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 4px;
     width: 60px;
     height: 32px;
     border-radius: 100px;
@@ -13,7 +13,6 @@
     position: relative;
     /* Use a subtly translucent background for the track */
     background-color: rgba(120, 120, 128, 0.2);
-    transition: background-color 0.3s ease;
     /* Remove default button styles */
     outline: none;
     overflow: hidden;
@@ -30,28 +29,36 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* The thumb */
+/* The thumb - uses transform for smooth CSS transitions */
 .toggle-thumb {
     width: 24px;
     height: 24px;
     background-color: #fff;
     border-radius: 50%;
-    position: relative;
-    /* Changed from absolute to relative */
-    /* top: 4px; left: 4px; Removed as we use flex alignment and padding now */
+    position: absolute;
+    top: 4px;
+    left: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 2;
+    /* CSS spring-like transition */
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background-color 0.2s ease;
+    transform: translateX(0);
 }
 
-[data-theme='dark'] .toggle-thumb {
-    background-color: #000;
-    /* Dark thumb for dark mode? Or keep it light? usually toggle handles are inverse or white. */
-    /* Let's keep it white/bright for visibility or dark grey. React component will handle color/icon. */
+/* Dark theme = thumb on right side (move 28px: 60px - 8px padding - 24px thumb) */
+.theme-toggle[data-active-theme='dark'] .toggle-thumb {
+    transform: translateX(28px);
     background-color: #1a1b26;
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light theme = thumb on left side (default) */
+.theme-toggle[data-active-theme='light'] .toggle-thumb {
+    transform: translateX(0);
 }
 
 /* Icons */
