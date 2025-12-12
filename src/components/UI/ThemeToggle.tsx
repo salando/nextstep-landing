@@ -99,7 +99,8 @@ export const ThemeToggle = () => {
         >
             <motion.div
                 className="toggle-thumb"
-                layout
+                layout="position"
+                layoutId="theme-toggle-thumb"
                 transition={{
                     type: "spring",
                     stiffness: 700,

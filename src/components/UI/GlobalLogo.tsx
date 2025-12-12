@@ -11,8 +11,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
     const [style, setStyle] = useState<React.CSSProperties>({ opacity: 0 }); // Start hidden
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationComplete, setAnimationComplete] = useState(false);
-    const logoRef = useRef<HTMLAnchorElement>(null);
-    const requestRef = useRef<number | null>(requestAnimationFrame(() => { })); // Initialize with a dummy request ID
+    const logoRef = useRef<HTMLAnchorElement>(null); const requestRef = useRef<number | null>(requestAnimationFrame(() => { })); // Initialize with a dummy request ID
 
     const lastStyleRef = useRef<any>(null);
 
@@ -175,8 +174,8 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
 
     return (
         <Link to="/" ref={logoRef} className="global-logo" style={style}>
-            <span style={{ color: 'var(--color-text-main)' }}>NEXT</span>
-            <span style={{ color: 'var(--color-primary)' }}>STEP</span>
+            <span className="logo-next">NEXT</span>
+            <span className="logo-step">STEP</span>
         </Link>
     );
 };

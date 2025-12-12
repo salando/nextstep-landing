@@ -4,3 +4,34 @@
     cursor: pointer;
     /* Other static styles */
 }
+
+/* "NEXT" part - matches hero title gradient */
+.logo-next {
+    background: radial-gradient(circle at center, #fff, #ccc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* "STEP" part - matches hero highlight gradient */
+.logo-step {
+    background: linear-gradient(135deg, #00f3ff, #0088ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Light Mode */
+[data-theme="light"] .logo-next {
+    background: radial-gradient(circle at center, #000, #333);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .logo-step {
+    background: linear-gradient(135deg, #007aff, #00c2ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

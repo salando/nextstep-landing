@@ -57,7 +57,7 @@
   font-weight: 700;
   letter-spacing: -0.04em;
   /* Tight tracking */
-  background: radial-gradient(circle at center, #fff, #aaa);
+  background: radial-gradient(circle at center, #fff, #ccc);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -206,7 +206,7 @@
 }
 
 [data-theme="light"] .hero-title {
-  background: radial-gradient(circle at center, #000, #444);
+  background: radial-gradient(circle at center, #000, #333);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

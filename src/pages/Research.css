@@ -358,7 +358,7 @@
     background: rgba(255, 255, 255, 0.06);
 }
 
-.toggle-icon {
+.expandable-toggle .toggle-icon {
     width: 24px;
     height: 24px;
     display: flex;
