@@ -1,77 +1,14 @@
-# NextStep Landing Page
+# NextStep
 
-A modern, animated landing page for the NextStep Exoskeleton capstone project. Built with React, TypeScript, and Vite.
+NextStep is a robotic exoskeleton designed to assist with walking and running. By applying a supportive force to the wearer's legs during movement, it effectively reduces the physical energy required to move.
 
-## 🚀 Quick Start
+This project, created for a Grade 12 Capstone, demonstrates the intersection of mechanical engineering, electronics, and software. It documents the complete journey of building a functional wearable robot from the ground up.
 
-```bash
-# Install dependencies
-npm install
+### Status: Work in Progress
+Please note that this project is currently under active development. Both the physical hardware and this documentation site are updated frequently as testing continues and improvements are made.
 
-# Start development server
-npm run dev
+## Visit the Website
 
-# Build for production
-npm run build
+The project website serves as the primary portfolio for the work. It provides a detailed, accessible explanation of how the exoskeleton functions and the engineering challenges overcome during its creation.
 
-# Preview production build
-npm run preview
-```
-
-## 📁 Project Structure
-
-```
-src/
-├── components/          # Reusable UI components
-│   ├── Boot/           # Boot sequence animation
-│   ├── Footer/         # Site footer
-│   ├── Hero/           # Hero section with animations
-│   ├── Progress/       # Development progress components
-│   ├── Research/       # Research page components
-│   ├── Specs/          # Technical specifications
-│   └── UI/             # Core UI components (NavBar, ThemeToggle, etc.)
-├── data/               # Static data (cards, progress items)
-├── hooks/              # Custom React hooks
-├── pages/              # Page components (lazy-loaded)
-├── styles/             # Global styles and design tokens
-└── App.tsx             # Main app component with routing
-```
-
-## 🎨 Key Features
-
-- **Boot Sequence Animation**: Terminal-style loading screen with animated logo fly-in
-- **Theme Toggle**: Light/dark mode with View Transitions API circular reveal effect
-- **Scroll Animations**: Apple-style "Reveal" components with blur effects
-- **Responsive Design**: Mobile-first with floating navbar and hamburger menu
-- **Performance Optimized**: Lazy-loaded pages, GPU-accelerated animations
-
-## 🧩 Key Components
-
-| Component | Description |
-|-----------|-------------|
-| `GlobalLogo` | Animated logo that flies from boot screen to navbar |
-| `ThemeToggle` | Dark/light mode switch with circular reveal animation |
-| `BootSequence` | Terminal-style loading animation on app startup |
-| `NavBar` | Floating navbar with animated active indicator pill |
-| `Reveal` | Scroll-triggered fade-in animation wrapper |
-
-## 🎯 Design Tokens
-
-Design tokens are centralized in `src/styles/tokens.css`:
-- Colors (with light/dark mode variants)
-- Typography (fonts, sizes)
-- Spacing scale
-- Animation easings
-
-## 📦 Tech Stack
-
-- **React 18** with TypeScript
-- **Vite** for fast builds
-- **React Router** for navigation
-- **Framer Motion** for animations
-- **CSS Modules** with CSS custom properties
-
-## 🔗 Links
-
-- [Live Site](https://nextstep.salando.dev)
-- [GitHub Repository](https://github.com/salando/nextstep-landing)
+[View the Project Website](https://engshen.ca)
