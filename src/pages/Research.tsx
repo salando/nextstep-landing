@@ -1,7 +1,7 @@
 import { useState, ReactNode } from 'react';
 import { Section } from '../components/UI/Section';
-import { HardwareGrid } from '../components/Research/HardwareGrid';
-import { ResearchTableOfContents } from '../components/Research/ResearchTableOfContents';
+import { HardwareGrid } from './Research/components/HardwareGrid';
+import { ResearchTableOfContents } from './Research/components/ResearchTableOfContents';
 import './Research.css';
 
 // Expandable section component for technical details

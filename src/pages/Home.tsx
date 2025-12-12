@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Hero } from '@/components/Hero/Hero';
+import { Hero } from './Home/components/Hero/Hero';
 import { Section } from '@/components/UI/Section';
-import { Specs } from '@/components/Specs/Specs';
+import { Specs } from './Home/components/Specs/Specs';
 import { BackgroundAnimation } from '@/components/UI/BackgroundAnimation';
 import { Reveal } from '@/components/UI/Reveal';
 import { MISSION_CARDS, PROGRESS_ITEMS, FUTURE_ITEMS } from '@/data/homeData';
@@ -67,7 +67,7 @@ export const Home = () => {
 
                     <div className="mission-cards">
                         {MISSION_CARDS.map((card, index) => (
-                            <Reveal key={card.number} delay={index * 0.1}>
+                            <Reveal key={card.number} delay={index * 0.1} width="100%">
                                 <div className="mission-card">
                                     <div className="card-number">{card.number}</div>
                                     <h4>{card.title}</h4>
@@ -100,7 +100,7 @@ export const Home = () => {
 
                 <div className="progress-overview">
                     {PROGRESS_ITEMS.map((item, index) => (
-                        <Reveal key={index} delay={index * 0.1}>
+                        <Reveal key={index} delay={index * 0.1} width="100%">
                             <div className={`progress-item ${item.status}`}>
                                 <span className="progress-icon">{item.icon}</span>
                                 <div className="progress-content">
