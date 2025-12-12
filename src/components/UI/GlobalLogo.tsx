@@ -7,11 +7,24 @@ interface GlobalLogoProps {
     onAnimationComplete?: () => void;
 }
 
+/**
+ * GlobalLogo - Animated logo component that transitions from boot screen to navbar
+ * 
+ * This component renders the NEXTSTEP logo and handles the animation sequence:
+ * 1. Initially locks to the boot screen anchor position
+ * 2. When `booted` becomes true, animates to the navbar anchor position
+ * 3. After animation completes, stays synced with navbar anchor on resize
+ * 
+ * The logo uses CSS gradients for styling (defined in GlobalLogo.css)
+ * - "NEXT" uses a radial gradient (white to gray)
+ * - "STEP" uses a linear gradient (cyan to blue)
+ */
 export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationComplete }) => {
-    const [style, setStyle] = useState<React.CSSProperties>({ opacity: 0 }); // Start hidden
+    const [style, setStyle] = useState<React.CSSProperties>({ opacity: 0 });
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationComplete, setAnimationComplete] = useState(false);
-    const logoRef = useRef<HTMLAnchorElement>(null); const requestRef = useRef<number | null>(requestAnimationFrame(() => { })); // Initialize with a dummy request ID
+    const logoRef = useRef<HTMLAnchorElement>(null);
+    const requestRef = useRef<number | null>(requestAnimationFrame(() => { }));
 
     const lastStyleRef = useRef<any>(null);
 
@@ -164,13 +177,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
         return () => window.removeEventListener('resize', handleResize);
     }, [animationComplete, snapToAnchor]);
 
-    // Keep tracking nav anchor after animation? 
-    // User asked to "remove it from the DOM" or "logo should be the same element".
-    // If we remove it, the NavBar anchor needs to become visible. 
-    // For now let's just keep this GlobalLogo as the permanent logo if desired, 
-    // OR as requested: "fade out the splash overlay and remove it from the DOM." - wait, remove splash.
-    // "The logo should be the same DOM element that later becomes the header logo". 
-    // This implies GlobalLogo IS the header logo now.
+
 
     return (
         <Link to="/" ref={logoRef} className="global-logo" style={style}>

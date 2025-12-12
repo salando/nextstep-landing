@@ -3,6 +3,19 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ThemeToggle.css';
 
+/**
+ * ThemeToggle - Light/Dark mode toggle switch with circular reveal animation
+ * 
+ * Features:
+ * - Uses View Transitions API for circular clip-path reveal animation
+ * - Falls back to CSS transitions for unsupported browsers
+ * - Includes navigation cooldown to prevent glitches after page transitions
+ * - Persists theme preference to localStorage
+ * - Respects system color scheme preference on first load
+ * 
+ * The toggle thumb position is controlled via CSS transforms (not framer-motion layout)
+ * to avoid scroll-related animation issues.
+ */
 export const ThemeToggle = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>(() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {

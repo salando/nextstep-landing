@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import './BootSequence.css';
 
+/** Boot sequence line item with message type for styling */
 type SequenceItem = { text: string; type: 'info' | 'success' | 'warning' };
 
+/** Simulated boot log messages displayed during startup */
 const SEQUENCE_DATA: SequenceItem[] = [
   { text: "Initializing NEXTSTEP kernel...", type: 'info' },
   { text: "Loading GIM8108 driver modules... [OK]", type: 'success' },
@@ -12,6 +14,21 @@ const SEQUENCE_DATA: SequenceItem[] = [
   { text: "Boot sequence complete. Launching UI...", type: 'info' }
 ];
 
+/**
+ * BootSequence - Terminal-style loading animation on app startup
+ * 
+ * Displays a simulated system boot log with:
+ * - Sequentially appearing log lines with random delays
+ * - Color-coded message types (info, success, warning)
+ * - Progress bar tracking completion
+ * - System status sidebar
+ * 
+ * The component includes a hidden anchor (#boot-logo-anchor) that GlobalLogo
+ * uses as its starting position for the fly-in animation.
+ * 
+ * @param onComplete - Called when all boot lines have finished displaying
+ * @param shouldFadeOut - When true, triggers the exit fade animation
+ */
 export const BootSequence = ({ onComplete, shouldFadeOut }: { onComplete: () => void, shouldFadeOut: boolean }) => {
   // Store lines with their calculated timestamp to ensure purity during render
   const [lines, setLines] = useState<(SequenceItem & { timestamp: number })[]>([]);

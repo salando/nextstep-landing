@@ -275,7 +275,6 @@
             rgba(0, 0, 0, 0.4) 35%,
             rgba(0, 0, 0, 0.1) 60%,
             transparent 100%);
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.7;
 }
 
@@ -287,8 +286,6 @@
 /* Light mode: Adjust image brightness with transition */
 [data-theme="light"] .card-bg-image {
     filter: brightness(1);
-    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="light"] .hardware-card:hover .card-bg-image {
@@ -299,11 +296,6 @@
 [data-theme="light"] .card-title {
     color: #ffffff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    transition: text-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="light"] .hardware-card:hover .card-title {
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 [data-theme="light"] .category-tag {
@@ -316,11 +308,6 @@
 [data-theme="light"] .card-description {
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-    transition: text-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="light"] .hardware-card:hover .card-description {
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 [data-theme="light"] .spec-label {

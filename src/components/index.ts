@@ -1,6 +1,18 @@
+// Component exports for cleaner imports
+// Usage: import { Hero, NavBar, Footer } from '@/components';
+
+// Core UI Components
+export * from './UI';
+
+// Feature Components
 export * from './Boot/BootSequence';
 export * from './Footer/Footer';
 export * from './Hero/Hero';
 export * from './Specs/Specs';
-export * from './UI';
-// Add others as needed, e.g. Research, Progress if they have main exports
+
+// Progress Components
+export * from './Progress/ProgressFeed';
+
+// Research Components  
+export * from './Research/HardwareGrid';
+export * from './Research/ResearchTableOfContents';

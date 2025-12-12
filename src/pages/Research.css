@@ -332,11 +332,25 @@
 }
 
 /* Expandable Sections */
+@keyframes delayedOverflow {
+    from {
+        overflow: hidden;
+    }
+
+    to {
+        overflow: visible;
+    }
+}
+
 .expandable-section {
     margin: 1rem 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     overflow: hidden;
+}
+
+.expandable-section.open {
+    animation: delayedOverflow 0s linear 0.3s forwards;
 }
 
 .expandable-toggle {
@@ -375,10 +389,12 @@
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.3s ease-out;
+    overflow: hidden;
 }
 
 .expandable-section.open .expandable-content-wrapper {
     grid-template-rows: 1fr;
+    animation: delayedOverflow 0s linear 0.3s forwards;
 }
 
 .expandable-content {
@@ -395,6 +411,7 @@
     opacity: 1;
     padding: 1.25rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: delayedOverflow 0s linear 0.3s forwards;
 }
 
 /* Tech Terms */

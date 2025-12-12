@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
 import './NavBar.css';
 
+/** Navigation link configuration */
 const NAV_LINKS = [
     { to: '/', label: 'HOME' },
     { to: '/research', label: 'RESEARCH' },
@@ -12,6 +13,19 @@ const NAV_LINKS = [
     { to: '/contact', label: 'CONTACT' },
 ];
 
+/**
+ * NavBar - Floating navigation bar with animated active indicator
+ * 
+ * Features:
+ * - Floating pill-shaped navbar with glassmorphism effect
+ * - Animated "pill" indicator that slides to the active link
+ * - Hover effects with ephemeral highlight pills
+ * - Responsive mobile hamburger menu
+ * - Integrated theme toggle switch
+ * 
+ * The navbar includes a hidden anchor (#nav-logo-anchor) that GlobalLogo
+ * uses as its target position for the fly-in animation.
+ */
 export const NavBar = () => {
     const { pathname } = useLocation();
     const [isOpen, setIsOpen] = useState(false);

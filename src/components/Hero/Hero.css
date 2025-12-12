@@ -207,6 +207,7 @@
 
 [data-theme="light"] .hero-title {
   background: radial-gradient(circle at center, #000, #333);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -214,6 +215,7 @@
 [data-theme="light"] .hero-title .highlight {
   /* Keep blue/cyan highlight or switch to indigo */
   background: linear-gradient(135deg, #007aff, #00c2ff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
