@@ -189,7 +189,7 @@
 }
 
 /* Specs Grid */
-.specs-grid {
+.hardware-specs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -318,11 +318,11 @@
     color: #ffffff;
 }
 
-[data-theme="light"] .specs-grid {
+[data-theme="light"] .hardware-specs-grid {
     border-top-color: rgba(255, 255, 255, 0.15);
 }
 
-[data-theme="light"] .hardware-card:hover .specs-grid {
+[data-theme="light"] .hardware-card:hover .hardware-specs-grid {
     border-top-color: rgba(255, 255, 255, 0.25);
 }
 

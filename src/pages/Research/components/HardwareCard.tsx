@@ -44,7 +44,7 @@ export const HardwareCard: React.FC<HardwareCardProps> = ({
                         <p className="card-description">{description}</p>
 
                         {specs && specs.length > 0 && (
-                            <div className="specs-grid">
+                            <div className="hardware-specs-grid">
                                 {specs.map((spec, index) => (
                                     <div className="spec-item" key={index}>
                                         <span className="spec-label">{spec.label}</span>

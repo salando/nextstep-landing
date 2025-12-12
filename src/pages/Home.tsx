@@ -21,12 +21,12 @@ export const Home = () => {
                             <h3>Think of it like an <span className="highlight-text">e-bike</span> for your legs.</h3>
                         </div>
 
-                        <div className="bento-card stat-card glass-card">
+                        <div className="bento-card home-stat-card glass-card">
                             <div className="bento-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
                             </div>
                             <span className="big-stat">40%</span>
-                            <span className="stat-label mono">METABOLIC REDUCTION</span>
+                            <span className="home-stat-label mono">METABOLIC REDUCTION</span>
                             <p>Less energy spent per step.</p>
                         </div>
 
@@ -87,9 +87,9 @@ export const Home = () => {
 
                 <Reveal width="100%">
                     <div className="status-banner">
-                        <div className="status-indicator">
-                            <span className="status-dot pulse"></span>
-                            <span className="status-label mono">CURRENT PHASE</span>
+                        <div className="home-status-indicator">
+                            <span className="home-status-dot pulse"></span>
+                            <span className="home-status-label mono">CURRENT PHASE</span>
                         </div>
                         <h3 className="status-phase">Hardware Integration</h3>
                         <p className="status-desc">

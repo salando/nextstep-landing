@@ -63,7 +63,7 @@
     border: 1px solid rgba(0, 243, 255, 0.1);
 }
 
-.stat-card {
+.home-stat-card {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     align-items: center;
@@ -134,7 +134,7 @@
     font-family: var(--font-mono);
 }
 
-.stat-label {
+.home-stat-label {
     font-size: 0.75rem;
     color: var(--color-text-muted);
     letter-spacing: 1px;
@@ -169,7 +169,7 @@
     }
 
     .main-concept,
-    .stat-card,
+    .home-stat-card,
     .feature-card,
     .detail-card {
         grid-column: auto;
@@ -207,7 +207,7 @@
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
 }
 
-[data-theme="light"] .stat-card {
+[data-theme="light"] .home-stat-card {
     background: rgba(8, 145, 178, 0.05);
     border-color: rgba(8, 145, 178, 0.15);
 }
@@ -286,7 +286,7 @@
     margin-bottom: 1.5rem;
 }
 
-.status-indicator {
+.home-status-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,7 +294,7 @@
     margin-bottom: 1rem;
 }
 
-.status-dot {
+.home-status-dot {
     width: 12px;
     height: 12px;
     background: var(--color-success);
@@ -302,11 +302,11 @@
     box-shadow: 0 0 10px var(--color-success);
 }
 
-.status-dot.pulse {
-    animation: pulse 2s ease-in-out infinite;
+.home-status-dot.pulse {
+    animation: home-pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes home-pulse {
 
     0%,
     100% {
@@ -320,7 +320,7 @@
     }
 }
 
-.status-label {
+.home-status-label {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     letter-spacing: 2px;

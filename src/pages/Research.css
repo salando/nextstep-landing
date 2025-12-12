@@ -71,7 +71,7 @@
     }
 }
 
-.section-header {
+.research-section-header {
     font-size: 1.75rem;
     font-weight: bold;
     margin-bottom: 0;
@@ -707,7 +707,7 @@
 }
 
 /* Light Mode Overrides */
-[data-theme="light"] .section-header {
+[data-theme="light"] .research-section-header {
     border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 

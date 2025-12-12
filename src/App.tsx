@@ -7,6 +7,7 @@ import { BootSequence } from './components/Boot/BootSequence';
 import { GlobalLogo } from './components/UI/GlobalLogo';
 import { ScrollToTop } from './components/UI/ScrollToTop';
 import './styles/tokens.css';
+import './styles/animations.css';
 import './App.css';
 
 // Lazy load pages

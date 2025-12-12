@@ -150,7 +150,7 @@ export const FAQ = () => {
                                             onClick={() => toggleItem(item.id)}
                                         >
                                             <div className="faq-question">
-                                                <span className="status-indicator"></span>
+                                                <span className="faq-status-indicator"></span>
                                                 <h4>{item.question}</h4>
                                                 <span className="expand-icon">{openItems.has(item.id) ? '−' : '+'}</span>
                                             </div>

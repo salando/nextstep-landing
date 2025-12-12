@@ -35,7 +35,7 @@
     /* Take up more space relative to title on large screens if needed */
 }
 
-.stat-card {
+.physical-stat-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -51,13 +51,13 @@
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.stat-card:hover {
+.physical-stat-card:hover {
     background: var(--color-surface-hover);
     border-color: var(--color-primary);
     transform: translateY(-2px);
 }
 
-.stat-label {
+.physical-stat-label {
     font-size: 0.7rem;
     color: var(--color-text-muted);
     text-transform: uppercase;
@@ -92,7 +92,7 @@
     margin-top: 0;
 }
 
-.stat-card .status-indicator {
+.physical-stat-card .physical-status-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,7 +107,7 @@
     font-family: var(--font-mono);
 }
 
-.status-dot {
+.physical-status-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -115,7 +115,7 @@
     box-shadow: 0 0 10px var(--color-success);
 }
 
-.status-dot.warning {
+.physical-status-dot.warning {
     background: var(--color-warning);
     box-shadow: 0 0 10px var(--color-warning);
 }
@@ -245,14 +245,14 @@
         gap: var(--spacing-sm);
     }
 
-    .stat-card {
+    .physical-stat-card {
         min-width: 0;
         /* Allow shrinking */
         padding: var(--spacing-md);
     }
 
     /* Make the last card full width if there are 3 */
-    .stat-card:last-child:nth-child(odd) {
+    .physical-stat-card:last-child:nth-child(odd) {
         grid-column: span 2;
     }
 }

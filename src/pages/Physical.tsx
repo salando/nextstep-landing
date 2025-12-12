@@ -42,19 +42,19 @@ export const Physical = () => {
                         </div>
 
                         <div className="stats-grid">
-                            <div className="stat-card">
-                                <span className="stat-label">Latest Update</span>
+                            <div className="physical-stat-card">
+                                <span className="physical-stat-label">Latest Update</span>
                                 <span className="stat-value highlight">{stats.lastUpdateDate}</span>
                                 <span className="stat-sub">{stats.lastUpdateTitle}</span>
                             </div>
-                            <div className="stat-card">
-                                <span className="stat-label">Total Logs</span>
+                            <div className="physical-stat-card">
+                                <span className="physical-stat-label">Total Logs</span>
                                 <span className="stat-value">{stats.totalUpdates}</span>
                             </div>
-                            <div className="stat-card">
-                                <span className="stat-label">System Status</span>
-                                <span className="stat-value status-indicator">
-                                    <span className="status-dot warning"></span>
+                            <div className="physical-stat-card">
+                                <span className="physical-stat-label">System Status</span>
+                                <span className="stat-value physical-status-indicator">
+                                    <span className="physical-status-dot warning"></span>
                                     Debugging
                                 </span>
                             </div>

@@ -24,7 +24,7 @@
 .hex-icon {
     color: var(--color-primary);
     font-size: 1.5rem;
-    animation: pulse 3s infinite ease-in-out;
+    animation: faq-pulse 3s infinite ease-in-out;
 }
 
 .header-line {
@@ -154,7 +154,7 @@
     gap: 1rem;
 }
 
-.status-indicator {
+.faq-status-indicator {
     width: 6px;
     height: 6px;
     background-color: var(--color-text-muted);
@@ -162,12 +162,12 @@
     transition: background-color 0.3s ease;
 }
 
-.faq-item:hover .status-indicator {
+.faq-item:hover .faq-status-indicator {
     background-color: var(--color-secondary);
     box-shadow: 0 0 8px var(--color-secondary);
 }
 
-.faq-item.open .status-indicator {
+.faq-item.open .faq-status-indicator {
     background-color: var(--color-primary);
     box-shadow: 0 0 8px var(--color-primary);
 }
@@ -224,7 +224,7 @@
     }
 }
 
-@keyframes pulse {
+@keyframes faq-pulse {
 
     0%,
     100% {

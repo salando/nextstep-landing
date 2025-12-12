@@ -85,7 +85,7 @@ export const Research = () => {
 
                         {/* Introduction Section */}
                         <Section id="introduction">
-                            <div className="section-header">Introduction</div>
+                            <div className="research-section-header">Introduction</div>
                             <div className="text-block">
                                 <p>
                                     NextStep is an exoskeleton that helps with lower-body movement, specifically <TechTerm term="hip flexion" explanation="The movement of lifting your thigh toward your chest, like when walking or running" /> - the motion when you lift your leg to walk or run.
@@ -122,7 +122,7 @@ export const Research = () => {
 
                         {/* Biomechanics Section */}
                         <Section id="biomechanics">
-                            <div className="section-header">Understanding Human Movement</div>
+                            <div className="research-section-header">Understanding Human Movement</div>
                             <div className="text-block">
                                 <p>
                                     Before I could design anything, I needed to understand exactly <em>how</em> humans walk and run.
@@ -157,7 +157,7 @@ export const Research = () => {
 
                         {/* Power Analysis Section */}
                         <Section id="power-analysis">
-                            <div className="section-header">Power Analysis: Reverse-Engineering the Competition</div>
+                            <div className="research-section-header">Power Analysis: Reverse-Engineering the Competition</div>
                             <div className="text-block">
                                 <p>
                                     To figure out what motors I needed, I looked at a commercial exoskeleton - the Hypershell X Ultra - and worked backwards from their specs.
@@ -201,7 +201,7 @@ export const Research = () => {
 
                         {/* Methodology Section */}
                         <Section id="methodology">
-                            <div className="section-header">Design Approach</div>
+                            <div className="research-section-header">Design Approach</div>
                             <p className="text-block">
                                 I looked at three different ways to apply force to the leg.
                                 Each has trade-offs between complexity, reliability, and performance.
@@ -285,7 +285,7 @@ export const Research = () => {
 
                         {/* Motor Types Section */}
                         <Section id="motor-types">
-                            <div className="section-header">Understanding Motors</div>
+                            <div className="research-section-header">Understanding Motors</div>
                             <div className="text-block">
                                 <p>
                                     Not all motors are the same. For this exoskeleton, I needed to understand the different types and pick the right one.
@@ -333,7 +333,7 @@ export const Research = () => {
 
                         {/* Gearing Section */}
                         <Section id="gearing">
-                            <div className="section-header">The Gearing Challenge</div>
+                            <div className="research-section-header">The Gearing Challenge</div>
                             <div className="text-block">
                                 <p>
                                     Here's the problem: motors that spin fast are small and cheap. Motors with high torque are big and expensive.
@@ -386,7 +386,7 @@ export const Research = () => {
 
                         {/* Motor Research Section */}
                         <Section id="motor-research">
-                            <div className="section-header">Motor Research & Selection</div>
+                            <div className="research-section-header">Motor Research & Selection</div>
 
                             <div className="research-block">
                                 <h3>The Search Process</h3>
@@ -463,7 +463,7 @@ export const Research = () => {
 
                         {/* Budget Section */}
                         <Section id="budget">
-                            <div className="section-header">Budget Breakdown</div>
+                            <div className="research-section-header">Budget Breakdown</div>
                             <p className="text-block">
                                 The budget for this project is set at under $500, though it's flexible. This constraint forced me to be creative with what I chose.
                             </p>
@@ -532,7 +532,7 @@ export const Research = () => {
 
                         {/* Belt Research Section */}
                         <Section id="belt-research">
-                            <div className="section-header">Belt & Attachment Research</div>
+                            <div className="research-section-header">Belt & Attachment Research</div>
                             <p className="text-block">
                                 The exoskeleton needs to attach securely to your body without slipping when you move.
                                 I looked at the human waist geometry (which is actually an ellipse, not a circle) to design the attachment system.
@@ -594,7 +594,7 @@ export const Research = () => {
 
                         {/* Hardware Showcase Section */}
                         <Section id="hardware-showcase" className="hardware-section">
-                            <div className="section-header">Physical Implementation</div>
+                            <div className="research-section-header">Physical Implementation</div>
                             <p className="text-block" style={{ maxWidth: '800px', marginBottom: '4rem' }}>
                                 Precision engineering meets student budget. I used topology optimization and FOC motor control
                                 to get high-torque performance in a compact package.
