@@ -143,34 +143,13 @@ export const NavBar = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        style={{
-                            position: 'absolute',
-                            top: '80px', /* Below the pill */
-                            left: 0,
-                            right: 0,
-                            background: 'rgba(15, 15, 22, 0.9)',
-                            backdropFilter: 'blur(16px)',
-                            padding: '1.5rem',
-                            borderRadius: '16px',
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '1rem',
-                            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-                        }}
                     >
                         {NAV_LINKS.map(({ to, label }) => (
                             <Link
                                 key={to}
                                 to={to}
                                 onClick={closeMenu}
-                                style={{
-                                    textDecoration: 'none',
-                                    color: pathname === to ? 'var(--color-primary)' : 'var(--color-text-main)',
-                                    fontSize: '1.1rem',
-                                    fontWeight: 500,
-                                    padding: '0.5rem',
-                                }}
+                                className={`mobile-nav-link ${pathname === to ? 'active' : ''}`}
                             >
                                 {label}
                             </Link>

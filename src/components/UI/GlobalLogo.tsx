@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './GlobalLogo.css';
 
@@ -10,13 +10,14 @@ interface GlobalLogoProps {
 export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationComplete }) => {
     const [style, setStyle] = useState<React.CSSProperties>({ opacity: 0 }); // Start hidden
     const [isAnimating, setIsAnimating] = useState(false);
+    const [animationComplete, setAnimationComplete] = useState(false);
     const logoRef = useRef<HTMLAnchorElement>(null);
     const requestRef = useRef<number | null>(requestAnimationFrame(() => { })); // Initialize with a dummy request ID
 
     const lastStyleRef = useRef<any>(null);
 
     // Function to update position based on active anchor
-    const snapToAnchor = (anchorId: string) => {
+    const snapToAnchor = useCallback((anchorId: string) => {
         const anchor = document.getElementById(anchorId);
         if (!anchor) return;
 
@@ -39,7 +40,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
             whiteSpace: 'nowrap', // Ensure single line
             boxSizing: 'border-box' as React.CSSProperties['boxSizing']
         };
-    };
+    }, []);
 
     useEffect(() => {
         // Initial State: Locked to boot anchor
@@ -128,17 +129,41 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                     });
                 }, 0);
 
-                // Cleanup
+                // Cleanup - mark animation complete and enable pointer events
                 setTimeout(() => {
-                    // Reset z-index to normal navbar level after animation
-                    setStyle(prev => ({ ...prev, zIndex: 1001 }));
+                    setAnimationComplete(true);
+                    setStyle(prev => ({
+                        ...prev,
+                        zIndex: 1001,
+                        pointerEvents: 'auto',
+                        transition: 'none' // Disable transition for resize updates
+                    }));
                     if (onAnimationComplete) onAnimationComplete();
                 }, 1000);
             }
         }
 
         return () => cancelAnimationFrame(requestRef.current!);
-    }, [booted, isAnimating, onAnimationComplete]);
+    }, [booted, isAnimating, onAnimationComplete, snapToAnchor]);
+
+    // Resize handler: Keep logo synced with nav anchor after animation completes
+    useEffect(() => {
+        if (!animationComplete) return;
+
+        const handleResize = () => {
+            const newStyle = snapToAnchor('nav-logo-anchor');
+            if (newStyle) {
+                setStyle(prev => ({
+                    ...prev,
+                    ...newStyle,
+                    transition: 'none' // Instant update on resize
+                }));
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [animationComplete, snapToAnchor]);
 
     // Keep tracking nav anchor after animation? 
     // User asked to "remove it from the DOM" or "logo should be the same element".

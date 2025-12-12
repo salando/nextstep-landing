@@ -17,7 +17,7 @@ export const ThemeToggle = () => {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    const toggleTheme = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
         // Check for View Transition API support
@@ -32,10 +32,12 @@ export const ThemeToggle = () => {
         // If a transition is already running, skip it and apply the new theme immediately.
         // This ensures rapid clicks feel responsive by jumping to the target state.
         if (transitionRef.current) {
-            transitionRef.current.skipTransition();
+            try {
+                transitionRef.current.skipTransition();
+            } catch {
+                // Ignore errors if transition already finished
+            }
             transitionRef.current = null;
-            setTheme(nextTheme);
-            return;
         }
 
         const x = e.clientX;
@@ -58,25 +60,31 @@ export const ThemeToggle = () => {
             if (transitionRef.current === transition) {
                 transitionRef.current = null;
             }
+        }).catch(() => {
+            // Ignore errors from skipped transitions
+            transitionRef.current = null;
         });
 
-        await transition.ready;
-
-        // Animate the circular clip path
-        document.documentElement.animate(
-            {
-                clipPath: [
-                    `circle(0px at ${x}px ${y}px)`,
-                    `circle(${endRadius}px at ${x}px ${y}px)`,
-                ],
-            },
-            {
-                duration: 400,
-                easing: "ease-in-out",
-                // @ts-ignore - pseudoElement is a valid property for Web Animations Level 2
-                pseudoElement: "::view-transition-new(root)",
-            }
-        );
+        // Run animation in background (non-blocking)
+        transition.ready.then(() => {
+            // Animate the circular clip path
+            document.documentElement.animate(
+                {
+                    clipPath: [
+                        `circle(0px at ${x}px ${y}px)`,
+                        `circle(${endRadius}px at ${x}px ${y}px)`,
+                    ],
+                },
+                {
+                    duration: 400,
+                    easing: "ease-in-out",
+                    // @ts-ignore - pseudoElement is a valid property for Web Animations Level 2
+                    pseudoElement: "::view-transition-new(root)",
+                }
+            );
+        }).catch(() => {
+            // Ignore errors from skipped transitions
+        });
     };
 
     return (
@@ -98,13 +106,13 @@ export const ThemeToggle = () => {
                     damping: 30
                 }}
             >
-                <AnimatePresence mode="wait" initial={false}>
+                <AnimatePresence mode="popLayout" initial={false}>
                     <motion.div
                         key={theme}
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.5, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.1 }}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
                         {theme === 'dark' ? (

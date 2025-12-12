@@ -103,6 +103,13 @@
   backdrop-filter: blur(5px);
 }
 
+/* Boot Logo Anchor - Same font as navbar logo */
+#boot-logo-anchor {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 /* Header */
 .boot-header {
   display: flex;

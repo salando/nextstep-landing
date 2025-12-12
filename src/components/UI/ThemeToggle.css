@@ -79,6 +79,9 @@
    This enables the circular clip path animation 
 */
 
+::view-transition,
+::view-transition-group(root),
+::view-transition-image-pair(root),
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation: none;
