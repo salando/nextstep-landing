@@ -11,4 +11,4 @@ Please note that this project is currently under active development. Both the ph
 
 The project website serves as the primary portfolio for the work. It provides a detailed, accessible explanation of how the exoskeleton functions and the engineering challenges overcome during its creation.
 
-[View the Project Website](https://engshen.ca)
+### [View the Project Website](https://engshen.ca)
