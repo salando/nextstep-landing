@@ -1,6 +1,6 @@
 # NextStep Exoskeleton - Capstone Project
-Modern marketing website for an assistive exoskeleton project. Features custom animations, comprehensive documentation, and a polished UI showcasing research, development, and physical progress.
-</br>
-</br>Built with React + TypeScript + Framer Motion | 
+The digital showcase for NextStep, an in-progress capstone project exploring assistive exoskeleton technology. With 80+ hours invested to date, this site documents the ongoing development process, from initial research and mechanical design to physical prototyping.
 
-### **Live at https://engshen.ca**
+## **Live Site:** [engshen.ca](https://engshen.ca)
+
+**Active development — check back for updates!**
