@@ -22,7 +22,10 @@
   --glow-primary: 0 0 20px rgba(0, 243, 255, 0.3);
   --glow-text: 0 0 10px rgba(255, 255, 255, 0.5);
 
+  /* Animation Easings */
   --cubic-fast: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --apple-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Premium, smooth ease */
 
   /* Spacing */
   --header-height: 80px;
@@ -67,10 +70,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
   scrollbar-gutter: stable;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 body {
@@ -117,5 +119,5 @@ body {
 }
 
 .section-padding {
-  padding: 70px 0;
+  padding: 2rem 0;
 }

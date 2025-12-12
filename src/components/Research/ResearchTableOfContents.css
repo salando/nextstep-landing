@@ -1,38 +1,32 @@
-.research-sidebar {
+.toc-sidebar {
     position: -webkit-sticky;
     position: sticky;
     top: 120px;
     width: 200px;
-    height: fit-content;
     max-height: calc(100vh - 140px);
     overflow-y: auto;
-    align-self: flex-start;
     z-index: 10;
-    flex-shrink: 0;
     padding-right: 1rem;
 }
 
 /* Hide scrollbar for cleaner look */
-.research-sidebar::-webkit-scrollbar {
+.toc-sidebar::-webkit-scrollbar {
     width: 4px;
 }
 
-.research-sidebar::-webkit-scrollbar-thumb {
+.toc-sidebar::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
 }
 
-/* Sidebar Header */
-.sidebar-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+/* Header */
+.toc-header {
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.sidebar-header h3 {
+.toc-header h3 {
     font-family: var(--font-sans);
     font-size: 0.85rem;
     font-weight: 600;
@@ -42,17 +36,16 @@
     margin: 0;
 }
 
-/* Navigation track with left accent border */
-.sidebar-track {
-    position: relative;
+/* Navigation Track */
+.toc-track {
     display: flex;
     flex-direction: column;
     padding: 0.5rem 0;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Navigation Links - matching Physical page sidebar font */
-.sidebar-link {
+/* Link Styles */
+.toc-link {
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -70,8 +63,8 @@
     margin-left: -1px;
 }
 
-/* Dot indicator */
-.link-dot {
+/* Dot Indicator */
+.toc-dot {
     width: 4px;
     height: 4px;
     border-radius: 50%;
@@ -80,118 +73,69 @@
     flex-shrink: 0;
 }
 
-.sidebar-link:hover {
+/* Hover State */
+.toc-link:hover {
     color: var(--color-text-main);
     background: rgba(255, 255, 255, 0.03);
 }
 
-.sidebar-link:hover .link-dot {
+.toc-link:hover .toc-dot {
     background: var(--color-text-muted);
     transform: scale(1.3);
 }
 
-.sidebar-link.active {
+/* Active State */
+.toc-link.active {
     color: var(--color-primary);
     font-weight: 500;
     background: rgba(0, 243, 255, 0.05);
     border-left-color: var(--color-primary);
 }
 
-.sidebar-link.active .link-dot {
+.toc-link.active .toc-dot {
     background: var(--color-primary);
     box-shadow: 0 0 8px var(--color-primary);
     transform: scale(1.5);
 }
 
-/* Light mode adjustments */
-[data-theme="light"] .sidebar-header {
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .sidebar-track {
-    border-left-color: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .research-sidebar::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .link-dot {
-    background: rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="light"] .sidebar-link:hover {
-    background: rgba(0, 0, 0, 0.03);
-}
-
-[data-theme="light"] .sidebar-link:hover .link-dot {
-    background: var(--color-text-muted);
-}
-
-[data-theme="light"] .sidebar-link.active {
-    background: rgba(8, 145, 178, 0.08);
-}
-
-[data-theme="light"] .sidebar-link.active .link-dot {
-    background: var(--color-primary);
-}
-
-/* Mobile responsive - Horizontal scrollable bar */
+/* Mobile Responsive */
 @media (max-width: 1024px) {
-    .research-sidebar {
+    .toc-sidebar {
         display: block;
-        /* Show sidebar on mobile */
-        position: -webkit-sticky;
-        /* Ensure sticky works */
         position: sticky;
         top: 60px;
-        /* Adjust based on navbar height, assuming ~60px */
         width: 100vw;
-        /* Full width */
         height: auto;
         max-height: none;
         padding: 0;
         margin: 0;
-        /* Reset margin */
         background: rgba(20, 20, 20, 0.95);
-        /* High opacity background */
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 90;
     }
 
-    .sidebar-header {
+    .toc-header {
         display: none;
-        /* Hide header text to save space */
     }
 
-    .sidebar-track {
+    .toc-track {
         flex-direction: row;
-        /* Horizontal layout */
         overflow-x: auto;
-        /* Allow scrolling */
         border-left: none;
         padding: 0.5rem 1rem;
         gap: 0.5rem;
         -webkit-overflow-scrolling: touch;
-
-        /* Hide scrollbar */
         scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE 10+ */
     }
 
-    .sidebar-track::-webkit-scrollbar {
+    .toc-track::-webkit-scrollbar {
         display: none;
-        /* Chrome/Safari */
     }
 
-    .sidebar-link {
+    .toc-link {
         flex-shrink: 0;
-        /* Prevent shrinking */
-        letter-spacing: normal;
         border-left: none;
         border-bottom: 2px solid transparent;
         border-radius: 4px;
@@ -199,31 +143,15 @@
         padding: 0.5rem 0.75rem;
         white-space: nowrap;
         background: rgba(255, 255, 255, 0.05);
-        /* Slight BG for visibility */
     }
 
-    .sidebar-link.active {
+    .toc-link.active {
         background: rgba(0, 243, 255, 0.15);
         border-bottom-color: var(--color-primary);
         color: var(--color-primary);
     }
 
-    .link-dot {
+    .toc-dot {
         display: none;
-        /* Hide dots on mobile to save space */
-    }
-
-    /* Light mode mobile adjustments */
-    [data-theme="light"] .research-sidebar {
-        background: rgba(255, 255, 255, 0.95);
-        border-bottom-color: rgba(0, 0, 0, 0.1);
-    }
-
-    [data-theme="light"] .sidebar-link {
-        background: rgba(0, 0, 0, 0.03);
-    }
-
-    [data-theme="light"] .sidebar-link.active {
-        background: rgba(8, 145, 178, 0.15);
     }
 }

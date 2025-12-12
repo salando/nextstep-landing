@@ -1,7 +1,7 @@
 import { useState, ReactNode } from 'react';
 import { Section } from '../components/UI/Section';
 import { HardwareGrid } from '../components/Research/HardwareGrid';
-import { ResearchSidebar } from '../components/Research/ResearchSidebar';
+import { ResearchTableOfContents } from '../components/Research/ResearchTableOfContents';
 import './Research.css';
 
 // Expandable section component for technical details
@@ -80,7 +80,7 @@ export const Research = () => {
 
             <div className="container">
                 <div className="research-layout">
-                    <ResearchSidebar />
+                    <ResearchTableOfContents />
                     <div className="research-content">
 
                         {/* Introduction Section */}

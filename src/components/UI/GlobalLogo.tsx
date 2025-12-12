@@ -13,6 +13,8 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
     const logoRef = useRef<HTMLAnchorElement>(null);
     const requestRef = useRef<number | null>(requestAnimationFrame(() => { })); // Initialize with a dummy request ID
 
+    const lastStyleRef = useRef<any>(null);
+
     // Function to update position based on active anchor
     const snapToAnchor = (anchorId: string) => {
         const anchor = document.getElementById(anchorId);
@@ -45,12 +47,13 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
             const updatePosition = () => {
                 const newStyle = snapToAnchor('boot-logo-anchor');
                 if (newStyle) {
+                    lastStyleRef.current = newStyle;
                     setStyle({
                         ...newStyle,
                         position: 'fixed',
                         margin: 0,
                         padding: 0,
-                        zIndex: 10005,
+                        zIndex: 10000,
                         pointerEvents: 'none',
                         display: 'flex',
                         alignItems: 'center',
@@ -72,8 +75,8 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
             setTimeout(() => setIsAnimating(true), 0);
 
 
-            // 1. Get current position (should be at boot anchor)
-            const startStyle = snapToAnchor('boot-logo-anchor');
+            // 1. Get current position (use last known good position to avoid jump from BootSequence exit transform)
+            const startStyle = lastStyleRef.current || snapToAnchor('boot-logo-anchor');
 
             // 2. Get target position (nav anchor)
             const endStyle = snapToAnchor('nav-logo-anchor');
@@ -108,7 +111,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                     setStyle({
                         ...startStyle,
                         position: 'fixed',
-                        zIndex: 10005,
+                        zIndex: 10000,
                         opacity: 1,
                         transition: transition
                     });
@@ -118,7 +121,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                         setStyle({
                             ...endStyle,
                             position: 'fixed',
-                            zIndex: 10005,
+                            zIndex: 10000,
                             opacity: 1,
                             transition: transition
                         });
@@ -127,6 +130,8 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
 
                 // Cleanup
                 setTimeout(() => {
+                    // Reset z-index to normal navbar level after animation
+                    setStyle(prev => ({ ...prev, zIndex: 1001 }));
                     if (onAnimationComplete) onAnimationComplete();
                 }, 1000);
             }

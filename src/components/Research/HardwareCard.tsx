@@ -25,44 +25,26 @@ export const HardwareCard: React.FC<HardwareCardProps> = ({
 }) => {
     return (
         <div className={`hardware-card ${className}`}>
-            <div className="card-inner">
-                {/* FRONT OF CARD */}
-                <div className="card-face card-front">
-                    {/* Decoration: Technical Corners */}
-                    <div className="card-tech-corners">
-                        <div className="corner-tl"></div>
-                        <div className="corner-tr"></div>
-                        <div className="corner-bl"></div>
-                        <div className="corner-br"></div>
-                    </div>
+            {/* Background Image - Full Cover */}
+            <div className="card-bg-container">
+                <img src={image} alt={title} className="card-bg-image" />
+                <div className="card-overlay-gradient"></div>
+            </div>
 
-                    <div className="card-image-container">
-                        <img src={image} alt={title} className="card-image" />
-                    </div>
-
-                    <div className="card-content">
-                        <div className="card-header">
-                            <span className="category-tag">{category}</span>
-                            <h3 className="card-title">{title}</h3>
-                        </div>
-                    </div>
+            {/* Content Overlay */}
+            <div className="card-content-wrapper">
+                <div className="card-header">
+                    <span className="category-tag">{category}</span>
+                    <h3 className="card-title">{title}</h3>
                 </div>
 
-                {/* BACK OF CARD */}
-                <div className="card-face card-back">
-                    <div className="card-tech-corners">
-                        <div className="corner-tl"></div>
-                        <div className="corner-tr"></div>
-                        <div className="corner-bl"></div>
-                        <div className="corner-br"></div>
-                    </div>
-
-                    <div className="card-back-content">
-                        <h3 className="card-title-back">{title}</h3>
-                        <p className="card-description-back">{description}</p>
+                {/* Details slide up and fade in */}
+                <div className="card-details-window">
+                    <div className="card-details-inner">
+                        <p className="card-description">{description}</p>
 
                         {specs && specs.length > 0 && (
-                            <div className="specs-container-back">
+                            <div className="specs-grid">
                                 {specs.map((spec, index) => (
                                     <div className="spec-item" key={index}>
                                         <span className="spec-label">{spec.label}</span>
@@ -72,9 +54,6 @@ export const HardwareCard: React.FC<HardwareCardProps> = ({
                             </div>
                         )}
                     </div>
-
-                    {/* Optional: faded background image for the back too */}
-                    <div className="card-back-bg" style={{ backgroundImage: `url(${image})` }}></div>
                 </div>
             </div>
         </div>

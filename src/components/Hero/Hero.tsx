@@ -1,30 +1,56 @@
-
-import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import './Hero.css';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Faster stagger
+      delayChildren: 0.1,   // Reduced initial delay
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.8, // Slightly faster duration
+      ease: [0.25, 0.1, 0.25, 1] as const, // Apple-like ease
+    },
+  },
+};
+
 export const Hero = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="hero-container">
       <div className="hero-grid-bg"></div>
-      <div className={`hero-content ${mounted ? 'enter' : ''}`}>
-        <div className="hero-badge mono">GRADE 12 CAPSTONE PROJECT</div>
-        <h1 className="hero-title">
+
+      <motion.div
+        className="hero-content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={itemVariants} className="hero-badge mono">
+          GRADE 12 CAPSTONE PROJECT
+        </motion.div>
+
+        <motion.h1 variants={itemVariants} className="hero-title">
           NEXT<span className="highlight">STEP</span>
           <br />
           EXOSKELETON
-        </h1>
-        <p className="hero-subtitle">
-          Redefining human potential. Whether restoring mobility or enhancing performance, NextStep powers your movement to go further.
-        </p>
+        </motion.h1>
 
-        <div className="hero-stats mono">
+        <motion.p variants={itemVariants} className="hero-subtitle">
+          Redefining human potential. Whether restoring mobility or enhancing performance, NextStep powers your movement to go further.
+        </motion.p>
+
+        <motion.div variants={itemVariants} className="hero-stats mono">
           <div className="stat-item">
             <span className="label">STATUS</span>
             <span className="value text-active">IN DEVELOPMENT</span>
@@ -37,18 +63,53 @@ export const Hero = () => {
             <span className="label">LOGIC</span>
             <span className="value">RPi + CAN</span>
           </div>
-        </div>
+        </motion.div>
 
-        <a href="#overview" className="cta-button">
+        <motion.a
+          variants={itemVariants}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('value-prop')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="cta-button"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          style={{ cursor: 'pointer' }}
+        >
           EXPLORE THE PROJECT
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
 
-      {/* Decorative Abstract Tech Ring */}
+      <motion.div
+        className="scroll-indicator"
+        onClick={() => document.getElementById('value-prop')?.scrollIntoView({ behavior: 'smooth' })}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
+        <span className="scroll-text mono">SCROLL</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+        </svg>
+      </motion.div>
+
+      {/* Decorative Abstract Tech Ring - Animated with Framer */}
       <div className="tech-ring-container">
-        <div className="tech-ring ring-1"></div>
-        <div className="tech-ring ring-2"></div>
-        <div className="tech-ring ring-3"></div>
+        <motion.div
+          className="tech-ring ring-1"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        ></motion.div>
+        <motion.div
+          className="tech-ring ring-2"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        ></motion.div>
+        <motion.div
+          className="tech-ring ring-3"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        ></motion.div>
       </div>
     </div>
   );

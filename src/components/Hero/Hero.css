@@ -6,10 +6,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: radial-gradient(circle at center, #1a1a24 0%, var(--color-bg) 70%);
+  background: radial-gradient(circle at center, #111116 0%, var(--color-bg) 80%);
 }
 
-/* Animated Grid Background */
+/* Static Grid Background */
 .hero-grid-bg {
   position: absolute;
   top: 0;
@@ -19,83 +19,77 @@
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  perspective: 1000px;
-  transform: translateZ(0);
-  animation: gridMove 20s linear infinite;
+  background-size: 60px 60px;
+  /* Larger grid for cleaner look */
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
   z-index: 0;
-}
-
-@keyframes gridMove {
-  0% {
-    transform: translateY(0) scale(1.1);
-  }
-
-  50% {
-    transform: translateY(-20px) scale(1.15);
-  }
-
-  100% {
-    transform: translateY(0) scale(1.1);
-  }
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 800px;
+  max-width: 900px;
   padding: 0 20px;
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 1s ease, transform 1s var(--cubic-fast);
-}
-
-.hero-content.enter {
-  opacity: 1;
-  transform: scale(1);
 }
 
 .hero-badge {
   display: inline-block;
-  padding: 8px 16px;
-  border: 1px solid var(--color-primary);
+  padding: 6px 14px;
+  border: 1px solid rgba(0, 243, 255, 0.3);
   color: var(--color-primary);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 2px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   background: rgba(0, 243, 255, 0.05);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+  border-radius: 9999px;
+  /* Pill shape */
+  backdrop-filter: blur(4px);
 }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: 5rem;
+  /* Larger title */
   margin: 0 0 24px;
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -2px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  /* Tight tracking */
+  background: radial-gradient(circle at center, #fff, #aaa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-title .highlight {
-  color: var(--color-primary);
-  text-shadow: var(--glow-primary);
+  /* Using gradients for the highlight text */
+  background: linear-gradient(135deg, #00f3ff, #0088ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  /* Larger, readable subtitle */
   color: var(--color-text-muted);
-  line-height: 1.6;
-  margin-bottom: 48px;
-  max-width: 600px;
+  line-height: 1.5;
+  margin-bottom: 56px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-bottom: 48px;
+  gap: 60px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
@@ -103,44 +97,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .stat-item .label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
 }
 
 .stat-item .value {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--color-text-main);
-  border-bottom: 2px solid var(--color-border);
   padding-bottom: 2px;
 }
 
 .stat-item .text-active {
-  color: var(--color-warning);
-  border-color: var(--color-warning);
+  color: var(--color-success);
+  /* Green for "In Development" is more standard */
 }
 
 .cta-button {
   display: inline-block;
-  background: var(--color-text-main);
-  color: var(--color-bg);
-  padding: 16px 32px;
-  font-family: var(--font-mono);
-  font-weight: 700;
+  background: #fff;
+  color: #000;
+  padding: 16px 40px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  /* Use sans for buttons usually */
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  background: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  letter-spacing: -0.01em;
 }
 
 /* Decorative Ring */
@@ -149,12 +140,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 80vw;
-  max-width: 800px;
-  max-height: 800px;
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  max-height: 1000px;
   z-index: 1;
-  opacity: 0.4;
+  opacity: 0.3;
   pointer-events: none;
 }
 
@@ -163,96 +154,100 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* Start centered so Framer can handle rotation */
   border-radius: 50%;
   border: 1px solid var(--color-border);
 }
 
 .ring-1 {
-  width: 100%;
-  height: 100%;
-  border-color: rgba(255, 255, 255, 0.05);
-  animation: spin 40s linear infinite;
-}
-
-.ring-1::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--color-primary);
+  width: 80%;
+  height: 80%;
+  border-color: rgba(255, 255, 255, 0.03);
 }
 
 .ring-2 {
-  width: 70%;
-  height: 70%;
-  border: 1px dashed var(--color-border);
-  animation: spinReverse 30s linear infinite;
+  width: 60%;
+  height: 60%;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
 }
 
 .ring-3 {
   width: 40%;
   height: 40%;
-  border: 2px solid rgba(0, 243, 255, 0.1);
-}
-
-@keyframes spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-@keyframes spinReverse {
-  from {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
+  border: 1px solid rgba(0, 243, 255, 0.05);
 }
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .hero-stats {
-    gap: 20px;
+    gap: 30px;
   }
 }
 
 /* Light Mode Overrides */
 [data-theme="light"] .hero-container {
-  background: radial-gradient(circle at center, #e8f4f8 0%, var(--color-bg) 70%);
+  background: radial-gradient(circle at center, #fff 0%, #f5f5f7 100%);
 }
 
 [data-theme="light"] .hero-grid-bg {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 70%);
 }
 
 [data-theme="light"] .hero-badge {
-  background: rgba(8, 145, 178, 0.08);
-  box-shadow: 0 0 15px rgba(8, 145, 178, 0.1);
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text-muted);
 }
 
-[data-theme="light"] .cta-button:hover {
-  box-shadow: 0 10px 25px rgba(8, 145, 178, 0.25);
+[data-theme="light"] .hero-title {
+  background: radial-gradient(circle at center, #000, #444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-[data-theme="light"] .ring-1 {
-  border-color: rgba(0, 0, 0, 0.06);
+[data-theme="light"] .hero-title .highlight {
+  /* Keep blue/cyan highlight or switch to indigo */
+  background: linear-gradient(135deg, #007aff, #00c2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-[data-theme="light"] .ring-3 {
-  border-color: rgba(8, 145, 178, 0.15);
+[data-theme="light"] .cta-button {
+  background: #000;
+  color: #fff;
+}
+
+[data-theme="light"] .stat-item .value {
+  color: #1d1d1f;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.scroll-text {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+
+[data-theme="light"] .scroll-indicator {
+  color: rgba(0, 0, 0, 0.4);
 }

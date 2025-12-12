@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './ResearchSidebar.css';
+import './ResearchTableOfContents.css';
 
 const sections = [
     { id: 'research-intro', label: 'Overview' },
@@ -15,29 +15,35 @@ const sections = [
     { id: 'hardware-showcase', label: 'Hardware' }
 ];
 
-export const ResearchSidebar = () => {
+export const ResearchTableOfContents = () => {
     const [activeSection, setActiveSection] = useState<string>('research-intro');
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + 200;
-
-            for (let i = sections.length - 1; i >= 0; i--) {
-                const section = document.getElementById(sections[i].id);
-                if (section && section.offsetTop <= scrollPosition) {
-                    setActiveSection(sections[i].id);
-                    break;
-                }
-            }
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
         };
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Set initial active section
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach((section) => {
+            const element = document.getElementById(section.id);
+            if (element) observer.observe(element);
+        });
+
+        return () => observer.disconnect();
     }, []);
 
-    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
         e.preventDefault();
         const section = document.getElementById(sectionId);
         if (section) {
@@ -49,23 +55,26 @@ export const ResearchSidebar = () => {
                 top: offsetPosition,
                 behavior: 'smooth'
             });
+
+            // Immediate feedback
+            setActiveSection(sectionId);
         }
     };
 
     return (
-        <aside className="research-sidebar">
-            <div className="sidebar-header">
+        <aside className="toc-sidebar">
+            <div className="toc-header">
                 <h3>Contents</h3>
             </div>
-            <nav className="sidebar-track">
+            <nav className="toc-track">
                 {sections.map((section) => (
                     <a
                         key={section.id}
                         href={`#${section.id}`}
-                        className={`sidebar-link ${activeSection === section.id ? 'active' : ''}`}
-                        onClick={(e) => handleClick(e, section.id)}
+                        className={`toc-link ${activeSection === section.id ? 'active' : ''}`}
+                        onClick={(e) => scrollToSection(e, section.id)}
                     >
-                        <span className="link-dot"></span>
+                        <span className="toc-dot"></span>
                         {section.label}
                     </a>
                 ))}

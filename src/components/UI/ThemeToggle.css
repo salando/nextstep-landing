@@ -1,70 +1,104 @@
+/* src/components/UI/ThemeToggle.css */
 .theme-toggle {
-    position: relative;
-    top: auto;
-    right: auto;
-    z-index: 10;
     background: transparent;
-
-    border: 1px solid transparent;
-    padding: 2px;
-    border-radius: 2rem;
+    border: none;
     cursor: pointer;
+    padding: 0;
+    width: 60px;
+    height: 32px;
+    border-radius: 100px;
+    /* Capsule shape */
     display: flex;
     align-items: center;
-    transition: all 0.3s ease;
+    position: relative;
+    /* Use a subtly translucent background for the track */
+    background-color: rgba(120, 120, 128, 0.2);
+    transition: background-color 0.3s ease;
+    /* Remove default button styles */
+    outline: none;
+    overflow: hidden;
+    z-index: 10000;
+    /* Ensure button is above the view transition layer */
 }
 
 .theme-toggle:hover {
-    border-color: var(--color-primary);
-    background: rgba(0, 0, 0, 0.85);
+    background-color: rgba(120, 120, 128, 0.3);
 }
 
-.toggle-track {
-    width: 44px;
-    height: 24px;
-    background: var(--color-surface);
-    border-radius: 12px;
-    position: relative;
-    border: 1px solid var(--color-border);
-    transition: background 0.3s ease;
+[data-theme='light'] .theme-toggle {
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+/* The thumb */
 .toggle-thumb {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 3px;
-    width: 18px;
-    height: 18px;
-    background: var(--color-secondary);
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
     border-radius: 50%;
-    transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease;
+    position: relative;
+    /* Changed from absolute to relative */
+    /* top: 4px; left: 4px; Removed as we use flex alignment and padding now */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
-.toggle-thumb.light {
-    left: 21px;
-    background: var(--color-warning);
+[data-theme='dark'] .toggle-thumb {
+    background-color: #000;
+    /* Dark thumb for dark mode? Or keep it light? usually toggle handles are inverse or white. */
+    /* Let's keep it white/bright for visibility or dark grey. React component will handle color/icon. */
+    background-color: #1a1b26;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Light Mode Styles */
-[data-theme="light"] .theme-toggle {
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
+/* Icons */
+.toggle-icon {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2.5;
 }
 
-[data-theme="light"] .theme-toggle:hover {
-    background: rgba(255, 255, 255, 1);
-    border-color: var(--color-primary);
+.sun-icon {
+    color: #FDB813;
 }
 
-[data-theme="light"] .toggle-track {
-    background: #e5e7eb;
-    border-color: transparent;
+.moon-icon {
+    color: #fff;
 }
 
-/* Global Transition Helper */
-/* This class is added to html during the theme switch */
+[data-theme='light'] .moon-icon {
+    color: #1a1b26;
+    /* Dark moon on light theme if visible */
+}
+
+/* 
+   View Transitions API 
+   This enables the circular clip path animation 
+*/
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+    /* Ensure it's above everything */
+    pointer-events: none;
+}
+
+/* When switching theme, we want the NEW view to appear either on top or bottom depending on context,
+   but for the circular reveal, the NEW view grows on top of the OLD view.
+*/
+::view-transition-new(root) {
+    z-index: 9999;
+}
+
+/* We need to define the custom animation that will be applied by JS helper if needed, 
+   but actually, we can just define a class that we toggle? 
+   No, the `startViewTransition` callback changes the DOM. 
+   We will rely on inline styles or a general rule if we can.
+/* Fallback for browsers without View Transitions */
 html.theme-transition,
 html.theme-transition *,
 html.theme-transition *::before,

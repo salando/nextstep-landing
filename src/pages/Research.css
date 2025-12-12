@@ -25,20 +25,25 @@
 
 /* Content Layout */
 /* Main Layout */
+/* Main Layout - CSS Grid for robust sticky behavior */
 .research-layout {
-    display: flex;
-    gap: 2.5rem;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    /* Fixed sidebar width, rest for content */
+    gap: 3rem;
+    align-items: start;
+    /* Crucial for sticky to work */
     max-width: 1100px;
     margin: 0 auto;
     position: relative;
     padding: 0 3rem;
+    min-height: 100vh;
 }
 
 .research-content {
-    flex: 1;
     min-width: 0;
-    max-width: 850px;
+    /* Prevents grid blowout */
+    max-width: 800px;
 }
 
 /* Ensure container allows full width for layout */
@@ -50,9 +55,10 @@
 /* Adjust mobile layout */
 @media (max-width: 1024px) {
     .research-layout {
+        display: flex;
+        /* Revert to flex col for mobile */
         flex-direction: column;
         padding: 0;
-        /* Removing padding here so sidebar can be full width */
         gap: 1.5rem;
     }
 
@@ -61,6 +67,7 @@
         margin: 0 auto;
         padding: 0 1rem 2rem 1rem;
         width: 100%;
+        max-width: none;
     }
 }
 
