@@ -1,4 +1,5 @@
-# nextstep-landing
-Marketing site for the NextStep exoskeleton project
+##NextStep Exoskeleton - Capstone Project##
+Modern marketing website for an assistive exoskeleton project. Features custom animations, comprehensive documentation, and a polished UI showcasing research, development, and physical progress.
+Built with React + TypeScript + Framer Motion | 
 
-Link to the website is https://engshen.ca
+Live at https://engshen.ca
