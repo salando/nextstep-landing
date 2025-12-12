@@ -1,3 +1,8 @@
+/* Research Page - Ensure sticky works after SPA navigation */
+.research-page {
+    overflow: visible;
+}
+
 .research-page .section-padding {
     padding: 1rem 0;
 }
@@ -38,18 +43,22 @@
     position: relative;
     padding: 0 3rem;
     min-height: 100vh;
+    overflow: visible;
+    /* Ensure sticky positioning works after SPA navigation */
 }
 
 .research-content {
     min-width: 0;
     /* Prevents grid blowout */
     max-width: 800px;
+    overflow: visible;
 }
 
 /* Ensure container allows full width for layout */
 .research-page .container {
     max-width: 100%;
     padding: 0;
+    overflow: visible;
 }
 
 /* Adjust mobile layout */
