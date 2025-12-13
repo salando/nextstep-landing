@@ -158,23 +158,40 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
         return () => cancelAnimationFrame(requestRef.current!);
     }, [booted, isAnimating, onAnimationComplete, snapToAnchor]);
 
-    // Resize handler: Keep logo synced with nav anchor after animation completes
+    // Resize and scroll handler: Keep logo synced with nav anchor after animation completes
     useEffect(() => {
         if (!animationComplete) return;
 
-        const handleResize = () => {
+        const updatePosition = () => {
             const newStyle = snapToAnchor('nav-logo-anchor');
             if (newStyle) {
                 setStyle(prev => ({
                     ...prev,
                     ...newStyle,
-                    transition: 'none' // Instant update on resize
+                    transition: 'none' // Instant update
                 }));
             }
         };
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        // Throttle scroll updates for performance
+        let ticking = false;
+        const handleScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updatePosition();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('resize', updatePosition);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('resize', updatePosition);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [animationComplete, snapToAnchor]);
 
 

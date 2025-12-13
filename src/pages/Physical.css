@@ -1,8 +1,14 @@
+/* Physical Page - Ensure sticky works after SPA navigation */
+.physical-page {
+    overflow: visible;
+}
+
 /* Physical Page Layout */
 .physical-container {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
+    overflow: visible;
 }
 
 /* Dashboard Header */
@@ -125,6 +131,10 @@
     display: grid;
     grid-template-columns: 210px 1fr;
     gap: var(--spacing-lg);
+    overflow: visible;
+    /* Ensure sticky positioning works */
+    align-items: start;
+    /* Crucial for sticky to work properly */
 }
 
 /* Sidebar */
@@ -204,6 +214,11 @@
 }
 
 /* Feed Container */
+.feed-container {
+    min-height: 60vh;
+    /* Ensure sidebar has enough height to stick when content is filtered */
+}
+
 .feed-header {
     margin-bottom: var(--spacing-md);
 }
