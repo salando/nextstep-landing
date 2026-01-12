@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './GlobalLogo.css';
 
@@ -54,7 +54,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
         };
     }, []);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         // Animation State: Triggered when booted becomes true
         // NOTE: During the boot phase (!booted), this component relies on the static
         // logo inside BootSequence to be visible. We don't render or track position
@@ -62,9 +62,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
         if (booted && !isAnimating) {
             cancelAnimationFrame(requestRef.current!);
 
-            // Defer state update to avoid sync render warning
-            setTimeout(() => setIsAnimating(true), 0);
-
+            setIsAnimating(true);
 
             // 1. Get current position (use last known good position to avoid jump from BootSequence exit transform)
             // Since we don't track during boot anymore, we grab the layout snapshot RIGHT NOW.
@@ -95,13 +93,23 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                     line-height ${fontDuration} ${bezier} ${fontDelay}
                 `.replace(/\n\s+/g, ' ').trim();
 
-                // Defer start to avoid sync setState in effect
-                setTimeout(() => {
-                    setIsAnimating(true);
+                // Set initial state with transition
+                setStyle({
+                    ...startStyle,
+                    position: 'fixed',
+                    zIndex: 10000,
+                    opacity: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 0,
+                    transition: transition
+                });
 
-                    // Set initial state with transition
+                // Start animation to end style in next frame
+                requestAnimationFrame(() => {
                     setStyle({
-                        ...startStyle,
+                        ...endStyle,
                         position: 'fixed',
                         zIndex: 10000,
                         opacity: 1,
@@ -111,22 +119,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                         gap: 0,
                         transition: transition
                     });
-
-                    // Start animation to end style in next frame
-                    requestAnimationFrame(() => {
-                        setStyle({
-                            ...endStyle,
-                            position: 'fixed',
-                            zIndex: 10000,
-                            opacity: 1,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: 0,
-                            transition: transition
-                        });
-                    });
-                }, 0);
+                });
 
                 // Cleanup - mark animation complete and enable pointer events
                 setTimeout(() => {
