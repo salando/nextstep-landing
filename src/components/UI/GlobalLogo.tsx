@@ -27,7 +27,6 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
     const logoRef = useRef<HTMLAnchorElement>(null);
     const requestRef = useRef<number | null>(requestAnimationFrame(() => { }));
 
-    const lastStyleRef = useRef<any>(null);
 
     // Function to update position based on active anchor
     const snapToAnchor = useCallback((anchorId: string) => {
@@ -56,34 +55,11 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
     }, []);
 
     useEffect(() => {
-        // Initial State: Locked to boot anchor
-        if (!booted && !isAnimating) {
-            const updatePosition = () => {
-                const newStyle = snapToAnchor('boot-logo-anchor');
-                if (newStyle) {
-                    lastStyleRef.current = newStyle;
-                    setStyle({
-                        ...newStyle,
-                        position: 'fixed',
-                        margin: 0,
-                        padding: 0,
-                        zIndex: 10000,
-                        pointerEvents: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 0,
-                        transition: 'none',
-                        opacity: 1 // Make visible once positioned
-                    });
-                }
-                requestRef.current = requestAnimationFrame(updatePosition);
-            };
-
-            requestRef.current = requestAnimationFrame(updatePosition);
-        }
         // Animation State: Triggered when booted becomes true
-        else if (booted && !isAnimating) {
+        // NOTE: During the boot phase (!booted), this component relies on the static
+        // logo inside BootSequence to be visible. We don't render or track position
+        // until we are ready to fly out, avoiding scroll jitter/desync issues.
+        if (booted && !isAnimating) {
             cancelAnimationFrame(requestRef.current!);
 
             // Defer state update to avoid sync render warning
@@ -91,7 +67,8 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
 
 
             // 1. Get current position (use last known good position to avoid jump from BootSequence exit transform)
-            const startStyle = lastStyleRef.current || snapToAnchor('boot-logo-anchor');
+            // Since we don't track during boot anymore, we grab the layout snapshot RIGHT NOW.
+            const startStyle = snapToAnchor('boot-logo-anchor');
 
             // 2. Get target position (nav anchor)
             const endStyle = snapToAnchor('nav-logo-anchor');

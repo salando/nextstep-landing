@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import './BootSequence.css';
 
+import './GlobalLogo.css';
+
 /** Boot sequence line item with message type for styling */
 type SequenceItem = { text: string; type: 'info' | 'success' | 'warning' };
 
@@ -64,9 +66,22 @@ export const BootSequence = ({ onComplete, shouldFadeOut }: { onComplete: () => 
     <div className={`boot-overlay ${shouldFadeOut ? 'exiting' : ''}`}>
       <div className={`boot-container ${shouldFadeOut ? 'fade-out' : ''}`}>
         <div className="boot-header">
-          <div className="header-left">
+          <div className="header-left" style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
             {/* Anchor for GlobalLogo - Text matches logo for sizing */}
-            <span id="boot-logo-anchor" style={{ opacity: 0, fontWeight: 'bold' }}>NEXTSTEP</span>
+            <span
+              id="boot-logo-anchor"
+              style={{
+                opacity: shouldFadeOut ? 0 : 1,
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 0,
+                transition: 'none' // Instant hide so GlobalLogo takes over
+              }}
+            >
+              <span className="logo-next">NEXT</span><span className="logo-step">STEP</span>
+            </span>
             <span className="header-suffix"> // BOOT_LOADER</span>
           </div>
         </div>
