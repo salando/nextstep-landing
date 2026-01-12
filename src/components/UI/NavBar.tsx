@@ -3,6 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
 import './NavBar.css';
+import './GlobalLogo.css';
+
+interface NavBarProps {
+    showLogo?: boolean;
+}
 
 /** Navigation link configuration */
 const NAV_LINKS = [
@@ -26,7 +31,7 @@ const NAV_LINKS = [
  * The navbar includes a hidden anchor (#nav-logo-anchor) that GlobalLogo
  * uses as its target position for the fly-in animation.
  */
-export const NavBar = () => {
+export const NavBar = ({ showLogo = false }: NavBarProps) => {
     const { pathname } = useLocation();
     const [isOpen, setIsOpen] = useState(false);
     const [hoveredPath, setHoveredPath] = useState<string | null>(null);
@@ -70,8 +75,20 @@ export const NavBar = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-                <Link to="/" className="nav-brand" id="nav-logo-anchor" onClick={closeMenu} style={{ opacity: 0 }}>
-                    NEXTSTEP
+                <Link
+                    to="/"
+                    className="nav-brand"
+                    id="nav-logo-anchor"
+                    onClick={closeMenu}
+                    style={{
+                        opacity: showLogo ? 1 : 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 0 // Ensure no gap disrupts the gradient flow
+                    }}
+                >
+                    <span className="logo-next">NEXT</span><span className="logo-step">STEP</span>
                 </Link>
 
                 {/* Desktop Links */}

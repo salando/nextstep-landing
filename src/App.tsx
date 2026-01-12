@@ -55,11 +55,12 @@ function App() {
       <GlobalLogo
         booted={bootState === 'flying' || bootState === 'cleanup' || bootState === 'complete'}
         onAnimationComplete={handleLogoAnimationComplete}
+        shouldHide={bootState === 'complete'}
       />
 
       {/* Main app is visible behind the overlay, but overlay covers it until cleanup */}
       <main className={`app-wrapper ${bootState !== 'loading' ? 'visible' : ''}`}>
-        <NavBar />
+        <NavBar showLogo={bootState === 'complete'} />
 
         <Suspense fallback={<div className="loading-fallback">Loading...</div>}>
           <Routes>

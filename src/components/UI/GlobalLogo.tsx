@@ -5,6 +5,7 @@ import './GlobalLogo.css';
 interface GlobalLogoProps {
     booted: boolean;
     onAnimationComplete?: () => void;
+    shouldHide?: boolean;
 }
 
 /**
@@ -19,7 +20,7 @@ interface GlobalLogoProps {
  * - "NEXT" uses a radial gradient (white to gray)
  * - "STEP" uses a linear gradient (cyan to blue)
  */
-export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationComplete }) => {
+export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationComplete, shouldHide }) => {
     const [style, setStyle] = useState<React.CSSProperties>({ opacity: 0 });
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationComplete, setAnimationComplete] = useState(false);
@@ -71,6 +72,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        gap: 0,
                         transition: 'none',
                         opacity: 1 // Make visible once positioned
                     });
@@ -126,6 +128,10 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                         position: 'fixed',
                         zIndex: 10000,
                         opacity: 1,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 0,
                         transition: transition
                     });
 
@@ -136,6 +142,10 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                             position: 'fixed',
                             zIndex: 10000,
                             opacity: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 0,
                             transition: transition
                         });
                     });
@@ -195,11 +205,11 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
     }, [animationComplete, snapToAnchor]);
 
 
+    if (shouldHide) return null;
 
     return (
         <Link to="/" ref={logoRef} className="global-logo" style={style}>
-            <span className="logo-next">NEXT</span>
-            <span className="logo-step">STEP</span>
+            <span className="logo-next">NEXT</span><span className="logo-step">STEP</span>
         </Link>
     );
 };

@@ -427,7 +427,23 @@ export const Research = () => {
                                 <h3>The Winning Solution</h3>
                                 <p>
                                     I found motors with built-in planetary gearboxes - combining the motor and gearing into one compact unit.
-                                    The <strong>GIM8108-8</strong> from Steadywin turned out to be the best option.
+                                    Before settling on the final choice, I considered the **GIM6010-8** from Steadywin.
+                                </p>
+                                <div className="highlight-box" style={{ marginBottom: '1.5rem', background: 'rgba(255, 255, 255, 0.02)' }}>
+                                    <div className="motor-specs">
+                                        <img src="/research_images/image67.png" alt="GIM6010-8 Motor" className="featured-image" />
+                                        <div className="specs-content">
+                                            <h4>Candidate: GIM6010-8</h4>
+                                            <ul>
+                                                <li><strong>Torque:</strong> 5.0 Nm (Rated)</li>
+                                                <li><strong>Speed:</strong> 120 RPM (after reduction)</li>
+                                                <li><strong>Verdict:</strong> Good, but torque was slightly lower than optimal.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>
+                                    However, the **GIM8108-8** turned out to be the superior option, offering 50% more torque and better efficiency in a similar package.
                                 </p>
                                 <div className="highlight-box">
                                     <div className="motor-specs">
@@ -589,6 +605,66 @@ export const Research = () => {
                                 <p>
                                     <strong>Conclusion:</strong> I went with a ratchet-style adjustable belt system with a rigid frame to secure everything.
                                 </p>
+                            </div>
+                        </Section>
+
+                        {/* Battery Research Section */}
+                        <Section id="battery-research">
+                            <div className="research-section-header">Battery Technology & Selection</div>
+                            <div className="text-block">
+                                <p>
+                                    Powering the exoskeleton is just as critical as moving it. The motor requires a voltage range of <strong>12-56V</strong> and a peak current of <strong>22A</strong>.
+                                    We compared four common battery chemistries to find the best power source.
+                                </p>
+                            </div>
+
+                            <div className="motor-types-grid">
+                                <div className="motor-type-card">
+                                    <h4>Legacy Tech: Lead-Acid & NiMH</h4>
+                                    <div className="comparison-visual">
+                                        <div className="vs-item bad">
+                                            <span className="vs-label">Lead-Acid</span>
+                                            <p>Too heavy (low energy density) and archaic. Not suitable for wearable tech.</p>
+                                        </div>
+                                        <div className="vs-item bad">
+                                            <span className="vs-label">NiMH (AA/C cells)</span>
+                                            <p>Safer and standard sizes, but heavy. To get 22A current, we'd need a massive parallel array (~4kg+).</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="motor-type-card">
+                                    <h4>Modern Tech: Lithium-Based</h4>
+                                    <div className="comparison-visual">
+                                        <div className="vs-item good">
+                                            <span className="vs-label">Li-Polymer (LiPo) ✓</span>
+                                            <p>Extremely high discharge (20C-50C+), flexible form factor, lightweight. The choice for high-power robotics.</p>
+                                        </div>
+                                        <div className="vs-item">
+                                            <span className="vs-label">Li-Ion (Cylindrical)</span>
+                                            <p>High capacity and cycle life (1000+), but generally lower burst current than LiPo. Requires simpler 5S setup.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="research-block">
+                                <h3>The Winning Choice: LiPo</h3>
+                                <p>
+                                    We chose <strong>LiPo batteries</strong> (Turnigy 5000mAh 4S) for their massive current overhead ("unlimited" 60C discharge for our needs) and safety.
+                                    By using a battery capable of 300A but only drawing ~20A, we keep the battery cool and safe.
+                                </p>
+                                <div className="highlight-box">
+                                    <div className="specs-content">
+                                        <h4>Selected Configuration: 4S LiPo</h4>
+                                        <ul className="specs-list">
+                                            <li><strong>Voltage:</strong> 14.8V Nominal (16.8V Peak)</li>
+                                            <li><strong>Capacity:</strong> 5000mAh (per side)</li>
+                                            <li><strong>Discharge:</strong> 60C Continuous (300A)</li>
+                                            <li><strong>Weight:</strong> ~500g per pack</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </Section>
 

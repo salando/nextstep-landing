@@ -12,6 +12,7 @@ const sections = [
     { id: 'motor-research', label: 'Motor Selection' },
     { id: 'budget', label: 'Budget' },
     { id: 'belt-research', label: 'Belt Research' },
+    { id: 'battery-research', label: 'Battery Technology' },
     { id: 'hardware-showcase', label: 'Hardware' }
 ];
 
