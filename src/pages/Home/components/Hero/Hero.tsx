@@ -61,7 +61,7 @@ export const Hero = () => {
           </div>
           <div className="stat-item">
             <span className="label">LOGIC</span>
-            <span className="value">RPi + CAN</span>
+            <span className="value">RPi 5 + CAN</span>
           </div>
         </motion.div>
 

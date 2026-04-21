@@ -3,6 +3,7 @@ import './ResearchTableOfContents.css';
 
 const sections = [
     { id: 'research-intro', label: 'Overview' },
+    { id: 'context', label: 'Context & Motivation' },
     { id: 'introduction', label: 'Introduction' },
     { id: 'biomechanics', label: 'Biomechanics' },
     { id: 'power-analysis', label: 'Power Analysis' },
@@ -13,6 +14,7 @@ const sections = [
     { id: 'budget', label: 'Budget' },
     { id: 'belt-research', label: 'Belt Research' },
     { id: 'battery-research', label: 'Battery Technology' },
+    { id: 'control-systems', label: 'Control Systems' },
     { id: 'hardware-showcase', label: 'Hardware' }
 ];
 

@@ -12,7 +12,7 @@ export const PROGRESS_DATA: ProgressEntry[] = [
         id: '4',
         date: '2025-12-07',
         title: 'Motor Integration & Debugging',
-        content: 'Integrated Raspberry Pi 5 with Waveshare CAN HAT and CyberGear motors. Successfully deployed the Python driver and v1 test script. Currently debugging a critical CAN communication issue where the motor is unresponsive to commands. Physical wiring verified, moving to signal analysis.',
+        content: 'Integrated Raspberry Pi 5 with Waveshare CAN HAT and GIM8108-8 motors via GDS68 driver. Successfully deployed the Python control script. Currently debugging a critical CAN communication issue where the motor is unresponsive to commands. Physical wiring verified, investigating signal-level communication with the GDS68 driver.',
         tags: ['Hardware', 'Integration', 'Debugging', 'Python'],
         images: [
             '/research_images/image56.png',

@@ -52,7 +52,7 @@ export const Research = () => {
                     <div className="section-line intro-line"></div>
                     <p className="intro-lead">
                         Building an exoskeleton isn't just about putting parts together. It's about solving a complex problem with real constraints.
-                        I had to work within a student budget of <span className="highlight">$600 CAD</span>, keep the weight under <span className="highlight">2.5kg</span>, and still get enough power to actually assist movement.
+                        I had to work within a student budget of <span className="highlight">$500 CAD</span>, keep the weight under <span className="highlight">2.5kg</span>, and still get enough power to actually assist movement.
                     </p>
                     <div className="research-link-container" style={{ marginTop: '1.5rem' }}>
                         <a
@@ -82,6 +82,39 @@ export const Research = () => {
                 <div className="research-layout">
                     <ResearchTableOfContents />
                     <div className="research-content">
+
+                        {/* Context & Motivation Section */}
+                        <Section id="context">
+                            <div className="research-section-header">Context & Motivation</div>
+                            <div className="text-block">
+                                <p>
+                                    In modern society, technology is often based on market demands, rather than necessity.
+                                    We live in a society which is constantly expanding, as demonstrated by the creation of computers, telecommunication, and AI.
+                                    However, many of these innovations are motivated with the goal of maximizing profitability, rather than focusing on human necessity.
+                                </p>
+                                <p>
+                                    In the robotics field, many inventions are developed in research labs, making them inaccessible to the average consumer.
+                                    Understanding this led me to ask, <em>'Why would someone innovate?'</em> The clear answer is not to innovate for the sake of innovating,
+                                    but rather to solve fundamental problems.
+                                </p>
+                            </div>
+
+                            <div className="info-callout">
+                                <h4>The Core Question</h4>
+                                <p>
+                                    While there are numerous innovative ideas that would hugely benefit people, accessibility is often limited to being
+                                    <strong> expensive, theoretical, or exclusive</strong>. My goal is to engineer something accessible that improves
+                                    people's quality of life — an innovation that everyone could use.
+                                </p>
+                            </div>
+
+                            <div className="text-block">
+                                <p>
+                                    I wanted to create something tangible and accessible. The idea should directly benefit people while demonstrating
+                                    that the technology is not out of reach. This ambition led me to create <strong>NextStep</strong>, a robotic exoskeleton.
+                                </p>
+                            </div>
+                        </Section>
 
                         {/* Introduction Section */}
                         <Section id="introduction">
@@ -668,12 +701,83 @@ export const Research = () => {
                             </div>
                         </Section>
 
+                        {/* Control Systems Section */}
+                        <Section id="control-systems">
+                            <div className="research-section-header">Control Systems & Communication</div>
+                            <div className="text-block">
+                                <p>
+                                    The control architecture connects the brain of the system — a Raspberry Pi 5 — to the GIM8108-8 motors through a CAN bus network.
+                                    This industrial-grade communication protocol ensures reliable, real-time motor control.
+                                </p>
+                            </div>
+
+                            <div className="motor-types-grid">
+                                <div className="motor-type-card">
+                                    <h4>Processing Unit</h4>
+                                    <div className="comparison-visual">
+                                        <div className="vs-item good">
+                                            <span className="vs-label">Raspberry Pi 5</span>
+                                            <p>Central brain handling high-level control logic and sensor fusion. Runs custom Python control loops for motor coordination.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="motor-type-card">
+                                    <h4>Communication Interface</h4>
+                                    <div className="comparison-visual">
+                                        <div className="vs-item good">
+                                            <span className="vs-label">Waveshare RS485 CAN HAT</span>
+                                            <p>Uses MCP2515 CAN controller with SN65HVD230 transceiver. Connects via SPI to the Pi, providing CAN bus at 1 Mbps with 120Ω termination.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="motor-type-card">
+                                    <h4>Motor Driver</h4>
+                                    <div className="comparison-visual">
+                                        <div className="vs-item good">
+                                            <span className="vs-label">GDS68 Driver (Integrated)</span>
+                                            <p>Built into the GIM8108-8 motor. Accepts CAN commands for position, velocity, and torque control. USB-C port available for debugging and configuration.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="research-block">
+                                <h3>CAN Bus Network</h3>
+                                <p>
+                                    CAN (Controller Area Network) bus was chosen for motor communication due to its robustness in noisy environments
+                                    and its support by the GDS68 motor driver. The network uses twisted-pair wiring (22-24 AWG) with silicone-shielded cables
+                                    and 120Ω termination resistors at both ends of the bus.
+                                </p>
+                                <div className="image-grid">
+                                    <div className="image-card">
+                                        <img src="/research_images/can_setup_1.png" alt="CAN Bus Wiring" />
+                                        <p className="image-caption">CAN Bus wiring setup with Raspberry Pi 5</p>
+                                    </div>
+                                    <div className="image-card">
+                                        <img src="/research_images/can_setup_2.png" alt="CAN HAT Configuration" />
+                                        <p className="image-caption">Waveshare CAN HAT mounted on Pi 5</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ExpandableSection title="Current Integration Status">
+                                <p>
+                                    The physical wiring between the Raspberry Pi 5, CAN HAT, and GIM8108-8 motor has been completed and verified.
+                                    The Python control script has been deployed successfully. However, we are currently debugging a CAN communication
+                                    issue where the motor is unresponsive to CAN commands. Investigation is focused on signal-level communication
+                                    with the GDS68 driver.
+                                </p>
+                            </ExpandableSection>
+                        </Section>
+
                         {/* Hardware Showcase Section */}
                         <Section id="hardware-showcase" className="hardware-section">
                             <div className="research-section-header">Physical Implementation</div>
                             <p className="text-block" style={{ maxWidth: '800px', marginBottom: '4rem' }}>
-                                Precision engineering meets student budget. I used topology optimization and FOC motor control
-                                to get high-torque performance in a compact package.
+                                Every component carefully selected to balance performance, weight, and cost on a student budget.
+                                Two GIM8108-8 motors at 800g total, leaving 1,700g for batteries, frame, and electronics within the 2.5kg target.
                             </p>
                             <HardwareGrid />
                         </Section>

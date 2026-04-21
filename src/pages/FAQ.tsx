@@ -19,17 +19,22 @@ const faqData: FAQCategory[] = [
             {
                 id: "gen-1",
                 question: "What is the primary mission of NextStep?",
-                answer: "NextStep aims to democratize exoskeleton technology. We are building a high-performance, lower-limb assistive device on a student budget (<$600 CAD) to prove that accessibility and advanced robotics can coexist."
+                answer: "NextStep aims to democratize exoskeleton technology. We are building a high-performance, lower-limb assistive device on a student budget (<$500 CAD) to prove that accessibility and advanced robotics can coexist. The goal is to engineer something accessible that improves people's quality of life."
             },
             {
                 id: "gen-2",
-                question: "Who is the target pilot demographic?",
-                answer: "The current prototype is designed for individuals with partial mobility impairments, rehabilitation patients requiring gait assistance, and potentially for industrial fatigue reduction."
+                question: "Who is the target user demographic?",
+                answer: "The current prototype is designed for individuals with partial mobility impairments, rehabilitation patients requiring gait assistance, workers in physically demanding jobs like construction or manufacturing, and anyone seeking reduced walking effort."
             },
             {
                 id: "gen-3",
                 question: "What is the current project status?",
-                answer: "We are currently in the Phase 2 integration stage. Initial motor testing and PCB fabrication are complete. We are now integrating the control software with the physical hardware and beginning closed-loop gait trials."
+                answer: "We are currently in the hardware integration and debugging stage. Motors have been sourced (GIM8108-8), the Raspberry Pi 5 and CAN HAT are wired, and the Python control script has been deployed. We are debugging CAN bus communication between the controller and motor drivers."
+            },
+            {
+                id: "gen-4",
+                question: "What is the target weight?",
+                answer: "The target total system weight is under 2.5 kg for mobility. The two motors weigh approximately 800g total (396g each with driver), leaving 1,700g for batteries, frame, belt system, and other components."
             }
         ]
     },
@@ -38,23 +43,28 @@ const faqData: FAQCategory[] = [
         items: [
             {
                 id: "tech-1",
-                question: "What is the peak torque output?",
-                answer: "The system utilizes GIM8108-8 motors with a 36:1 planetary gearbox, capable of delivering approximately 7.5 Nm of peak torque per joint, sufficient for 20-30% gait assistance."
+                question: "What is the motor torque output?",
+                answer: "The system uses GIM8108-8 motors with a built-in 1:8 planetary gearbox. Each motor delivers 7.5 Nm rated torque and 22 Nm peak torque. The motor operates at 7A rated current and 22A peak current, providing excellent efficiency at 0.93 A/Nm — a 133% improvement over the alternative GIM6010-8."
             },
             {
                 id: "tech-2",
                 question: "How is the system powered?",
-                answer: "We use a 6S (22.2V) LiPo battery configuration, providing high discharge rates for motor bursts. The system includes a custom power distribution board with voltage regulation for logic circuits."
+                answer: "We use a 4S (14.8V nominal) LiPo battery — the Turnigy Heavy Duty 5000mAh with 60C discharge rate (300A capable). This provides approximately 74 Wh of energy and over 21 minutes of continuous running at peak average torque. The system features a swappable battery design for extended use."
             },
             {
                 id: "tech-3",
                 question: "What control architecture is used?",
-                answer: "The exoskeleton runs on a distributed control system. An ESP32 microcontroller handles high-level gait logic and sensor fusion, communicating with ODrive motor controllers via CAN bus for precise field-oriented control (FOC)."
+                answer: "A Raspberry Pi 5 serves as the central brain, communicating with GIM8108-8 motors via CAN bus through a Waveshare RS485 CAN HAT. The motors use integrated GDS68 drivers that accept CAN commands and USB-C for debugging. A custom Python control loop manages motor commands."
             },
             {
                 id: "tech-4",
-                question: "What sensors are integrated?",
-                answer: "The system employs a sensor fusion array including IMUs (Inertial Measurement Units) for limb orientation, load cells for ground reaction force detection, and motor encoders for precise joint angle position."
+                question: "How much does it reduce walking effort?",
+                answer: "Based on research from existing hip-assist exoskeletons, the target is a 20-40% reduction in metabolic cost per step. The motor is designed to assist during the hip flexion (swing) phase of walking, directly augmenting the user's natural stride."
+            },
+            {
+                id: "tech-5",
+                question: "What is the expected battery runtime?",
+                answer: "With the 4S 5000mAh LiPo battery, the system can sustain approximately 21.4 minutes of continuous operation at peak average torque (207.2W across both motors). In real-world use with variable assistance levels, runtime would be considerably longer. The swappable battery design allows quick changes for extended sessions."
             }
         ]
     },
@@ -64,12 +74,37 @@ const faqData: FAQCategory[] = [
             {
                 id: "safe-1",
                 question: "What fail-safes are in place?",
-                answer: "The system includes mechanical hard-stops to prevent hyperextension, emergency e-stop buttons, and software-defined torque limits that instantly cut power if abnormal resistance or velocity is detected."
+                answer: "The system includes software-defined torque limits that instantly cut power if abnormal resistance or velocity is detected, emergency stop capability, and the inherent backdriveable nature of the planetary gearbox mechanism."
             },
             {
                 id: "safe-2",
+                question: "What does backdriveability mean for safety?",
+                answer: "Backdriveability is crucial for safety — it means force applied to the output (your leg) can move the motor backwards. If you stumble or need to override the motor, the planetary gearbox allows your leg to move freely. This is why we specifically chose planetary gears over worm gears, which are 'self-locking' and could cause injury by trapping the user."
+            },
+            {
+                id: "safe-3",
                 question: "Is there a manual override?",
-                answer: "Yes. The actuators are back-drivable, meaning the user can mechanically overpower the motors in case of a system freeze, ensuring they are never 'locked' in a position."
+                answer: "Yes. The actuators use planetary gearboxes which are fully backdriveable, meaning the user can mechanically overpower the motors at any time. The user is never 'locked' in a position by the mechanism."
+            }
+        ]
+    },
+    {
+        title: "DESIGN_DECISIONS",
+        items: [
+            {
+                id: "des-1",
+                question: "Why direct motor drive instead of cables or springs?",
+                answer: "We evaluated three approaches: direct motor drive, cable pull systems, and spring energy storage. Direct motor drive scored 26/27 in our design matrix — the highest — due to its simplicity (5/5), functionality (8/8), consistency (5/5), and ease of wear (5/5). Simplicity reduces failure points and makes prototyping easier, which is essential with our timeline."
+            },
+            {
+                id: "des-2",
+                question: "Why a ratchet belt system?",
+                answer: "After evaluating ratchet, slide, and velcro belt designs, the ratchet system scored 18/19 — highest for durability (8/8), reliability (5/5), and comfort (3/3). All belt types are reinforced with a rigid frame to secure motors, brackets, and battery packs in place."
+            },
+            {
+                id: "des-3",
+                question: "Why LiPo batteries over other chemistries?",
+                answer: "We compared Lead-Acid, NiMH, Li-Ion, and LiPo. Lead-acid was too heavy (~7kg per cell). NiMH would require a 4kg+ parallel array to deliver 22A. LiPo batteries offer 20C-50C+ discharge rates, making our 22A draw trivial, while staying lightweight at ~500g per pack. The massive current overhead (300A capable vs 22A needed) keeps the batteries cool and safe."
             }
         ]
     },
@@ -79,12 +114,12 @@ const faqData: FAQCategory[] = [
             {
                 id: "fut-1",
                 question: "Is this open source?",
-                answer: "Yes. Upon project completion, we plan to release all CAD files, PCB schematics, and source code under an open-source license to encourage further innovation in the assistive robotics community."
+                answer: "Yes. Upon project completion, we plan to release all design files and source code under an open-source license to encourage further innovation in the assistive robotics community."
             },
             {
                 id: "fut-2",
                 question: "What are the next planned features?",
-                answer: "Future iterations will focus on implementing machine learning-based gait prediction, reducing the overall frame weight with carbon fiber components, and extending battery life through regenerative braking."
+                answer: "Future iterations will focus on implementing adaptive gait prediction, reducing the overall frame weight with advanced materials, extending battery life through optimized motor control, and potentially adding knee-assist modules for full lower-body support."
             }
         ]
     }

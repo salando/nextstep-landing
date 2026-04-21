@@ -22,7 +22,7 @@ export const HardwareGrid = () => {
             title: "Waveshare CAN HAT",
             category: "Interface",
             image: "/research_images/image54.png",
-            description: "RS485/CAN HAT for Raspberry Pi 5. Enables communication with the CyberGear motors.",
+            description: "RS485/CAN HAT for Raspberry Pi 5. Enables CAN bus communication with GIM8108-8 motors via GDS68 driver.",
             className: "grid-span-2",
             specs: [
                 { label: "Controller", value: "MCP2515" },
@@ -33,30 +33,30 @@ export const HardwareGrid = () => {
         },
         {
             id: 3,
-            title: "Custom Battery",
+            title: "4S LiPo Battery",
             category: "Power",
             image: "/research_images/image52.png",
-            description: "6S2P Li-Ion pack with high C-rating for burst power delivery.",
+            description: "Turnigy Heavy Duty 5000mAh 4S 60C LiPo pack with swappable design for extended runtime.",
             className: "grid-span-2",
             specs: [
-                { label: "Capacity", value: "5Ah" },
-                { label: "Voltage", value: "22.2V" },
-                { label: "Config", value: "6S2P" },
-                { label: "Peak", value: "1200W" }
+                { label: "Capacity", value: "5000mAh" },
+                { label: "Voltage", value: "14.8V" },
+                { label: "Config", value: "4S" },
+                { label: "Discharge", value: "60C (300A)" }
             ]
         },
         {
             id: 4,
-            title: "CF-Nylon Frame",
-            category: "Structure",
+            title: "Frame & Harness",
+            category: "Structure (Planned)",
             image: "/research_images/image45.png",
-            description: "Topology-optimized structure printed in Carbon Fiber Nylon.",
+            description: "Rigid frame with ratchet belt system. Reinforced to support motors, brackets, and battery packs.",
             className: "grid-span-2",
             specs: [
-                { label: "Material", value: "PA12-CF" },
-                { label: "Weight", value: "450g" },
-                { label: "Process", value: "SLS" },
-                { label: "Load", value: "120kg" }
+                { label: "Belt", value: "Ratchet" },
+                { label: "Frame", value: "Rigid" },
+                { label: "Fit", value: "75-100cm" },
+                { label: "Status", value: "Planned" }
             ]
         }
     ];

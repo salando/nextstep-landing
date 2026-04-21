@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import './BootSequence.css';
 
-import './GlobalLogo.css';
+import '../UI/GlobalLogo.css';
 
 /** Boot sequence line item with message type for styling */
 type SequenceItem = { text: string; type: 'info' | 'success' | 'warning' };

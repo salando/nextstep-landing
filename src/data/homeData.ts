@@ -41,25 +41,25 @@ export const PROGRESS_ITEMS: ProgressItem[] = [
     {
         icon: '✓',
         title: 'Research Complete',
-        description: 'Biomechanics, motor selection, and power analysis finished.',
+        description: 'Biomechanics, motor selection, power analysis, and battery calculations finished.',
         status: 'complete'
     },
     {
         icon: '⚡',
         title: 'Hardware Acquired',
-        description: 'Motors, controllers, and sensors sourced and ready.',
+        description: 'GIM8108-8 motors, Raspberry Pi 5, CAN HAT, and LiPo batteries sourced.',
         status: 'complete'
     },
     {
         icon: '🔧',
-        title: 'Assembly & Testing',
-        description: 'Physical integration and control system development.',
+        title: 'Hardware Integration',
+        description: 'CAN bus communication debugging. Physical wiring verified, investigating signal integrity.',
         status: 'in-progress'
     },
     {
         icon: '◎',
         title: 'Field Testing',
-        description: 'Real-world testing and optimization.',
+        description: 'Real-world gait assistance testing and optimization.',
         status: 'planned'
     }
 ];

@@ -91,9 +91,9 @@ export const Home = () => {
                             <span className="home-status-dot pulse"></span>
                             <span className="home-status-label mono">CURRENT PHASE</span>
                         </div>
-                        <h3 className="status-phase">Hardware Integration</h3>
+                        <h3 className="status-phase">CAN Integration & Debugging</h3>
                         <p className="status-desc">
-                            Motors sourced, control systems under development. Moving from research to physical assembly.
+                            Hardware sourced and wired. Currently debugging CAN bus communication between Raspberry Pi 5 and GIM8108-8 motors.
                         </p>
                     </div>
                 </Reveal>

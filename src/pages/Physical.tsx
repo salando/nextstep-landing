@@ -55,7 +55,7 @@ export const Physical = () => {
                                 <span className="physical-stat-label">System Status</span>
                                 <span className="stat-value physical-status-indicator">
                                     <span className="physical-status-dot warning"></span>
-                                    Debugging
+                                    CAN Integration
                                 </span>
                             </div>
                         </div>
@@ -83,8 +83,8 @@ export const Physical = () => {
                             <div className="mini-report">
                                 <h3>Current Issue</h3>
                                 <div className="mini-alert warning">
-                                    <strong>CAN Bus Failure</strong>
-                                    <p>Motor unresponsive. Investigating signal integrity.</p>
+                                    <strong>CAN Bus Communication</strong>
+                                    <p>GIM8108-8 motor unresponsive to CAN commands via GDS68 driver. Physical wiring verified, investigating signal-level communication.</p>
                                 </div>
                             </div>
                         </aside>

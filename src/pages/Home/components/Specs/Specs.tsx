@@ -23,10 +23,10 @@ const SECTIONS = [
     icon: IconPower,
     image: '/research_images/battery_closeup.jpg', // Correct Battery Image
     items: [
-      '2x 4S 5000mAh Li-ion (Split Config)',
-      'JBD 7S-14S Li-ion 30A BMS',
-      'Buck Converter 32V→5V (Logic)',
-      'XT60/XT90 + 30A Safety Fuses'
+      '4S 5000mAh LiPo (Turnigy Heavy Duty)',
+      '14.8V Nominal / 16.8V Peak',
+      '60C Discharge (300A Capable)',
+      'XT-90 Connector + Swappable Design'
     ]
   },
   {
@@ -35,9 +35,9 @@ const SECTIONS = [
     icon: IconChip,
     image: '/research_images/pi_setup.jpg', // Correct Pi/HAT Image
     items: [
-      'Raspberry Pi 4 (Central Brain)',
-      'RS485 CAN HAT Extension',
-      'ICM-20948 IMU (9-DOF)',
+      'Raspberry Pi 5 (Central Brain)',
+      'Waveshare RS485 CAN HAT',
+      'GDS68 Motor Driver (CAN)',
       'Custom Python Control Loop'
     ]
   },
@@ -47,10 +47,10 @@ const SECTIONS = [
     icon: IconMech,
     image: '/research_images/motor_setup_2.jpg',
     items: [
-      'GIM8108-8 Brushless Motors',
-      'Carbon Fiber / Alu Frame',
-      'Ratchet Fastening System',
-      'Adjustable Waist Harness'
+      '2x GIM8108-8 Brushless Motors',
+      '1:8 Planetary Gearbox (Built-in)',
+      'Ratchet Belt Fastening System',
+      'Rigid Frame Waist Harness'
     ]
   },
   {
