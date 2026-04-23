@@ -2,13 +2,13 @@
   --color-bg: #050508;
   --color-surface: #0f0f16;
   --color-surface-hover: #1a1a24;
-  --color-primary: #00f3ff;
-  /* Cyan */
-  --color-secondary: #bf55ff;
-  /* Lighter Purple for contrast */
-  --color-success: #00ff9d;
-  --color-warning: #ffae00;
-  --color-danger: #ff2a2a;
+  --color-primary: #06b6d4;
+  /* Cyan (muted) */
+  --color-secondary: #8b5cf6;
+  /* Purple (muted) */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
   --color-text-main: #ffffff;
   --color-text-muted: #8888aa;
   --color-border: #2a2a35;
@@ -19,8 +19,8 @@
   /* New tech/premium display font */
   --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
 
-  --glow-primary: 0 0 20px rgba(0, 243, 255, 0.3);
-  --glow-text: 0 0 10px rgba(255, 255, 255, 0.5);
+  --glow-primary: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --glow-text: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   /* Animation Easings */
   --cubic-fast: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -33,7 +33,7 @@
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
   --spacing-xl: 4rem;
-  --radius-lg: 12px;
+  --radius-lg: 6px;
 }
 
 [data-theme="light"] {
@@ -60,8 +60,8 @@
   /* Subtle but visible borders */
   --color-border: #e2e8f0;
 
-  /* Refined glows for light mode */
-  --glow-primary: 0 0 20px rgba(8, 145, 178, 0.15);
+  /* Refined shadows for light mode */
+  --glow-primary: 0 4px 12px rgba(0, 0, 0, 0.05);
   --glow-text: none;
 }
 

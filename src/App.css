@@ -51,11 +51,11 @@ html {
 }
 
 .future-banner {
-  background: linear-gradient(45deg, rgba(112, 0, 255, 0.1), transparent);
-  border: 1px dashed var(--color-secondary);
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid var(--color-border);
   padding: 40px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 4px;
   position: relative;
 }
 

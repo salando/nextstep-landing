@@ -1,11 +1,9 @@
 /* src/components/UI/NavBar.css */
 .system-nav-container {
   position: fixed;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 800px;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
 }
 
@@ -13,23 +11,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  background: rgba(15, 15, 22, 0.6);
-  /* Fallback / Base */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 2rem;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
   transition: all 0.3s var(--apple-ease);
 }
 
 [data-theme='light'] .system-nav {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 0, 0, 0.05);
+  background: var(--color-bg);
 }
 
 /* Brand */
@@ -63,7 +52,7 @@
   text-decoration: none;
   transition: color 0.2s ease;
   z-index: 1;
-  border-radius: 9999px;
+  border-radius: 4px;
   white-space: nowrap;
 }
 
@@ -81,17 +70,17 @@
   color: #fff;
 }
 
-/* Sliding Pill Background */
+/* Active Indicator Background */
 .nav-pill {
   position: absolute;
   inset: 0;
-  background: var(--color-text-main);
-  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
   z-index: -1;
 }
 
 [data-theme='light'] .nav-pill {
-  background: var(--color-primary);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* Actions (Theme Toggle etc) */
@@ -126,8 +115,8 @@
 /* Responsive */
 @media (max-width: 768px) {
   .system-nav-container {
-    width: 95%;
-    top: 10px;
+    width: 100%;
+    top: 0;
   }
 
   .nav-links {

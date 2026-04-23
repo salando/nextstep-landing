@@ -31,9 +31,6 @@ export const Contact = () => (
             <div className="transmission-console">
                 {/* Console Header */}
                 <div className="console-header">
-                    <div className="console-dot red" />
-                    <div className="console-dot yellow" />
-                    <div className="console-dot green" />
                     <span className="console-title">New Message</span>
                 </div>
 

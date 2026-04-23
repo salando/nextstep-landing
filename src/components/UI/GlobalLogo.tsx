@@ -93,7 +93,7 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                     line-height ${fontDuration} ${bezier} ${fontDelay}
                 `.replace(/\n\s+/g, ' ').trim();
 
-                // Set initial state with transition
+                // Set initial state WITHOUT transition so it snaps exactly to the boot logo instantly
                 setStyle({
                     ...startStyle,
                     position: 'fixed',
@@ -103,21 +103,24 @@ export const GlobalLogo: React.FC<GlobalLogoProps> = ({ booted, onAnimationCompl
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 0,
-                    transition: transition
+                    transition: 'none' // Important: no transition for the start state
                 });
 
-                // Start animation to end style in next frame
+                // We need to double requestAnimationFrame to ensure the start state is painted to the DOM
+                // before we apply the end state with the transition.
                 requestAnimationFrame(() => {
-                    setStyle({
-                        ...endStyle,
-                        position: 'fixed',
-                        zIndex: 10000,
-                        opacity: 1,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 0,
-                        transition: transition
+                    requestAnimationFrame(() => {
+                        setStyle({
+                            ...endStyle,
+                            position: 'fixed',
+                            zIndex: 10000,
+                            opacity: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 0,
+                            transition: transition
+                        });
                     });
                 });
 
